@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.js"></script>
+    <link rel="stylesheet" href="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.css">
+</head>
+<body>
+<div id="all">
+    <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="请输入内容"
+            v-model="textarea">
+    </el-input>
+    <el-button type="success" icon="el-icon-check" circle @click="submit">解码</el-button>
+    <div><span>
+        结果:{{result1}}
+    </span></div>
+    <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="请输入内容"
+            v-model="textarea2">
+    </el-input>
+    <el-button type="success" icon="el-icon-check" circle @click="submit2">编码</el-button>
+    <div><span>
+        结果:{{result2}}
+    </span></div>
+</div>
+<script>
+    new Vue({
+        el: '#all',
+        data: {
+            inputData: 123,
+            textarea: '8/kiQGXrq79DFdBAENoRQU7bukB+y6PAGNcbQFAwqkAO/MO/MK52QNU4gEDszrzAjp9CQCk2nMAiZ09AlPbkv07WCsH/gPLAcmcvP7FfAr+Rp8S/iE0SQXOTMkAHvoq8VQcrwHkDHMGXEizAbDkZwHgAScCcY7vAPceGQGrfF8E8/QTBy3GxQIH6D0ET15E/psA0QHBAAUHyTcBANyFGQVxQJkGc8rBATpGewIRQ2cCiSktATBrsQKF8EkActdPAgngnwbJlHcFHduS/YNmrvsuCDsHPuVLAxlHXwKCkBcBDxhLB0zjFwLwaJkAabE3ARCGlQFC4ncAKIWXA/UZnvg==',
+            textarea2: '',
+            result1: '',
+            result2: '',
+        },
+        methods: {
+            submit: function () {
+                console.log(this.textarea);
+                this.result1 = window.atob(this.textarea);
+                let x = eval(this.result1);
+                alert(x[1]);
+                alert(this.result1[0]);
+
+            },
+            submit2: function () {
+                alert('提交');
+                console.log(this.textarea);
+                this.result2 = window.btoa(this.textarea2);
+            },
+        }
+    })
+    ;
+</script>
+
+</body>
+</html>

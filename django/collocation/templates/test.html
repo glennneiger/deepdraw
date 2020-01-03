@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搭配</title>
+    <link rel="stylesheet" href="../static/css/test.css">
+    <script type="text/javascript" src="http://dbr.deepdraw.cn/web/duichang/static/spark_md5.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.js"></script>
+    <link rel="stylesheet" href="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div>
+    <div id="all">
+        <div id="top_nav">
+            <div id="logo">
+                <a href="http://dbr.deepdraw.cn/web/soutu_menu/facesearch/soutunew/soutunew.html">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAAAVCAYAAABWtYB0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTYyNjM2NDFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTYyNjM2NTFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5NjI2MzYyMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5NjI2MzYzMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+bKpiOAAABa5JREFUeNqsWX1MllUU54WXVwi1ucQSE8HhjGY6l6S2aDUtcxNpZVKYWZJtlZbpxlYtU5e6/gt1ETodtTbTxixj9jH6soKcjDbWl1+gBYWWvimIHy/wdC773e3s7N7n4+U522/vc+/5nXue5577ce59I47jpIQkrxBWEzIC2Fwk3OzBKSJ8aajvIkwmqA/YQniWkDrEbzhNmIo2tbQQCgzcMsKnhJWE1wnDkvB3iXBHJKQgqA54Owm7dsJED04z4XaLLkKYQDgV0kBSnTKCBeFOwg8W7jTCL4S+Ifp8IxrSy29K0m6XD84+Qr2h/mv8rhKzYydhwKf/TMJaQhrzxUdlBXs+xHxeILQSFoj2qglnffh9hjAWz/emqJnggREWZEN/l2OWK4Q+4DLhgoFzkw//XjjD2stLwr6P2c9i9WmEbqa70WBbxfS1AXw+xuyOuhGXEtoIFw1QHfwSeLWiY3cTJiFI44DRhJWC920IAZjD2jtJyIK/AkLEYjOcMB7vt53Znxa8h5juJ0tbXYwz3eJnnMAYwjxm95ft4wocb9Ejo5fVdbh0WJ2wXxpCEPaw9nqBfnSaLQinwL8q3meD4B1kuncM7dzH9O1CF0FQHbwPxzWsDFrO2T5up0cAPgCvRNSvt7SXK3iqAzKGGIA8l/d7zWLznItNPuONErpFhrZ+Zvp1Qve8E0CiloyjzFB/DbrvCEtQ96Lg1Fs2ortF+SPCFY/NazGhhJBAOYrspRqbYjphPdJcLanYWLer1A/pYwqymDcJbUilue8YNvR2VreEPXcT9hv6qAYb+4AhwThu8GOS6OD7GyIsR/cxQjGWH76R3iB4aoO7zjICtwnuXI9RnukycF71OVOamM3qgLOsxWWUhw7TTFghygsJvxt45aKsDi69lohzbpzQ4DFCZqCtcxhpE5iujo2iQuTpPK3sJ+QQZrEZ3ISDXYTx0mB7AjZa8gjTWfkEbDsJPay+EO0NJJGaR+C/g/CfjEqOGHVNLhE8KbjFPtIx0wZoy2D0nrGb2TYyzn4nHKkUvncJfQK/BxinNCTfrYOHZfECGwSpzNJJxYLX5tKhRwR3dMDpyjOJEtSNdcKTUuZrpAtvC+M1h+S7zrQcLWPPl7GBmuRpUa618HKxtGj5hvBvgGm7md1FqZPoJ3iuZJw/CY9gWVDL0mzCVrGcdrINXi9FmahrFkvZPVgK1bK0F0uHWoY2gnMLu0aJo/2rYqnTMgAd34jTWULQMvjEolskovSuZWTGCD2Cm2vhrhO8xwPOAp7LL0fd9WyJUPKksNnMdN8PYcPcytrZa1kG3w9jY+aFGtFhFRajWwXvRxcHbeIaI8jZ4Alm28nqn2L1/wibYfAjAzQJ6+9hLCVqGUh18T1TfKO+zpjscx/UyIY/7bfKLQgRw91OvqXhNYK3wsKbInh7AgQgJt5nDtP9yurLhV252FCzUJ9umL05Lv7/YLwPWX0jqz/k81uOC78xWxAWCmKDpcFphPOM14/LPMkbheg7lo70Qj2z28fqX2D1vxnsvrJ0nsIm8T5TLL6rxclen30eFvYTfX7LKmFXaAvCAUFsxwXbYaDRkOUo+Zg19jJ4Kq2NC15HgABUMjvVThT1Y0SbU4WdzJjmCf1ioS8y+L5NcBagPkNkaRUBvme8aHO26bA20nAvngd4SRV+dxgOeVyafGZDi3C9oOV+9qfJQeG3Vdjyq4bzhM+F/m9RThPl4YTPWPktdg2zkWVp6hrjDOFBH//kqewr3/OrMYKTkbiPizRbBmPCo8Jmh+UA1WWxb2CcbQa9/N9jhrhgPGtZjuc74YpxJjyA6AaRY+yssAwXVQkDrwf/VtV6tFdKeA95usrRv8C/T3p2LEdbCfFvl5YszNxu5OY1Bk5MfGecnWXUO2ZDf4QwF7p8XM4lxGWcPl85Pq4nHHYtoq4pjkrS/wIMAPiAdiPO9/6/AAAAAElFTkSuQmCC">
+                </a>
+            </div>
+            <div id="nav_select">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        background-color="rgb(47,52,61)"
+                        text-color="#fff"
+                        active-text-color="#66b1ff">
+                    <el-menu-item index="1"><a
+                            href="http://dbr.deepdraw.cn/web/soutu_menu/facesearch/soutunew/soutunew.html">搜图主页</a>
+                    </el-menu-item>
+                    <el-menu-item index="3"><a href="http://dbr.deepdraw.cn/web/soutu_menu/facemerge/facemerge.html">人脸融合</a>
+                    </el-menu-item>
+
+                    <el-menu-item index="4"><a
+                            href="http://dbr.deepdraw.cn/web/soutu_menu/%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/contentSearch.html">文本分类</a>
+                    </el-menu-item>
+                    <el-menu-item index="5"><a
+                            href="">搭配</a>
+                    </el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title">我的</template>
+                        <el-menu-item index="2-1">选项1</el-menu-item>
+                        <el-menu-item index="2-2">选项2</el-menu-item>
+                        <el-menu-item index="2-3">选项3</el-menu-item>
+                        <el-submenu index="2-4">
+                            <template slot="title">选项4</template>
+                            <el-menu-item index="2-4-1">选项1</el-menu-item>
+                            <el-menu-item index="2-4-2">选项2</el-menu-item>
+                            <el-menu-item index="2-4-3">选项3</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                </el-menu>
+            </div>
+        </div>
+        <div id="result_page">
+            <div id="search2">
+                <div class="search">
+                    <input type="text" name="searchs" id="get_inputs" placeholder="请输入图片URL或衣物类目">
+                    <button @click="sendurl()" id="click">搜索一下</button>
+                </div>
+                <div class="upload">
+                    <button>
+                        <label class="btn" for="input_imgs"><p id="fo">上传图片</p></label>
+                    </button>
+                    <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" id="input_imgs"
+                           style="display: none;" v-on:input="upload">
+                </div>
+            </div>
+            <div id="left_box">
+                <el-card shadow="hover" style="height: 796px">
+                    <div id="main_pic">
+                        <div id="tipp">
+                            <p>商品图片</p>
+                        </div>
+                        <img v-bind:src="main_url" alt="fail" class="main_imgs">
+                        <div class="boxs" v-for="box in position_list" @click="chooseBox">
+                            <div v-bind:class="box[4]" v-bind:id="box[4]+'box'"
+                                 v-bind:style="{display:'none',position:'absolute',border:'1px solid red',width:box[0]+'px',height:box[1]+'px',top:box[2]+45+'px',left:box[3]+'px'}"
+                                 @mouseout="disapearAll" style="z-index: 10">
+                                <button v-bind:id="box[4]+'button'" type="disabled"
+                                        v-bind:style="{opacity: '0.4',position: 'absolute',left:box[0]+'px'}">
+                                    {{ box[4].replace(/[0-9]/ig,"")}}</button>
+                            </div>
+                            <div v-bind:class="box[4]+'bottom'" class="guide"
+                                 v-bind:style="{opacity:0.7,position:'absolute',left:box[3]+box[0]/2-5 +'px',top:box[2]+45+box[1]/2-10+'px'}"
+                                 @mouseover="displayAll" onClick="event.cancelBubble = true" style="z-index: 15">
+                            </div>
+                        </div>
+                        <p class="tips">
+                            点击筛选方框
+                        </p>
+                    </div>
+                </el-card>
+            </div>
+            <div id="right_box">
+                <el-card>
+                    <template>
+                        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+                            <el-tab-pane label="所有图片" name="first" v-loading="loading"
+                                         element-loading-text="拼命加载中
+                                预计耗时10秒"
+                                         element-loading-spinner="el-icon-loading"
+                                         element-loading-background="rgba(64,158,255, 0.3)"
+                                         style="width: 100%;height: 700px;overflow-y: scroll;">
+                                <div class="wall">
+                                    <div style="margin-left: 30px;">
+                                        <div id="a" style="float: left;">
+                                            <div v-for="data1 in result_position_lista" class="a">
+                                                <div class="pict_single wrap">
+                                                    <img v-bind:src="data1[0]" class="pict"
+                                                         referrerPolicy="no-referrer">
+                                                    <span class="draw_border"
+                                                          v-bind:style="{position:'absolute',border:'1px solid red',width:data1[1]+'px',height:data1[2]+'px',top:data1[3]+'px',left:data1[4]+'px'}"></span>
+                                                    <span class="top common"></span>
+                                                    <span class="right common"></span>
+                                                    <span class="bottom common"></span>
+                                                    <span class="left common"></span>
+                                                    <span class="distance" style="text-align: center">
+                                                        <p>{{ data1[5] }}</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="b" style="float: left;">
+                                            <div v-for="data2 in result_position_listb" class="b">
+                                                <div class="pict_single wrap">
+                                                    <img v-bind:src="data2[0]" class="pict"
+                                                         referrerPolicy="no-referrer">
+                                                    <span class="draw_border"
+                                                          v-bind:style="{position:'absolute',border:'1px solid red',width:data2[1]+'px',height:data2[2]+'px',top:data2[3]+'px',left:data2[4]+'px'}"></span>
+                                                    <span class="top common"></span>
+                                                    <span class="right common"></span>
+                                                    <span class="bottom common"></span>
+                                                    <span class="left common"></span>
+                                                    <span class="distance" style="text-align: center">
+                                                        <p>{{ data2[5] }}</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="c" style="float: left">
+                                            <div v-for="data3 in result_position_listc" class="c">
+                                                <div class="pict_single wrap">
+                                                    <img v-bind:src="data3[0]" class="pict"
+                                                         referrerPolicy="no-referrer">
+                                                    <span class="draw_border"
+                                                          v-bind:style="{position:'absolute',border:'1px solid red',width:data3[1]+'px',height:data3[2]+'px',top:data3[3]+'px',left:data3[4]+'px'}"></span>
+                                                    <span class="top common"></span>
+                                                    <span class="right common"></span>
+                                                    <span class="bottom common"></span>
+                                                    <span class="left common"></span>
+                                                    <span class="distance" style="text-align: center">
+                                                        <p>{{ data3[5] }}</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </el-tab-pane>
+                            <el-tab-pane label="ins图片" name="second">暂无</el-tab-pane>
+                        </el-tabs>
+                    </template>
+                </el-card>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#all',
+        data: {
+            main_url: 'http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/element/%E7%B4%A0%E6%9D%90/015b1456cd26db32f7a84.jpg%401280w_1l_2o_100sh.jpg',
+            activeName: 'first',
+            loading: false,
+            result_position_lists: [],
+            result_position_listss: [],
+            result_position_lista: [],
+            result_position_listb: [],
+            result_position_listc: [],
+            resVector: '',
+            resPics: '',
+            //apiVector: 'http://192.168.2.104:5001/cloth_recom/',
+            apiVector: "http://aiproxy.nps.deepdraw.online/polls/analyze_str/",
+            els: "http://192.168.2.104:9200/zy_test_0/_search",
+            apiImages: "http://60.191.84.99:8035/images/",
+            apiBox: 'http://aiproxy.nps.deepdraw.online/polls/analyze_str/',
+            //apiBox:"http://192.168.2.113:8000/polls/analyze_str/",
+            apiPics: "",
+            imageVector: [],
+            bbox: [],
+            box: '',
+            clothType: '',
+            clothTypes: 'down',
+            main_width: '',
+            main_height: '',
+            activeIndex: '5',
+            resultUrls: [],
+            resultScores: [],
+            resultBodys: [],
+            resultClicks: [],
+            position_list: [],
+            boxes: [],
+            upDownBox: [],
+            bigNumber: 0,
+        },
+        methods: {
+            disapearAll: function (event) {
+                //鼠标移出方框特效
+                //console.log('移出特效');
+                var tits = $(event.target);
+                var nows = $(event.target).attr('id');
+                var now = '';
+                //判断鼠标悬浮在那个方框
+                if (nows.indexOf('button') != -1) {
+                    var temp = nows.length - 6;
+                    now = nows.slice(0, temp);
+                    now = now + 'box';
+                    nows = now;
+                }
+                ;
+                if (nows.indexOf(this.box) != -1) {
+                    console.log('原图');
+                } else {
+                    var tit = $('#' + nows).nextAll().attr('class');
+                    var tis = tit.split(' ');
+                    if (tis.length > 1) {
+                        var ti = tis[1];
+                    } else {
+                        var ti = tis[0]
+                    }
+                    $('.' + ti).css("display", "block");
+                    $('#' + nows).css("display", "none");
+                }
+            },
+
+            displayAll: function (event) {
+                //鼠标悬浮特效
+                //console.log('展示特效');
+                var tits = $(event.target);
+                var nows = $(event.target).attr('class');
+                var now = nows.split(' ')[1];
+                var tit = tits.prevAll().attr('id');
+                console.log(now, tit);
+                $('#' + tit).css("display", "block");
+                $('.' + now).css("display", "none");
+            },
+
+            clearData: function (thi) {
+                console.log('开始清除');
+                thi.result_position_lista = [];
+                thi.result_position_listb = [];
+                thi.result_position_listc = [];
+                thi.result_position_listss = [];
+                thi.result_position_lists = [];
+                thi.resultUrls = [];
+                thi.resultScores = [];
+                thi.resultBodys = [];
+                thi.bbox = [];
+
+            },
+
+            upload: function () {
+                //用户上传图片至oss
+                console.log('用户上传图片');
+                this.$options.methods.clearData(this);
+                this.box = '';
+                this.position_list = [];
+                this.main_height = '';
+                this.main_width = '';
+                this.upDownBox = [];
+                this.loading = true;
+                var file2 = document.getElementById("input_imgs").files[0];
+                console.log(file2);
+                var file = file2;
+                let spark = new SparkMD5();
+                var codes = spark.code();
+                let client = new OSS({
+                    accessKeyId: codes.hs,
+                    accessKeySecret: codes.ah,
+                    endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                    bucket: 'deepdraw-dbr',
+                });
+                var file_types = file['name'].split('.');
+                var file_type = file_types[file_types.length - 1];
+                var storeAs = 'soutu_data/upload_imgs/' + this.uuid() + '.' + file_type;
+                client.multipartUpload(storeAs, file)
+                    .then((result) => {
+                        if (result.res.requestUrls[0].split('?')[0].length > 0) {
+                            this.main_url = result.res.requestUrls[0].split('?')[0];
+                        } else {
+                            this.main_url = 'wrong';
+                        }
+                        ;
+                        this.$options.methods.postUrl(this);
+                    })
+            },
+
+            preLoad: function (thi) {
+                console.log('开始预加载');
+                let max = thi.position_list[thi.bigNumber];
+                console.log(max);
+                let title = max[4];
+                thi.box = max[4];
+                setTimeout(function () {
+                    $('.' + thi.box).click();
+                }, 100);
+                //setTimeout($('.' + thi.box + 'bottom').click(), 500);
+            },
+
+            uuid: function () {
+                //随机生成uuid
+                //console.log('计算uuid');
+                var s = [];
+                var hexDigits = "0123456789abcdef";
+                for (var i = 0; i < 36; i++) {
+                    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+                }
+                s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+                s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+                s[8] = s[13] = s[18] = s[23] = "-";
+                var uuid = s.join("");
+                return uuid;
+            },
+
+            handleClick: function (tab, event) {
+                //选择结果页面的标签
+                console.log("点击事件");
+            },
+
+            postUrl: function (thi) {
+                console.log('传输信息');
+                console.log(thi.main_url);
+                thi.$options.methods.getImageInfo(thi.main_url, thi, (width, height) => {
+                    // 在这里面使用
+                    var real_width = width;
+                    var real_height = height;
+                    thi.main_width = 300;
+                    thi.main_height = real_height / (real_width / 300);
+                    console.log(thi.main_height, thi.main_width);
+                    if (real_width) {
+                        thi.$options.methods.getBox(thi);
+                        //thi.$options.methods.getVector(thi);
+                    } else {
+                        alert("图片加载失败");
+                    }
+                    ;
+                });
+            },
+
+            chooseMax: function (thi) {
+                console.log('选择最大的');
+                console.log(thi.upDownBox);
+                let areas = [];
+                let orderArea = [];
+                if (thi.upDownBox.length === 1) {
+                    var bigBox = thi.upDownBox[0];
+                } else {
+                    for (let j = 0; j < thi.upDownBox.length; j++) {
+                        var w = thi.upDownBox[j][1] - thi.upDownBox[j][3];
+                        var h = thi.upDownBox[j][2] - thi.upDownBox[j][0];
+                        var area = w * h;
+                        areas.push(area);
+                    }
+                    var maxs = Math.max.apply(null, areas);
+                    var indexOfMax = areas.indexOf(maxs);
+                    var bigBox = thi.upDownBox[indexOfMax];
+                    thi.bigNumber = indexOfMax;
+                    console.log(thi.bigNumber, bigBox);
+                }
+
+                thi.$options.methods.getVector(thi);
+                return bigBox;
+            },
+
+            chooseBox: function (event) {
+                this.loading = true;
+                this.$options.methods.clearData(this);
+                if (this.box) {
+                    $('#' + this.box + 'box').css("display", "none");
+                    var x = $('#' + this.box + 'box').nextAll().attr('class');
+                    console.log(x);
+                    var y = x.split(' ')[1];
+                    console.log(y);
+                    $('.' + y).css("display", "block");
+                }
+                let titles = $(event.target).attr('class');
+                let title = titles.split(' ')[0];
+                this.box = title;
+                this.clothType = title;
+                $('#' + this.box + 'box').css("display", "block");
+                var x = $('#' + this.box + 'box').nextAll().attr('class');
+                var y = x.split(' ')[1];
+                $('.' + y).css("display", "none");
+                for (let j = 0; j < this.upDownBox.length; j++) {
+                    if (this.upDownBox[j].contains(title)) {
+                        var box = this.upDownBox[j];
+                    }
+                }
+                console.log(box);
+                this.$options.methods.returnVectors(this, box);
+
+            },
+
+            chooseUpDown: function (thi, values) {
+                console.log('选择上下');
+                console.log(values);
+                for (let i = 0; i < values.length; i++) {
+                    console.log(i);
+                    if (values[i][4] === "upper" || values[i][4] === "down") {
+                        console.log('有一个');
+                        //values[i][4] += i;
+                        thi.upDownBox.push(values[i]);
+                    }
+                }
+                console.log(thi.upDownBox);
+                if (thi.upDownBox.length > 0) {
+                    let max = thi.$options.methods.chooseMax(thi);
+                    console.log(max);
+                    //thi.box = max[4];
+                } else {
+                    alert('图片没有upper和down类型');
+                }
+            },
+            getBox: function (thi) {
+                //开始选框
+                console.log('请求接口中');
+                let reqUrl = thi.apiBox + '?str={"action":"cloth","model":"default","proj":"yolov3","exec":"online","inputparams":[{"pic_url":"' + thi.main_url + '"}]}';
+                console.log(reqUrl);
+                axios.get(reqUrl)
+                    .then((res) => {
+                        console.log('请求成功', res.data);
+                        if (res.data.errCode === 0) {
+                            let box = res.data.predictions;
+                            console.log(box);
+                            var keys = [];
+                            var values = [];
+                            console.log(box[0]);
+                            for (var property in box[0]) {
+                                console.log('当前', property);
+                                console.log(box[0][property]);
+                                let body = [];
+                                keys.push(property);
+                                body.push(box[0][property]['t'], box[0][property]['r'], box[0][property]['b'], box[0][property]['l'], box[0][property]['type']);
+                                console.log(body);
+                                values.push(body);
+                            }
+                            console.log(keys);
+                            let upDown = thi.$options.methods.chooseUpDown(thi, values);
+                        } else {
+                            alert('请求画框接口失败')
+                        }
+                        //let max = thi.$options.methods.chooseMax(thi, values);
+                        //thi.$options.methods.getVector(thi, max);
+                    });
+            },
+
+            returnVectors: function (thi, max) {
+                console.log(thi.upDownBox);
+                let reqUrl = thi.apiVector + '?str={"action":"recom_net","model":"default","proj":"resnet","exec":"online","inputparams":[{"pic_url":"' + thi.main_url + '","t":' + max[0] + ',"r":' + max[1] + ',"b":' + max[2] + ',"l":' + max[3] + '}]}';
+                console.log(reqUrl);
+                axios.get(reqUrl)
+                    .then((res) => {
+                        console.log(res);
+                        if (res.data.errCode === 0) {
+                            let feature = res.data.predictions[0]['feature'];
+                            let vector = feature.split("'")[1];
+                            let imageV = window.atob(vector);
+                            let preData = imageV.slice(2, imageV.length - 2);
+                            let realData = preData.split(",");
+                            let real = realData.map(parseFloat);
+                            console.log(typeof (real[0]), real.length);
+                            thi.imageVector = real;
+                            thi.bbox.push(max[0], max[1], max[2], max[3]);
+                            console.log(thi.bbox);
+                            if (thi.imageVector.length === 64) {
+                                thi.$options.methods.esSearch(thi);
+                            }
+                        } else {
+                            alert('请求向量接口失败')
+                        }
+                    });
+            },
+
+            getVector: function (thi) {
+                console.log('最大的');
+                //thi.clothType = maxs[4];
+                //let max = maxs;
+                //console.log(thi.clothType);
+                thi.$options.methods.getBoxsSize(thi);
+
+            },
+            /*
+                        getVectors: function (thi) {
+                            console.log('接口返回向量信息');
+                            axios.get(thi.apiVector + '?str={"path":"' + thi.main_url + '"}').then((response) => {
+                                console.log(response.data);
+                                if (response.data === "no") {
+                                    alert('当前图片有问题，请换一张');
+                                } else {
+                                    thi.imageVector = response.data[0];
+                                    console.log('vector', thi.imageVector);
+                                    thi.bbox = response.data[1].split(',');
+                                    console.log('boxlist', thi.bbox);
+                                    thi.clothType = response.data[2];
+                                    console.log('类型', thi.clothType);
+                                    if (thi.imageVector.length === 64) {
+                                        thi.$options.methods.esSearch(thi);
+                                    }
+                                    if (thi.bbox.length === 4) {
+                                        thi.$options.methods.getBoxSize(thi);
+                                    }
+                                }
+                            });
+                        },
+
+             */
+
+            esSearch: function (th) {
+                console.log('es开始查找', th.clothType);
+                if (th.clothType === "upper") {
+                    th.clothTypes = 'down';
+                } else {
+                    th.clothTypes = 'upper';
+                }
+                console.log(th.clothTypes);
+                let test_body = {
+                    "size": 9,
+                    "query": {
+                        "script_score": {
+                            "query": {
+                                "bool": {
+                                    "filter": {
+                                        "term": {
+                                            "img_type": th.clothTypes
+                                        }
+                                    }
+                                }
+                            },
+                            "script": {
+                                "source": "1 / (1 + l2norm(params.queryVector, doc['img_vector']))",
+                                "params": {
+                                    "queryVector": th.imageVector
+                                }
+                            }
+                        }
+                    }
+                };
+                console.log('测试', test_body);
+                axios.post(th.els, test_body)
+                    .then((res) => {
+                        console.log('test3', res);
+                        th.resData = res.data.hits.hits;
+                        console.log(th.resData);
+                        th.$options.methods.handleResData(th);
+                    });
+                return 1;
+            },
+
+            getImageInfo: function (url, thi, callback) {
+                //根据url获取图片尺寸
+
+                var img = new Image();
+                img.src = url;
+                if (img.complete) {
+                    callback(img.width, img.height);
+                } else {
+                    img.onload = function () {
+                        callback(img.width, img.height);
+                        img.onload = null;
+                    };
+                }
+                ;
+            },
+            /*
+
+            getBoxSize: function (thi) {
+                console.log('画框');
+                console.log(thi.bbox);
+                var t = thi.bbox[0];
+                var r = thi.bbox[1];
+                var b = thi.bbox[2];
+                var l = thi.bbox[3];
+                console.log(t, r, b, l);
+                var now_width = Math.abs(thi.main_width * (r - l));
+                var now_height = Math.abs(thi.main_height * (b - t));
+                console.log(now_height);
+                var top = thi.main_height * t;
+                var left = thi.main_width * l;
+                //var type_list = [];
+                thi.box = [];
+                thi.box.push(now_width, now_height, top, left);
+                console.log(thi.box);
+            },
+
+             */
+
+            getBoxsSize: function (thi) {
+                console.log('开始', thi.upDownBox);
+                console.log(thi.main_width, thi.main_height);
+                for (let i = 0; i < thi.upDownBox.length; i++) {
+                    var t = thi.upDownBox[i][0];
+                    var r = thi.upDownBox[i][1];
+                    var b = thi.upDownBox[i][2];
+                    var l = thi.upDownBox[i][3];
+                    var type = thi.upDownBox[i][4];
+                    var now_width = Math.abs(thi.main_width * (r - l));
+                    var now_height = Math.abs(thi.main_height * (b - t));
+                    var top = thi.main_height * t;
+                    var left = thi.main_width * l;
+                    let box = [];
+                    box.push(now_width, now_height, top, left, type);
+                    console.log('box', box);
+                    thi.position_list.push(box);
+                }
+                console.log(thi.position_list);
+                thi.$options.methods.preLoad(thi);
+            },
+
+            handleResData: function (thi) {
+                console.log(thi.resData.length);
+                for (let i = 0; i < thi.resData.length; i++) {
+                    let badUrl = thi.resData[i]['_source'].img_urls;
+                    let goodUrl = thi.apiImages + badUrl;
+                    console.log(goodUrl);
+                    thi.resultUrls.push(goodUrl);
+                    thi.resultScores.push(thi.resData[i]['_score']);
+                    thi.resultBodys.push(thi.resData[i]['_source'].img_region);
+                }
+                console.log(thi.resultBodys, thi.resultUrls, thi.resultScores);
+                thi.$options.methods.combineData(thi);
+            },
+
+            sendurl: function () {
+                alert('暂不支持搜索,请点击上传');
+            },
+
+            combineData: function (thi) {
+                console.log('开始循环');
+                console.log(thi.result_position_lists);
+                thi.result_position_lists = [];
+                for (let j = 0; j < thi.resultUrls.length; j++) {
+                    var position = [];
+                    var sin_url = thi.resultUrls[j];
+                    thi.$options.methods.getImageInfo(sin_url, thi, (width, height) => {
+                        // 在这里面使用
+                        console.log(j);
+                        var single_url = thi.resultUrls[j];
+                        var boxes = thi.resultBodys[j];
+                        var dist = thi.resultScores[j];
+                        console.log(single_url, boxes, dist);
+                        var box = boxes.split(',');
+                        var t = box[0];
+                        var r = box[1];
+                        var b = box[2];
+                        var l = box[3];
+                        console.log(t, r, b, l);
+                        var real_width = width;
+                        var real_height = height;
+                        var main_width = 330;
+                        var main_height = real_height / (real_width / 330);
+                        console.log(main_height, main_width);
+                        var now_width = Math.abs(main_width * (r - l));
+                        var now_height = Math.abs(main_height * (b - t));
+                        var top = main_height * t;
+                        var left = main_width * l;
+                        position.push(single_url, now_width, now_height, top, left, dist);
+                        thi.result_position_lists.push(position);
+                        position = [];
+                        console.log('长度', thi.result_position_lists.length);
+                    });
+                }
+                ;
+                setTimeout(() => {
+                    console.log('结果,排序前', thi.result_position_lists);
+                    for (let j = 0; j < thi.resultUrls.length; j++) {
+                        for (let i = 0; i < thi.result_position_lists.length; i++) {
+                            if (thi.resultUrls[j] == thi.result_position_lists[i][0]) {
+                                thi.result_position_listss.push(thi.result_position_lists[i])
+                            }
+                        }
+                    }
+                    ;
+                    console.log('结果,排序后', thi.result_position_listss);
+                    for (let j = 0; j < thi.result_position_listss.length; j++) {
+                        if (j % 3 == 0) {
+                            thi.result_position_lista.push(thi.result_position_listss[j])
+                        } else if (j % 3 == 1) {
+                            thi.result_position_listb.push(thi.result_position_listss[j])
+                        } else if (j % 3 == 2) {
+                            thi.result_position_listc.push(thi.result_position_listss[j])
+                        }
+                    }
+                    ;
+                    thi.loading = false;
+                }, 1000);
+
+            },
+
+
+        }
+    });
+    Array.prototype.contains = function (obj) {
+        //判断数组是否包含某变量的方法
+        var index = this.length;
+        while (index--) {
+            if (this[index] === obj) {
+                return true;
+            }
+        }
+        return false;
+    };
+</script>
+</body>
+</html>

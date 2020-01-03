@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">
+    <title>深绘搜图</title>
+    <link rel="stylesheet" href="../static/css/test.css">
+    <script type="text/javascript" src="http://dbr.deepdraw.cn/web/duichang/static/spark_md5.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.js"></script>
+    <link rel="stylesheet" href="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+</head>
+<body>
+<div>
+    <div id="all">
+        <div id="loadings"
+             style="display: none;width:100%;height:100%;background-color: #635683;padding-left: 650px;padding-top: 200px;padding-bottom:295px;">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568284313927&di=5addbcfec962b50752bcebe124b4122a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F6e05684ba6689dff29994bb01b9bd761c3324a15a0084-7rxphA_fw658"
+                 width="600px" height="450px"/>
+        </div>
+        <div id="top_nav" v-show="isLoadings">
+            <div id="logo">
+                <a href="http://dbr.deepdraw.cn/web/soutu_menu/facesearch/soutunew/soutunew.html">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAAAVCAYAAABWtYB0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTYyNjM2NDFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTYyNjM2NTFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5NjI2MzYyMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5NjI2MzYzMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+bKpiOAAABa5JREFUeNqsWX1MllUU54WXVwi1ucQSE8HhjGY6l6S2aDUtcxNpZVKYWZJtlZbpxlYtU5e6/gt1ETodtTbTxixj9jH6soKcjDbWl1+gBYWWvimIHy/wdC773e3s7N7n4+U522/vc+/5nXue5577ce59I47jpIQkrxBWEzIC2Fwk3OzBKSJ8aajvIkwmqA/YQniWkDrEbzhNmIo2tbQQCgzcMsKnhJWE1wnDkvB3iXBHJKQgqA54Owm7dsJED04z4XaLLkKYQDgV0kBSnTKCBeFOwg8W7jTCL4S+Ifp8IxrSy29K0m6XD84+Qr2h/mv8rhKzYydhwKf/TMJaQhrzxUdlBXs+xHxeILQSFoj2qglnffh9hjAWz/emqJnggREWZEN/l2OWK4Q+4DLhgoFzkw//XjjD2stLwr6P2c9i9WmEbqa70WBbxfS1AXw+xuyOuhGXEtoIFw1QHfwSeLWiY3cTJiFI44DRhJWC920IAZjD2jtJyIK/AkLEYjOcMB7vt53Znxa8h5juJ0tbXYwz3eJnnMAYwjxm95ft4wocb9Ejo5fVdbh0WJ2wXxpCEPaw9nqBfnSaLQinwL8q3meD4B1kuncM7dzH9O1CF0FQHbwPxzWsDFrO2T5up0cAPgCvRNSvt7SXK3iqAzKGGIA8l/d7zWLznItNPuONErpFhrZ+Zvp1Qve8E0CiloyjzFB/DbrvCEtQ96Lg1Fs2ortF+SPCFY/NazGhhJBAOYrspRqbYjphPdJcLanYWLer1A/pYwqymDcJbUilue8YNvR2VreEPXcT9hv6qAYb+4AhwThu8GOS6OD7GyIsR/cxQjGWH76R3iB4aoO7zjICtwnuXI9RnukycF71OVOamM3qgLOsxWWUhw7TTFghygsJvxt45aKsDi69lohzbpzQ4DFCZqCtcxhpE5iujo2iQuTpPK3sJ+QQZrEZ3ISDXYTx0mB7AjZa8gjTWfkEbDsJPay+EO0NJJGaR+C/g/CfjEqOGHVNLhE8KbjFPtIx0wZoy2D0nrGb2TYyzn4nHKkUvncJfQK/BxinNCTfrYOHZfECGwSpzNJJxYLX5tKhRwR3dMDpyjOJEtSNdcKTUuZrpAtvC+M1h+S7zrQcLWPPl7GBmuRpUa618HKxtGj5hvBvgGm7md1FqZPoJ3iuZJw/CY9gWVDL0mzCVrGcdrINXi9FmahrFkvZPVgK1bK0F0uHWoY2gnMLu0aJo/2rYqnTMgAd34jTWULQMvjEolskovSuZWTGCD2Cm2vhrhO8xwPOAp7LL0fd9WyJUPKksNnMdN8PYcPcytrZa1kG3w9jY+aFGtFhFRajWwXvRxcHbeIaI8jZ4Alm28nqn2L1/wibYfAjAzQJ6+9hLCVqGUh18T1TfKO+zpjscx/UyIY/7bfKLQgRw91OvqXhNYK3wsKbInh7AgQgJt5nDtP9yurLhV252FCzUJ9umL05Lv7/YLwPWX0jqz/k81uOC78xWxAWCmKDpcFphPOM14/LPMkbheg7lo70Qj2z28fqX2D1vxnsvrJ0nsIm8T5TLL6rxclen30eFvYTfX7LKmFXaAvCAUFsxwXbYaDRkOUo+Zg19jJ4Kq2NC15HgABUMjvVThT1Y0SbU4WdzJjmCf1ioS8y+L5NcBagPkNkaRUBvme8aHO26bA20nAvngd4SRV+dxgOeVyafGZDi3C9oOV+9qfJQeG3Vdjyq4bzhM+F/m9RThPl4YTPWPktdg2zkWVp6hrjDOFBH//kqewr3/OrMYKTkbiPizRbBmPCo8Jmh+UA1WWxb2CcbQa9/N9jhrhgPGtZjuc74YpxJjyA6AaRY+yssAwXVQkDrwf/VtV6tFdKeA95usrRv8C/T3p2LEdbCfFvl5YszNxu5OY1Bk5MfGecnWXUO2ZDf4QwF7p8XM4lxGWcPl85Pq4nHHYtoq4pjkrS/wIMAPiAdiPO9/6/AAAAAElFTkSuQmCC">
+                </a>
+            </div>
+            <div id="nav_select">
+                <el-menu
+                        :default-active="activeIndex2"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        background-color="rgb(47,52,61)"
+                        text-color="#fff"
+                        active-text-color="#66b1ff">
+                    <el-menu-item index="1"><a
+                            href="http://dbr.deepdraw.cn/web/soutu_menu/facesearch/soutunew/soutunew.html">搜图主页</a>
+                    </el-menu-item>
+                    <el-menu-item index="3"><a href="http://dbr.deepdraw.cn/web/soutu_menu/facemerge/facemerge.html">人脸融合</a>
+                    </el-menu-item>
+                    <el-menu-item index="4"><a
+                            href="http://dbr.deepdraw.cn/web/soutu_menu/%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/contentSearch.html">文本分类</a>
+                    </el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title">我的账户</template>
+                        <el-menu-item index="2-1">选项1</el-menu-item>
+                        <el-menu-item index="2-2">选项2</el-menu-item>
+                        <el-menu-item index="2-3">选项3</el-menu-item>
+                        <el-submenu index="2-4">
+                            <template slot="title">选项4</template>
+                            <el-menu-item index="2-4-1">选项1</el-menu-item>
+                            <el-menu-item index="2-4-2">选项2</el-menu-item>
+                            <el-menu-item index="2-4-3">选项3</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                </el-menu>
+            </div>
+        </div>
+        <div id="upload_search" v-show="isSearchPage">
+            <div id="title">
+                <p>
+                    深&nbsp&nbsp&nbsp&nbsp绘&nbsp&nbsp&nbsp&nbsp搜&nbsp&nbsp&nbsp&nbsp图
+                </p>
+            </div>
+            <div id="search">
+                <div class="search">
+                    <input type="text" name="searchs" id="get_input" placeholder="请输入图片URL或衣物类目">
+                    <button @click="sendurl()" id="click">搜索一下</button>
+                </div>
+                <div class="upload">
+                    <button>
+                        <label class="btn" for="input_img"><p id="fo">上传图片</p></label>
+                    </button>
+                    <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" id="input_img"
+                           style="display: none;" v-on:input="upload">
+                </div>
+            </div>
+            <div id="middle_nav">
+                <el-card class="nav_pic" v-for="pic in pics">
+                    <div class="nav_pics">
+                        <img v-bind:src="pic" alt="失败" @click="clickImage(event)">
+                    </div>
+                </el-card>
+            </div>
+        </div>
+        <div id="result_page" v-show="isResultPage">
+            <div id="search2" v-show="isUpload2">
+                <div class="search">
+                    <input type="text" name="searchs" id="get_inputs" placeholder="请输入图片URL或衣物类目">
+                    <button @click="sendurl()" id="click">搜索一下</button>
+                </div>
+                <div class="upload">
+                    <button>
+                        <label class="btn" for="input_imgs"><p id="fo">上传图片</p></label>
+                    </button>
+                    <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" id="input_imgs"
+                           style="display: none;" v-on:input="upload">
+                </div>
+            </div>
+            <div id="left_box">
+                <el-card shadow="hover" style="height: 796px">
+                    <div id="main_pic">
+                        <div id="tipp">
+                            <p>搜索图片</p>
+                        </div>
+                        <img v-bind:src="main_url" alt="fail" class="main_imgs">
+                        <div v-for="box in position_list" class="boxs" @click="chooseBox">
+                            <div v-bind:class="box[4]" v-bind:id="box[4]+'box'"
+                                 v-bind:style="{display:'none',position:'absolute',border:'1px solid red',width:box[0]+'px',height:box[1]+'px',top:box[2]+45+'px',left:box[3]+'px'}"
+                                 @mouseout="disapearAll" style="z-index: 10">
+                                <button v-bind:id="box[4]+'button'" type="disabled"
+                                        v-bind:style="{opacity: '0.4',position: 'absolute',left:box[0]+'px'}">
+                                    {{ box[4].replace(/[0-9]/ig,"")}}</button>
+                            </div>
+                            <div v-bind:class="box[4]+'bottom'" class="guide"
+                                 v-bind:style="{opacity:0.7,position:'absolute',left:box[3]+box[0]/2-5 +'px',top:box[2]+45+box[1]/2-10+'px'}"
+                                 @mouseover="displayAll" onClick="event.cancelBubble = true" style="z-index: 15">
+                            </div>
+                        </div>
+                        <p class="tips">
+                            点击筛选方框
+                        </p>
+                    </div>
+                </el-card>
+            </div>
+            <div id="right_box">
+                <el-card>
+                    <template>
+                        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+                            <el-tab-pane label="所有图片" name="first" v-loading="loading"
+                                         element-loading-text="拼命加载中
+                                预计耗时10秒"
+                                         element-loading-spinner="el-icon-loading"
+                                         element-loading-background="rgba(64,158,255, 0.3)"
+                                         style="width: 100%;height: 700px;overflow-y: scroll;">
+                                <div class="wall">
+                                    <div style="margin-left: 30px;">
+                                        <div id="a" style="float: left;">
+                                            <div v-for="data1 in result_position_lista" class="a">
+                                                <div class="pict_single wrap">
+                                                    <a v-bind:href="data1[5]"
+                                                       target="_blank">
+                                                        <img v-bind:src="data1[0]" class="pict"
+                                                             referrerPolicy="no-referrer" width="100%">
+                                                        <span class="draw_border"
+                                                              v-bind:style="{position:'absolute',border:'1px solid red',width:data1[1]+'px',height:data1[2]+'px',top:data1[3]+'px',left:data1[4]+'px'}"></span>
+                                                        <span class="top common"></span>
+                                                        <span class="right common"></span>
+                                                        <span class="bottom common"></span>
+                                                        <span class="left common"></span>
+                                                    </a>
+                                                    <span class="distance" style="text-align: center">
+                                                        <p>{{ data1[6] }}</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="b" style="float: left;">
+                                            <div v-for="data2 in result_position_listb" class="b">
+                                                <div class="pict_single wrap">
+                                                    <a v-bind:href="data2[5]"
+                                                       target="_blank">
+                                                        <img v-bind:src="data2[0]" class="pict"
+                                                             referrerPolicy="no-referrer" width="100%">
+                                                        <span class="draw_border"
+                                                              v-bind:style="{position:'absolute',border:'1px solid red',width:data2[1]+'px',height:data2[2]+'px',top:data2[3]+'px',left:data2[4]+'px'}"></span>
+                                                        <span class="top common"></span>
+                                                        <span class="right common"></span>
+                                                        <span class="bottom common"></span>
+                                                        <span class="left common"></span>
+                                                    </a>
+                                                    <span class="distance" style="text-align: center">
+                                                        <p>{{ data2[6] }}</p>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="c" style="float: left">
+                                            <div v-for="data3 in result_position_listc" class="c">
+                                                <div class="pict_single wrap">
+                                                    <a v-bind:href="data3[5]"
+                                                       target="_blank">
+                                                        <img v-bind:src="data3[0]" class="pict"
+                                                             referrerPolicy="no-referrer" width="100%">
+                                                        <span class="draw_border"
+                                                              v-bind:style="{position:'absolute',border:'1px solid red',width:data3[1]+'px',height:data3[2]+'px',top:data3[3]+'px',left:data3[4]+'px'}"></span>
+                                                        <span class="top common"></span>
+                                                        <span class="right common"></span>
+                                                        <span class="bottom common"></span>
+                                                        <span class="left common"></span>
+                                                    </a>
+                                                    <span class="distance" style="text-align: center">
+                                                        <p>{{ data3[6] }}</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </el-tab-pane>
+                            <el-tab-pane label="ins图片" name="second">暂无</el-tab-pane>
+                        </el-tabs>
+                    </template>
+                </el-card>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#all',
+        data: {
+            pics: [
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/4b180eb4-0ecf-4018-88d8-e59d919dd603.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/b5a0e89a-9508-4326-84dd-a095a9543a67.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/5e801db8-769e-4d9b-8643-bb7bac012567.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/cc8ceba5-5583-41dd-afb6-b09b948ba46f.jpeg",
+            ],
+            isClick: true,
+            loading: true,
+            activeName: 'first',
+            main_url: '',
+            main_height: '',
+            main_width: '',
+            main_box: '',
+            content: '',
+            main_box_list: [],
+            activeIndex2: '1',
+            result_list: [],
+            result_body: [],
+            position_list: [],
+            result_position_list: [],
+            result_position_lista: [],
+            result_position_listb: [],
+            result_position_listc: [],
+            result_position_lists: [],
+            result_position_listss: [],
+            isSearchPage: true,
+            isResultPage: false,
+            isLoadings: true,
+            isUpload2: true,
+            box: '',
+            dist_list: [],
+            click_url_list: [],
+        },
+        methods: {
+            uuid: function () {
+                //随机生成uuid
+                //console.log('计算uuid');
+                var s = [];
+                var hexDigits = "0123456789abcdef";
+                for (var i = 0; i < 36; i++) {
+                    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+                }
+                s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+                s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+                s[8] = s[13] = s[18] = s[23] = "-";
+                var uuid = s.join("");
+                return uuid;
+            },
+
+            disapearAll: function (event) {
+                //鼠标移出方框特效
+                //console.log('移出特效');
+                var tits = $(event.target);
+                var nows = $(event.target).attr('id');
+                var now = '';
+                //判断鼠标悬浮在那个方框
+                if (nows.indexOf('button') != -1) {
+                    var temp = nows.length - 6;
+                    now = nows.slice(0, temp);
+                    now = now + 'box';
+                    nows = now;
+                }
+                ;
+                if (nows.indexOf(this.box) != -1) {
+                    console.log('原图');
+                } else {
+                    var tit = $('#' + nows).nextAll().attr('class');
+                    var tis = tit.split(' ');
+                    if (tis.length > 1) {
+                        var ti = tis[1];
+                    } else {
+                        var ti = tis[0]
+                    }
+                    $('.' + ti).css("display", "block");
+                    $('#' + nows).css("display", "none");
+                }
+            },
+
+            displayAll: function (event) {
+                //鼠标悬浮特效
+                //console.log('展示特效');
+                var tits = $(event.target);
+                var nows = $(event.target).attr('class');
+                var now = nows.split(' ')[1];
+                var tit = tits.prevAll().attr('id');
+                $('#' + tit).css("display", "block");
+                $('.' + now).css("display", "none");
+            },
+
+            handleClick: function (tab, event) {
+                //选择结果页面的标签
+                console.log("点击事件");
+            },
+
+            clickImage: function (event) {
+                //点击图片跳转，实质是点击图片获取url再调用postUrl方法
+                //console.log('点击首页图片');
+                document.body.style.backgroundImage = "none";
+                document.body.style.backgroundColor = "white";
+                this.isLoadings = false;
+                this.isSearchPage = false;
+                $('#loadings').css("display", "block");
+                var temp_url = $(event.target).attr('src');
+                this.main_url = temp_url;
+                this.$options.methods.postUrl(this);
+            },
+
+            sendurl: function () {
+                //搜索框输入图片url，再调用postUrl方法
+                //console.log('发送图片url');
+                this.isLoadings = false;
+                this.isSearchPage = false;
+                this.isUpload2 = false;
+                $('#loadings').css("display", "block");
+                //获取两个输入框的url
+                var url1 = document.getElementById("get_input").value;
+                var url2 = document.getElementById("get_inputs").value;
+                var url = '';
+                if (url1.length) {
+                    url = url1;
+                } else if (url2.length) {
+                    url = url2;
+                } else {
+                    alert('请输入内容');
+                    window.location.href = "soutunew.html";
+                }
+                document.getElementById('get_input').value = "";
+                document.getElementById('get_inputs').value = "";
+                this.main_url = url;
+                //判断url是否可以成功加载
+                var ImgObj = new Image();
+                ImgObj.src = this.main_url;
+                setTimeout(() => {
+                    if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+                        this.main_url = url;
+                        this.$options.methods.postUrl(this);
+                    } else {
+                        alert("请输入正确的图片地址");
+                        window.location.href = "soutunew.html";
+                    }
+                    ;
+                }, 500);
+            },
+
+            postUrl: function (thi) {
+                //传输图片获取尺寸
+                //console.log('传输上传的图片url');
+                thi.$options.methods.getImageInfo(thi.main_url, thi, (width, height) => {
+                    // 在这里面使用
+                    var real_width = width;
+                    var real_height = height;
+                    thi.main_width = 300;
+                    thi.main_height = real_height / (real_width / 300);
+                    if (real_width) {
+                        thi.$options.methods.getBoxResult(thi);
+                    } else {
+                        alert("图片加载失败");
+                    }
+                    ;
+                });
+            },
+
+            upload: function () {
+                //用户上传图片至oss
+                //console.log('用户上传图片');
+                document.body.style.backgroundImage = "none";
+                document.body.style.backgroundColor = "white";
+                this.box = '';
+                this.isLoadings = false;
+                this.isSearchPage = false;
+                $('#loadings').css("display", "block");
+                this.isUpload2 = false;
+                var file1 = document.getElementById("input_img").files[0];
+                var file2 = document.getElementById("input_imgs").files[0];
+                if (file1) {
+                    var file = file1
+                } else {
+                    var file = file2
+                }
+                ;
+                let spark = new SparkMD5();
+                var codes = spark.code();
+                let client = new OSS({
+                    accessKeyId: codes.hs,
+                    accessKeySecret: codes.ah,
+                    endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                    bucket: 'deepdraw-dbr',
+                });
+                var file_types = file['name'].split('.');
+                var file_type = file_types[file_types.length - 1];
+                var storeAs = 'soutu_data/upload_imgs/' + this.uuid() + '.' + file_type;
+                client.multipartUpload(storeAs, file)
+                    .then((result) => {
+                        if (result.res.requestUrls[0].split('?')[0].length > 0) {
+                            this.main_url = result.res.requestUrls[0].split('?')[0];
+                        } else {
+                            this.main_url = 'wrong';
+                        }
+                        ;
+                        this.$options.methods.postUrl(this);
+                    })
+            },
+
+            getImageInfo: function (url, thi, callback) {
+                //根据url获取图片尺寸
+                //console.log('获取图片的信息');
+                var img = new Image();
+                img.src = url;
+                if (img.complete) {
+                    callback(img.width, img.height);
+                } else {
+                    img.onload = function () {
+                        callback(img.width, img.height);
+                        img.onload = null;
+                    };
+                }
+                ;
+            },
+
+            chooseBox: function (event) {
+                //点击选择box
+                //console.log('点击衣服框');
+                if (this.box) {
+                    $('#' + this.box + 'box').css("display", "none");
+                    var x = $('#' + this.box + 'box').nextAll().attr('class');
+                    var y = x.split(' ')[1];
+                    $('.' + y).css("display", "block");
+                }
+                this.result_position_lists = [];
+                this.result_position_list = [];
+                this.result_position_listss = [];
+                this.result_position_lista = [];
+                this.result_position_listb = [];
+                this.result_position_listc = [];
+                this.loading = true;
+                this.isResultPage = true;
+                this.isLoadings = true;
+                this.isUpload2 = true;
+                $('#loadings').css("display", "none");
+                let title = $(event.target).attr('class');
+                //title = titles.split(' ')[0];
+                //console.log(titles, title);
+                var url = this.main_url;
+                for (let j = 0; j < this.main_box_list.length; j++) {
+                    if (this.main_box_list[j].contains(title)) {
+                        var box = this.main_box_list[j];
+                    }
+                }
+                this.box = title;
+                $('#' + this.box + 'box').css("display", "block");
+                var x = $('#' + this.box + 'box').nextAll().attr('class');
+                var y = x.split(' ')[1];
+                $('.' + y).css("display", "none");
+                axios.post('http://laipan.nps.deepdraw.online/picsearchpic/get_urls/', {
+                    url: url,
+                    box: box,
+                }).then((response) => {
+                    if (response.data.code == 1) {
+                        this.url_list = response.data.url_list;
+                        this.body_list = response.data.body_list;
+                        this.dist_list = response.data.dist_list;
+                        this.click_url_list = response.data.click_url_list;
+                        var position = [];
+                        for (let j = 0; j < this.url_list.length; j++) {
+                            var sin_url = this.url_list[j];
+                            this.$options.methods.getImageInfo(sin_url, this, (width, height) => {
+                                position = [];
+                                var single_url = this.url_list[j];
+                                var boxes = this.body_list[j];
+                                var dist = this.dist_list[j];
+                                var link = this.click_url_list[j];
+                                var box = boxes.split(',');
+                                var real_height = height;
+                                var real_width = width;
+                                var t = box[0];
+                                var r = box[1];
+                                var b = box[2];
+                                var l = box[3];
+                                main_width = 330;
+                                main_height = real_height / (real_width / 330);
+                                var now_width = main_width * (r - l);
+                                var now_height = main_height * (b - t);
+                                var top = main_height * t;
+                                var left = main_width * l;
+                                position.push(single_url, now_width, now_height, top, left, link, dist);
+                                this.result_position_lists.push(position);
+                            });
+                        }
+                        ;
+                        setTimeout(() => {
+                            for (let j = 0; j < this.url_list.length; j++) {
+                                for (let i = 0; i < this.result_position_lists.length; i++) {
+                                    if (this.url_list[j] == this.result_position_lists[i][0]) {
+                                        this.result_position_listss.push(this.result_position_lists[i])
+                                    }
+                                }
+                            }
+                            ;
+                            for (let j = 0; j < this.result_position_listss.length; j++) {
+                                if (j % 3 == 0) {
+                                    this.result_position_lista.push(this.result_position_listss[j])
+                                } else if (j % 3 == 1) {
+                                    this.result_position_listb.push(this.result_position_listss[j])
+                                } else if (j % 3 == 2) {
+                                    this.result_position_listc.push(this.result_position_listss[j])
+                                }
+                            }
+                            ;
+                            this.loading = false;
+                        }, 1000);
+                    }
+                });
+            },
+
+            preLoads: function (th) {
+                //进入页面时默认点击box面积最大那一个框
+                //console.log('方框预加载');
+                th.isResultPage = true;
+                th.isLoadings = true;
+                th.isUpload2 = true;
+                $('#loadings').css("display", "none");
+                var title = '';
+                th.result_position_list = [];
+                var url = th.url;
+                var areas = [];
+                for (let j = 0; j < th.main_box_list.length; j++) {
+                    var w = th.main_box_list[j][1] - th.main_box_list[j][3];
+                    var h = th.main_box_list[j][2] - th.main_box_list[j][0];
+                    var area = w * h;
+                    areas.push(area);
+                }
+                ;
+                var maxs = Math.max.apply(null, areas);
+                var indexOfMax = areas.indexOf(maxs);
+                var box = th.main_box_list[indexOfMax];
+                title = box[4];
+                console.log('点击', title);
+                th.box = title;
+                setTimeout(function () {
+                    $('.' + title).click();
+                }, 500);
+            },
+
+            getBoxResult: function (thi) {
+                //请求后端接口返回匹配图片
+                //console.log("请求后端接口匹配图片")
+                thi.position_list = [];
+                thi.main_box_list = [];
+                thi.result_position_lists = [];
+                thi.result_position_list = [];
+                thi.result_position_listss = [];
+                thi.result_position_lista = [];
+                thi.result_position_listb = [];
+                thi.result_position_listc = [];
+                var dic = {};
+                dic['url'] = thi.main_url;
+                var jsonstr = JSON.stringify(dic);
+                var post_url = "http://192.168.2.102:5000/annoy/?str=" + jsonstr;
+                var post_url2 = "http://laipan.nps.deepdraw.online/picsearchpic/get_box/" + jsonstr;
+                axios.post('http://laipan.nps.deepdraw.online/picsearchpic/get_box/', {
+                    url: thi.main_url,
+                }).then((response) => {
+                    if (response.data.code == 1) {
+                        thi.main_box = response.data.body_info;
+                        var type_list = [];
+                        for (let j = 0; j < thi.main_box.length; j++) {
+                            position = [];
+                            boxs = [];
+                            var type = thi.main_box[j]['type'];
+                            var t = thi.main_box[j]['t'];
+                            var r = thi.main_box[j]['r'];
+                            var b = thi.main_box[j]['b'];
+                            var l = thi.main_box[j]['l'];
+                            console.log(thi.main_width, thi.main_height);
+                            var now_width = thi.main_width * (r - l);
+                            var now_height = thi.main_height * (b - t);
+                            var top = thi.main_height * t;
+                            var left = thi.main_width * l;
+                            if (type_list.contains(type)) {
+                                type = type + j;
+                            }
+                            ;
+                            type_list.push(type);
+                            position.push(now_width, now_height, top, left, type);
+                            boxs.push(t, r, b, l, type);
+                            thi.position_list.push(position);
+                            thi.main_box_list.push(boxs);
+                        }
+                        ;
+                    } else {
+                        alert('失败');
+                    }
+                    thi.$options.methods.preLoads(thi);
+                })
+            },
+        }
+    });
+
+    Array.prototype.contains = function (obj) {
+        //判断数组是否包含某变量的方法
+        var index = this.length;
+        while (index--) {
+            if (this[index] === obj) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    $(document).ready(function () {
+        $('.el-menu-item').click(function () {
+            var x = $(this).children().attr('href');
+            if (x) {
+                window.location.href = x;
+            }
+        })
+    });
+</script>
+</body>
+</html>

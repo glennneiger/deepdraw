@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b197b63b-aea1-4d76-b50a-d72f5d18f9c3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lp_review/review_web/static/css/stackedCards.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lp_review/review_web/static/js/jquery-1.11.0.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lp_review/review_web/static/js/stackedCards.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lp_review/review_web/static/js/starlight.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lp_review/review_web/static/js/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lp_review/review_web/static/js/test1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lp_review/review_web/templetes/review_task2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lp_review/review_web/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/lp_review/review_web/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lp_review/review_web/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/lp_review/review_web/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lp_review/review_web/review/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/lp_review/review_web/review/settings.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/lp_review/review_web" />
+  </component>
+  <component name="ProjectId" id="1VNZUMb9lnKJSa0eg64XJEZs57O" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/review_API/ReviewApi/ReviewApi" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/review_API/ReviewApi/ReviewApi" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b197b63b-aea1-4d76-b50a-d72f5d18f9c3" name="Default Changelist" comment="" />
+      <created>1577095527380</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577095527380</updated>
+      <workItem from="1577095531888" duration="1552000" />
+      <workItem from="1577148901392" duration="884000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

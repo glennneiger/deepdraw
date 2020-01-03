@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>深绘 | 复核数据</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v-charts/lib/index.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.js"></script>
+    <script src="/static/js/stackedCards.min.js"></script>
+    <script src="/static/js/starlight.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/stackedCards.css"/>
+
+    <link rel="stylesheet" href="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-charts/lib/style.min.css">
+
+</head>
+
+<body>
+<div id="app">
+    <div v-if="!isLogin" class="starlight">
+        <transition name="el-zoom-in-top">
+            <div v-show="show">
+                <el-row>
+                    <el-col :span="24">
+                        <div style="font-size: 64px;font: -apple-system-headline;text-align: center;margin-top: 6%">
+                            <img
+                                    src="https://dbr-cd.oss-cn-hangzhou.aliyuncs.com/pic/%E7%9F%A2%E9%87%8F%E6%99%BA%E8%83%BD%E5%AF%B9%E8%B1%A1-2%281%29.png">
+                        </div>
+                    </el-col>
+                    <el-col :span="24">
+                        <el-card style="margin-left: 40%;margin-right: 40%;margin-top: 0%;margin-bottom: 12%">
+                            <div style="margin-left: 11%">
+                                <el-row>
+                                    <el-col :span="4">
+                                        <div style="margin: 55%">
+                                            <i class="el-icon-user"></i>
+                                        </div>
+                                        <div style="margin: 55%">
+                                            <i class="el-icon-key"></i>
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="20">
+                                        <el-input size="mini" style="margin-top: 10%;margin-left: 0%;width: 65%"
+                                                  v-model="username" clearable></el-input>
+
+                                        <el-input size="mini" style="margin-top: 10%;margin-left: 0%;width: 65%"
+                                                  v-model="password" show-password></el-input>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="24">
+                                        <el-button round @click="login()"
+                                                   style="color:#00bfb2;width: 65%;margin-left: 10%;margin-top: 0%;margin-bottom: 10%">
+                                            Go
+                                        </el-button>
+                                    </el-col>
+                                </el-row>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
+            </div>
+        </transition>
+    </div>
+
+    <div v-if="isLogin">
+        <el-menu :default-active="'1'" style="margin-left: 10%;margin-right: 10%" mode="horizontal">
+            <el-menu-item><img
+                    src="https://dbr-cd.oss-cn-hangzhou.aliyuncs.com/pic/%E7%9F%A2%E9%87%8F%E6%99%BA%E8%83%BD%E5%AF%B9%E8%B1%A1-2%281%29.png">
+            </el-menu-item>
+            <el-menu-item index="1" @click="page_choice(1);get_new_merchant();agg('merchantName.keyword');date('day')">
+                总览
+            </el-menu-item>
+            <el-submenu index="2">
+                <template slot="title">数据视角</template>
+                <el-menu-item index="2-1"
+                              @click="page_choice(2.1);merchant_date('month',input,'typeMerchant');merchant_agg(input,'tradeName.keyword','typeMerchant')">
+                    客户视角
+                </el-menu-item>
+                <el-menu-item index="2-2"
+                              @click="page_choice(2.2);merchant_date('month',input,'typeOperator');merchant_agg(input,'tradeName.keyword','typeOperator')">
+                    复核人员视角
+                </el-menu-item>
+
+            </el-submenu>
+            <el-menu-item index="3"
+                          @click="page_choice(3);get_check_pie_data();setTimeout('$(window).resize();', 1000);">
+                模型数据分析
+            </el-menu-item>
+            <el-submenu index="4">
+                <template slot="title">数据同步</template>
+                <el-menu-item index="4.1" @click="page_choice(4.1)">Flower</el-menu-item>
+                <el-menu-item index="4.2" @click="page_choice(4.2)">RabbitMQ</el-menu-item>
+                <el-menu-item index="4.3" @click="page_choice(4.3)">Kibana</el-menu-item>
+            </el-submenu>
+        </el-menu>
+
+        <div v-if="menuActive==1">
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%">
+                <div slot="header" class="clearfix">
+                    <span style="font-size: medium">数据总览</span>
+                    <el-button style="float: right; padding: 1px 0"><i class="el-icon-refresh"><a
+                            href="review_recs.html"></a> </i></el-button>
+                </div>
+
+                <div style="width: 30%">
+                    <div>
+                        <el-row :gutter="2">
+                            <el-col :span="1" style="margin-top: -15%">
+                                <ve-Pie :data="Pie" style="z-index: 99;margin-top: -60%;margin-bottom: 60%"
+                                        width="600px" height="300px" :legend-visible="false"
+                                        :settings="Pie.Settings"></ve-Pie>
+                            </el-col>
+                            <el-col :span="20">
+                                <div style="margin-left: 190%;width: 300%;margin-top: 10%;text-align: center">
+                                    <el-row :gutter="20">
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: xx-large">{{ allcount }}</div>
+                                                <span class="time" style="font-size: xx-small">复核记录总数</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ joindate }}</div>
+                                                <span class="time" style="font-size: xx-small">最早记录</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ lastdate }}</div>
+                                                <span class="time" style="font-size: xx-small">最新数据</span>
+                                            </el-card>
+                                        </el-col>
+                                    </el-row>
+                                </div>
+                            </el-col>
+                        </el-row>
+
+                        <el-button-group style="margin-left: 30%">
+                            <el-input
+                                    type="number"
+                                    v-model="top_num"
+                                    style="width: 20%"
+                                    size="mini"
+                                    max="50"
+                                    min="5">
+                            </el-input>
+                            <el-button size="mini" @click="agg('merchantName.keyword')">客户</el-button>
+                            <el-button size="mini" @click="agg('tradeName.keyword')">品类</el-button>
+                            <el-button size="mini" @click="agg('operator.keyword')">复核员</el-button>
+                            <el-button size="mini" @click="agg(agg_name)"><i class="el-icon-edit">top</i></el-button>
+
+                        </el-button-group>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <el-button-group style="margin-left: 45%">
+                        <el-button size="mini" @click="date('month')">月</el-button>
+                        <el-button size="mini" @click="date('day')">日</el-button>
+                        <el-button size="mini" @click="date('hour')">小时</el-button>
+                    </el-button-group>
+                    <ve-line :data="Line" :settings="Line.Settings" :data-zoom="Line.dataZoom"
+                             :not-set-unchange="['dataZoom']"></ve-line>
+                </div>
+            </el-card>
+
+
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%">
+                <div slot="header" class="clearfix">
+                    <span style="font-size: medium">近90天 新增商家 top12</span>
+                    <el-tag type="success">new</el-tag>
+
+                </div>
+                <div>
+                    <el-row :gutter="12">
+                        <el-col :span="6" v-for="merchant in new_merchant" style="text-align: center">
+                            <el-card shadow="hover">
+                                <div slot="header" class="clearfix">
+                                    <span>{{ merchant.key.split('_',1)[0]}}</span>
+                                    <el-button
+                                            @click="merchant_date('day',merchant.key,'typeMerchant');merchant_agg(merchant.key,'tradeName.keyword','typeMerchant');menuActive=2.1"
+                                            style="float: right; padding: 1px 0"><i class="el-icon-zoom-in
+    "><a href="test.html"></a> </i></el-button>
+
+                                </div>
+                                <div>
+                                    <div style="font-size: small">近90天 复核数：{{ merchant.doc_count }}</div>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-card>
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%;margin-bottom: 10%">
+                <div slot="header" class="clearfix">
+                    <span style="font-size: medium">近90天 不活跃商家 top12</span>
+                    <el-tag type="danger">loss</el-tag>
+                </div>
+                <div>
+                    <el-row :gutter="12">
+                        <el-col :span="6" v-for="merchant in loss_merchant" style="text-align: center">
+                            <el-card shadow="hover">
+                                <div slot="header" class="clearfix">
+                                    <span>{{ merchant.key.split("_",1)[0] }}</span>
+                                    <el-button
+                                            @click="merchant_date('day',merchant.key,'typeMerchant');merchant_agg(merchant.key,'tradeName.keyword','typeMerchant');input=merchant.key;menuActive=2.1"
+                                            style="float: right; padding: 1px 0"><i class="el-icon-zoom-in
+    "><a href="test.html"></a> </i></el-button>
+                                </div>
+                                <div>
+                                    <div style="font-size: small">复核数：{{ merchant.doc_count }}</div>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-card>
+        </div>
+
+        <div v-if="menuActive==2.1">
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%">
+                <el-row :gutter="2">
+                    <el-col :span="10">
+                        <el-input
+                                placeholder="请输入内容"
+                                v-model="input"
+                                clearable>
+                        </el-input>
+                    </el-col>
+                    <el-col :span="10">
+                        <el-button type="primary" plain
+                                   @click="merchant_date('day',input,'typeMerchant');merchant_agg(agg_name,'typeMerchant')">
+                            搜索
+                        </el-button>
+                    </el-col>
+                </el-row>
+            </el-card>
+
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%">
+                <div slot="header" class="clearfix">
+                    <span style="font-size: medium">客户数据预览</span>
+                    <el-button style="float: right; padding: 1px 0"><i class="el-icon-refresh"><a href="test.html"></a>
+                    </i></el-button>
+                </div>
+
+                <div style="width: 30%">
+                    <div>
+                        <el-row :gutter="2">
+                            <el-col :span="1" style="margin-top: -15%">
+                                <ve-Pie :data="Pie" style="z-index: 99;margin-top: -60%;margin-bottom: 60%"
+                                        width="600px" height="300px" :legend-visible="false"
+                                        :settings="Pie.Settings"></ve-Pie>
+                            </el-col>
+                            <el-col :span="20">
+                                <div style="margin-left: 190%;width: 300%;margin-top: 10%;text-align: center">
+                                    <el-row :gutter="20">
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: xx-large">{{ allcount }}</div>
+                                                <span class="time" style="font-size: xx-small">复核记录总数</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ joindate }}</div>
+                                                <span class="time" style="font-size: xx-small">入驻时间</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ lastdate }}</div>
+                                                <span class="time" style="font-size: xx-small">最近使用</span>
+                                            </el-card>
+                                        </el-col>
+                                    </el-row>
+                                </div>
+                            </el-col>
+                        </el-row>
+
+                        <el-button-group style="margin-left: 30%">
+                            <el-input
+                                    type="number"
+                                    v-model="top_num"
+                                    style="width: 20%"
+                                    size="mini"
+                                    max="50"
+                                    min="5">
+                            </el-input>
+                            <el-button size="mini" @click="merchant_agg(input,'tradeName.keyword','typeMerchant')">品类
+                            </el-button>
+                            <el-button size="mini" @click="merchant_agg(input,'operator.keyword','typeMerchant')">复核员
+                            </el-button>
+                            <el-button size="mini" @click="merchant_agg(input,agg_name,'typeMerchant')"><i
+                                    class="el-icon-edit">top</i></el-button>
+
+                        </el-button-group>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <el-button-group style="margin-left: 45%">
+                        <el-button size="mini" @click="merchant_date('month',input,'typeMerchant')">月</el-button>
+                        <el-button size="mini" @click="merchant_date('day',input,'typeMerchant')">日</el-button>
+                        <el-button size="mini" @click="merchant_date('hour',input,'typeMerchant')">小时</el-button>
+                    </el-button-group>
+                    <ve-line :data="Line" :settings="Line.Settings" :data-zoom="Line.dataZoom"
+                             :not-set-unchange="['dataZoom']"></ve-line>
+                </div>
+            </el-card>
+        </div>
+
+        <div v-if="menuActive==2.2">
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%">
+                <el-row :gutter="2">
+                    <el-col :span="10">
+                        <el-input
+                                placeholder="请输入内容"
+                                v-model="operator_name"
+                                clearable>
+                        </el-input>
+                    </el-col>
+                    <el-col :span="10">
+                        <el-button type="primary" plain
+                                   @click="merchant_agg(agg_name,'typeOperator');merchant_date('day',operator_name,'typeOperator')">
+                            搜索
+                        </el-button>
+                    </el-col>
+                </el-row>
+            </el-card>
+
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%">
+                <div slot="header" class="clearfix">
+                    <span style="font-size: medium">复核员数据预览</span>
+                    <el-button style="float: right; padding: 1px 0"><i class="el-icon-refresh"></a>
+                    </i></el-button>
+                </div>
+
+                <div style="width: 30%">
+                    <div>
+                        <el-row :gutter="2">
+                            <el-col :span="1" style="margin-top: -15%">
+                                <ve-Pie :data="Pie" style="z-index: 99;margin-top: -60%;margin-bottom: 60%"
+                                        width="600px" height="300px" :legend-visible="false"
+                                        :settings="Pie.Settings"></ve-Pie>
+                            </el-col>
+                            <el-col :span="20">
+                                <div style="margin-left: 190%;width: 300%;margin-top: 10%;text-align: center">
+                                    <el-row :gutter="20">
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: xx-large">{{ allcount }}</div>
+                                                <span class="time" style="font-size: xx-small">复核记录总数</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ joindate }}</div>
+                                                <span class="time" style="font-size: xx-small">入驻时间</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ lastdate }}</div>
+                                                <span class="time" style="font-size: xx-small">最近使用</span>
+                                            </el-card>
+                                        </el-col>
+                                    </el-row>
+                                </div>
+                            </el-col>
+                        </el-row>
+
+                        <el-button-group style="margin-left: 30%">
+                            <el-input
+                                    type="number"
+                                    v-model="top_num"
+                                    style="width: 20%"
+                                    size="mini"
+                                    max="50"
+                                    min="5">
+                            </el-input>
+                            <el-button size="mini" @click="merchant_agg(input,'tradeName.keyword','typeOperator')">品类
+                            </el-button>
+                            <el-button size="mini" @click="merchant_agg(input,'merchantName.keyword','typeOperator')">
+                                客户
+                            </el-button>
+                            <el-button size="mini" @click="merchant_agg(input,'tradeName.keyword','typeOperator')"><i
+                                    class="el-icon-edit">top</i></el-button>
+
+                        </el-button-group>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <el-button-group style="margin-left: 45%">
+                        <el-button size="mini" @click="merchant_date('month',input,'typeOperator')">月</el-button>
+                        <el-button size="mini" @click="merchant_date('day',input,'typeOperator')">日</el-button>
+                        <el-button size="mini" @click="merchant_date('hour',input,'typeOperator')">小时</el-button>
+                    </el-button-group>
+                    <ve-line :data="Line" :settings="Line.Settings" :data-zoom="Line.dataZoom"
+                             :not-set-unchange="['dataZoom']"></ve-line>
+                </div>
+            </el-card>
+        </div>
+
+        <div v-if="menuActive==3.1">
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%">
+                <el-row :gutter="2">
+                    <el-col :span="3">
+                        <el-select v-model="model_field" placeholder="请选择">
+                            <el-option
+                                    v-for="item in modelOptions"
+                                    :key="item.value"
+                                    :label="item.lable"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-select v-model="merchant_field" filterable placeholder="选择客户过滤" style="width: 100%">
+                            <el-option
+                                    v-for="item in Model_analyze_data['merchant_buckets']"
+                                    :key="item.key"
+                                    :label="item.key"
+                                    :value="item.doc_count">
+                            </el-option>
+                        </el-select>
+                    </el-col>
+                    <el-col :span="3">
+                        <el-select v-model="trade_field" filterable placeholder="选择客户过滤">
+                            <el-option
+                                    v-for="item in Model_analyze_data['trade_buckets']"
+                                    :key="item.key"
+                                    :label="item.key"
+                                    :value="item.doc_count">
+                            </el-option>
+                        </el-select>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-button type="primary" plain
+                                   @click="merchant_agg(agg_name,'typeOperator');merchant_date('day',operator,'typeOperator')">
+                            搜索
+                        </el-button>
+                    </el-col>
+                </el-row>
+            </el-card>
+
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%">
+                <div slot="header" class="clearfix">
+                    <span style="font-size: medium">模型复核数据预览</span>
+                    <el-button style="float: right; padding: 1px 0"><i class="el-icon-refresh"><a href="test.html"></a>
+                    </i></el-button>
+                </div>
+
+                <div style="width: 30%">
+                    <div>
+                        <el-row :gutter="2">
+                            <el-col :span="1" style="margin-top: -15%">
+                                <ve-Pie :data="Pie" style="z-index: 99;margin-top: -60%;margin-bottom: 60%"
+                                        width="600px" height="300px" :legend-visible="false"
+                                        :settings="Pie.Settings"></ve-Pie>
+                            </el-col>
+                            <el-col :span="20">
+                                <div style="margin-left: 190%;width: 300%;margin-top: 10%;text-align: center">
+                                    <el-row :gutter="20">
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: xx-large">{{ allcount }}</div>
+                                                <span class="time" style="font-size: xx-small">复核记录总数</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ joindate }}</div>
+                                                <span class="time" style="font-size: xx-small">入驻时间</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ lastdate }}</div>
+                                                <span class="time" style="font-size: xx-small">最近使用</span>
+                                            </el-card>
+                                        </el-col>
+                                    </el-row>
+                                </div>
+                            </el-col>
+                        </el-row>
+
+                        <el-button-group style="margin-left: 30%">
+                            <el-input
+                                    type="number"
+                                    v-model="top_num"
+                                    style="width: 20%"
+                                    size="mini"
+                                    max="50"
+                                    min="5">
+                            </el-input>
+                            <el-button size="mini" @click="merchant_agg(input,'tradeName.keyword','typeOperator')">品类
+                            </el-button>
+                            <el-button size="mini" @click="merchant_agg(input,'merchantName.keyword','typeOperator')">
+                                客户
+                            </el-button>
+                            <el-button size="mini" @click="merchant_agg(input,'tradeName.keyword','typeOperator')"><i
+                                    class="el-icon-edit">top</i></el-button>
+
+                        </el-button-group>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <el-button-group style="margin-left: 45%">
+                        <el-button size="mini" @click="merchant_date('month',input,'typeOperator')">月</el-button>
+                        <el-button size="mini" @click="merchant_date('day',input,'typeOperator')">日</el-button>
+                        <el-button size="mini" @click="merchant_date('hour',input,'typeOperator')">小时</el-button>
+                    </el-button-group>
+                    <ve-line :data="Line" :settings="Line.Settings" :data-zoom="Line.dataZoom"
+                             :not-set-unchange="['dataZoom']"></ve-line>
+                </div>
+            </el-card>
+        </div>
+
+        <div v-if="menuActive==3">
+
+            <el-card class="box-card" style="margin-left: 10%;margin-right: 10%;margin-top: 1%;">
+                <div class="top-select-group" style="width: 100%;">
+                    <el-select v-model="value2" filterable @change="get_check_pie_data(true)" id="modelSelect">
+                        <el-option
+                                v-for="model in modelOptions"
+                                :key="model.value"
+                                :label="model.label"
+                                :value="model.value">
+                        </el-option>
+                    </el-select>
+                    <el-select v-model="value0" filterable @change="get_check_pie_data(false)" id="merchantSelect">
+                        <el-option
+                                v-for="merchant in merchantOptions"
+                                :key="merchant.value"
+                                :label="merchant.label"
+                                :value="merchant.value">
+                        </el-option>
+                    </el-select>
+                    <el-select v-model="value1" filterable @change="get_check_pie_data(false)" id="typSelect">
+                        <el-option
+                                v-for="typ in typOptions"
+                                :key="typ.value"
+                                :label="typ.label"
+                                :value="typ.value">
+                        </el-option>
+                    </el-select>
+                    <el-select v-model="value3" filterable @change="get_check_pie_data(false)" id="tradeNameSelect">
+                        <el-option
+                                v-for="tradeName in tradeNameOptions"
+                                :key="tradeName.value"
+                                :label="tradeName.label"
+                                :value="tradeName.value">
+                        </el-option>
+                    </el-select>
+                </div>
+            </el-card>
+
+
+            <el-card v-loading="loading_data" class="box-card"
+                     style="margin-left: 10%;margin-right: 10%;margin-top: 1%;">
+                <div slot="header" class="clearfix">
+                    <span style="font-size: medium">模型评估数据总览</span>
+                    <el-button style="float: right; padding: 1px 0"><i class="el-icon-refresh"><a href="test.html"></a></i>
+                    </el-button>
+                </div>
+                <div style="width: 30%">
+                    <div>
+                        <el-row :gutter="2">
+                            <el-col :span="1" style="margin-top: -15%">
+                                <ve-Pie :data="PieModel" style="z-index: 99;margin-top: -60%;margin-bottom: 60%"
+                                        width="600px"
+                                        height="300px" :legend-visible="false" :settings="PieModel.Settings"></ve-Pie>
+                                <el-button-group style="margin-left: 30%;width: 500px;padding-left: 146px;">
+                                    <el-button size="mini" @click="click_pie_selector_merchant" id="merchant_button">
+                                        客户top
+                                    </el-button>
+                                    <el-button size="mini" @click="click_pie_selector_typ">图片类型top</el-button>
+                                    <el-button size="mini" @click="click_pie_selector_tradeName">品类top</el-button>
+                                    <el-input-number v-model="pie_show_num" @change="changeNumInput" :min="1"
+                                                     :max="pie_num"
+                                                     label="筛选前几" id="num_input" size="mini"
+                                                     style="width: 20%"></el-input-number>
+                                </el-button-group>
+
+                            </el-col>
+                            <el-col :span="20">
+                                <div style="margin-left: 190%;width: 300%;margin-top: 10%;text-align: center">
+                                    <el-row :gutter="20">
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: xx-large">{{ features_count }}</div>
+                                                <span class="time" style="font-size: xx-small">改正数量</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ maxRate }}</div>
+                                                <span class="time" style="font-size: xx-small">改正率</span>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="5">
+                                            <el-card shadow="hover">
+                                                <div style="font-size: large">{{ minRate }}</div>
+                                                <span class="time" style="font-size: xx-small">最近记录日期</span>
+                                            </el-card>
+                                        </el-col>
+                                    </el-row>
+                                </div>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </div>
+                <el-button-group style="margin-left: 45%">
+                    <el-button size="mini" @click="get_check_line_data">月</el-button>
+                    <el-button size="mini" @click="get_check_line_data">日</el-button>
+                </el-button-group>
+                <ve-line :data="check_line_data" :settings="chartSettings2" :legend-visible="false"
+                         :data-zoom="dataZoom"></ve-line>
+
+            </el-card>
+
+
+            <el-card v-loading="loading_pic" class="infinite-list" v-infinite-scroll="get_more_pic"
+                     style="margin-left: 10%;margin-right: 10%;margin-top: 1%;height: 800px;overflow: auto">
+                <div slot="header" class="clearfix">
+                    <span style="font-size: medium; ">近期修正的图片</span>
+                    <el-button style="float: right; padding: 1px 0"><i class="el-icon-refresh"> </i>
+                    </el-button>
+                </div>
+                <div>
+
+                    <el-card v-for="(img,index) in recent_img" class="result" style="height: 390px;margin-bottom: 1%">
+                        <div class="pic" @click="onload_product(img)">
+                            <img :src="img.src" alt="" referrerpolicy="no-referrer" :id="img.pic_id"
+                                 @load="what_test($event)">
+                            <span v-if="value2=='face_outline'||value2=='cloth_outline'||value2=='body_outline'"
+                                  class="draw_border" :id="img.region_id">
+                                <!--<el-tag style="float: right;margin-right:-122px;width: 120px;text-align: center">修正前{{ value2 }}</el-tag>-->
+                            </span>
+                            <span v-if="value2=='face_outline'||value2=='cloth_outline'||value2=='body_outline'"
+                                  class="draw_border_right" :id="img.region_right_id">
+                                <el-tag style="float: left;margin-left:-127px;width: 126px;text-align: center">修正后{{ value2 }}</el-tag>
+                            </span>
+                        </div>
+                        <span class="img-info">
+                            <span class="title">图片修正详情</span>
+                            <span class="detail" style="display: block;font-size: 25px;margin-bottom: 35px;"><el-tag
+                                    type="danger" style="margin-right: 15px;">{{ img.old_data }}</el-tag>→<el-tag
+                                    type="success" style="margin-left: 15px;">{{ img.new_data }}</el-tag></span>
+                            <span class="message1"
+                                  style="display: block;font-size: 17px;margin-bottom: 16px;">用户：{{ img.merchantName }}</span>
+                            <span class="message2"
+                                  style="display: block;font-size: 17px;margin-bottom: 16px;">操作者：{{ img.operator }}</span>
+                            <span class="message3"
+                                  style="display: block;font-size: 17px;">更新时间：{{ img.updateTime }}</span>
+                        </span>
+                    </el-card>
+
+
+                </div>
+            </el-card>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    @import url("//unpkg.com/element-ui@2.12.0/lib/theme-chalk/index.css");
+    @import url("//unpkg.com/element-ui@2.12.0/lib/theme-chalk/index.css");
+
+
+    .all-select-button {
+        margin-left: 5%;
+    }
+
+    .single-select-button {
+        margin-left: 5%;
+    }
+
+
+    .demo-image {
+        background-color: white;
+        height: 200px;
+        width: 200px;
+        display: inline-block;
+    }
+
+    .demo-image {
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
+
+    .demo-image img {
+        max-width: 100%;
+        max-height: 100%;
+        margin-top: 48px;
+    }
+
+    .total-img {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .bg-purple-dark img {
+        margin: 24px 0 0 32px;
+    }
+
+    .img-info {
+        font-size: 14px;
+        letter-spacing: 3px;
+        display: block;
+        float: right;
+        width: 490px;
+        text-align: center;
+        padding-top: 24px;
+    }
+
+    .pic {
+        margin-left: 10%;
+        overflow: visible;
+        display: inline-block;
+        height: 300px;
+        /* width: 20%; */
+        width: 400px;
+        margin: 0px 15px 15px 100px;
+        position: relative;
+    }
+
+    #border {
+        display: none;
+    }
+
+    .result {
+        height: 325px;
+        margin-bottom: 82px;
+    }
+
+    .pic img {
+        vertical-align: middle;
+        max-width: 99%;
+        max-height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .pic .draw_border {
+        position: absolute;
+        border: 1px solid red;
+        overflow: visible;
+    }
+
+    .pic .draw_dot {
+        height: 20px;
+        width: 20px;
+        border-radius: 28px;
+        position: absolute;
+        border: 6px solid white;
+        background-color: #1b8ce4;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .pic .draw_dot:hover {
+        opacity: 0.75;
+    }
+
+    .el-tag {
+        cursor: pointer;
+    }
+
+    .el-tag:hover {
+        background-color: #c9e0fe;
+    }
+
+    .pic .draw_border_right {
+        position: absolute;
+        border: 1px solid green;
+        overflow: visible;
+    }
+
+</style>
+<script>
+    const features_names = ['typ', 'body_orientation', 'body_orientation2', 'body_part', 'color', 'face_outline', 'cloth_outline'];
+    new Vue({
+        el: '#app',
+        data: {
+            size_list: {},
+            border_list: {},
+            show: false,
+            features_count: 0,
+            flag: 0,
+            before_correct: 'xxxxxxxxx',
+            after_correct: 'xxxxxxxxx',
+            merchantName: 'XXXXXXXXXXXXXXXXXXX',
+            operator: 'XXX',
+            updateTime: 'xxxx-xx-xx',
+            choose_interval: 'day',
+            pie_show_num: 20,
+            activeIndex: '1',
+            dataZoom: '',
+            rateAvg: '/',
+            maxRate: '/',
+            minRate: '/',
+            chartSettings: '',
+            chartSettings2: '',
+            all_response: '',
+            pie_selector_choice: 'merchant_data',
+            merchantOptions: [{
+                value: 'unlimited',
+                label: '不限用户'
+            }],
+            typOptions: [{
+                value: 'unlimited',
+                label: '不限图片类型'
+            }],
+            whole_typOptions: [{
+                value: 'unlimited',
+                label: '不限图片类型'
+            }],
+            whole_modelOptions: [
+                {
+                    value: 'typ',
+                    label: 'typ'
+                }, {
+                    value: 'color',
+                    label: 'color'
+                }, {
+                    value: 'body_part',
+                    label: 'body_part'
+                }, {
+                    value: 'body_count',
+                    label: 'body_count'
+                }, {
+                    value: 'body_outline',
+                    label: 'body_outline'
+                }, {
+                    value: 'body_orientation',
+                    label: 'body_orientation'
+                }, {
+                    value: 'body_orientation2',
+                    label: 'body_orientation2'
+                }, {
+                    value: 'face_outline',
+                    label: 'face_outline'
+                }, {
+                    value: 'cloth_outline',
+                    label: 'cloth_outline'
+                }, {
+                    value: 'angle',
+                    label: 'angle'
+                }]
+            ,
+            modelOptions: [
+                {
+                    value: 'typ',
+                    label: 'typ'
+                }, {
+                    value: 'color',
+                    label: 'color'
+                }, {
+                    value: 'body_part',
+                    label: 'body_part'
+                }, {
+                    value: 'body_count',
+                    label: 'body_count'
+                }, {
+                    value: 'body_outline',
+                    label: 'body_outline'
+                }, {
+                    value: 'body_orientation',
+                    label: 'body_orientation'
+                }, {
+                    value: 'body_orientation2',
+                    label: 'body_orientation2'
+                }, {
+                    value: 'face_outline',
+                    label: 'face_outline'
+                }, {
+                    value: 'cloth_outline',
+                    label: 'cloth_outline'
+                }, {
+                    value: 'angle',
+                    label: 'angle'
+                }],
+            tradeNameOptions: [{
+                value: 'unlimited',
+                label: '不限品类'
+            }],
+            value0: 'unlimited',
+            value1: 'unlimited',
+            value2: 'cloth_outline',
+            value3: 'unlimited',
+            colors: ['#44A1C4'],
+            pie_num: 100,
+            checkAll: true,
+            checkedCities: ['typ', 'body_orientation', 'body_orientation2', 'body_part', 'color', 'face_outline', 'cloth_outline'],
+            fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+            //url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            features_name: features_names,
+            isIndeterminate: true,
+            PieModel: {
+                columns: ['typ', '改正率'],
+                rows: []
+            },
+            recent_img: [],
+            loading_data: false,
+            loading_pic: false,
+            check_line_data: {
+                columns: ['时间', '改正率'],
+                rows: []
+            },
+            unlimited_list: ['merchant_data', 'typ_data', 'tradeName_data'],
+            if_click: false,
+            img_id: '',
+            now_page: 0,
+            term_list: [],
+
+
+            username: "review",
+            password: "trbl666",
+            isLogin: false,
+            operator_name: "xiechunyu",
+            allcount: 0,
+            joindate: '',
+            lastdate: '',
+            input: '上海美特斯邦威服饰股份有限公司_V',
+            loss_merchant: [],
+            new_merchant: [],
+            menuActive: 1,
+            isCollapse: true,
+            top_num: 10,
+            agg_name: "merchantName.keyword",
+            Pie: {
+                columns: ['key', 'doc_count'],
+                rows: []
+            },
+            Line: {
+                columns: ['key_as_string', 'doc_count'],
+                rows: [],
+                Settings: {
+                    //yAxisType:["percent"],
+                    area: true,
+                    labelMap: {
+                        'doc_count': "复核记录数量"
+                    }
+                },
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        start: 0,
+                        end: 100
+                    }
+                ]
+            },
+            Model_analyze_data: {},
+            model_field: "_body_orientation2",
+            merchant_field: '',
+            typ_field: "",
+            trade_field: "",
+
+        },
+        mounted() {
+            this.agg("merchantName.keyword");
+            this.date("day");
+            this.get_new_merchant();
+
+            window.vue = this;
+            //this.get_all();
+            this.if_show_pie_selector();
+            this.get_check_pie_data();
+            //console.log(this.value0, this.value1, this.value2, this.value3);
+            //this.get_new_merchant();
+            this.chartSettings = {
+                dimension: ['日期'],
+                metrics: ['下单率'],
+                dataOrder: {
+                    label: '下单率',
+                    order: 'desc'
+                }
+            };
+            this.chartSettings2 = {
+                yAxisType: ["percent"],
+                area: true
+            };
+            this.dataZoom = [
+                {
+                    type: 'slider',
+
+                }
+            ];
+            //console.log($('.el-input__inner').first());
+            $('.el-input__inner').eq(0).attr("placeholder", "");
+            $('.el-input__inner').eq(1).attr("placeholder", "");
+            $('.el-input__inner').eq(2).attr("placeholder", "");
+            $('.el-input__inner').eq(3).attr("placeholder", "");
+            // setTimeout("$(window).resize();", 1000);
+            this.show = true;
+        },
+        methods: {
+            what_test(e) {
+                let new_id = e.explicitOriginalTarget.id.slice(3,);
+                let width = e.explicitOriginalTarget.clientWidth;
+                let height = e.explicitOriginalTarget.clientHeight;
+                this.size_list[new_id] = [width, height];
+            },
+
+            login: function (p) {
+                axios.post("/review/v1/authentiction/", {
+                    "username": this.username,
+                    "password": this.password
+                })
+                    .then((response) => {
+                        if (response.data.errCode === "0") {
+                            this.isLogin = true
+                        }
+                    })
+            },
+            onload_product: function (img) {
+                console.log(img.src.split('/')[5]);
+                window.open('http://www.deepdraw.biz/product/' + img.src.split('/')[5]);
+            },
+            page_choice: function (p) {
+                this.menuActive = p;
+                console.log(this.menuActive);
+                if (p === 4.1) {
+                    window.location.href = 'http://60.191.84.99:8555/dashboard';
+                } else if (p === 4.2) {
+                    window.location.href = 'http://60.191.84.99:15677/';
+                } else if (p === 4.3) {
+                    alert("test")
+                }
+            },
+            agg: function (agg_name) {
+                this.agg_name = agg_name;
+                axios.post('/review/v1/agg/', {
+                    "agg_name": agg_name,
+                    "top_num": this.top_num
+                })
+                    .then((response) => {
+                        this.Pie.rows = response.data.rows;
+                        this.allcount = response.data.allcount;
+                    })
+            },
+            date: function (timeType) {
+                console.log(timeType);
+                axios.post('/review/v1/date/', {
+                    "timeType": timeType
+                })
+                    .then((response) => {
+                        this.Line.rows = response.data.rows;
+                        if (timeType === 'day') {
+                            this.joindate = response.data.rows[0]['key_as_string'];
+                            this.lastdate = response.data.rows[response.data.rows.length - 1]['key_as_string']
+                        }
+                    })
+            },
+
+            get_new_merchant: function () {
+                axios.post('/review/v1/oldday/', {
+                    //"timeType":timeType
+                })
+                    .then((response) => {
+                        this.new_merchant = response.data.new_merchant;
+                        this.loss_merchant = response.data.loss_merchant;
+                        console.log(this.new_merchant)
+                    })
+            },
+            merchant_date: function (timeType, merchant, type) {
+                this.input = merchant;
+                if (type === "typeMerchant") {
+                    key = merchant
+                } else key = this.operator_name;
+
+                axios.post('/review/v1/merchant_date/', {
+                    "timeType": timeType,
+                    "key": key,
+                    "type": type
+                })
+                    .then((response) => {
+                        this.Line.rows = [];
+                        this.Line.rows = response.data.rows;
+                        if (timeType === 'day') {
+                            this.joindate = response.data.rows[0]['key_as_string'];
+                            this.lastdate = response.data.rows[response.data.rows.length - 1]['key_as_string']
+                        }
+                    })
+            },
+            merchant_agg: function (merchant, agg_name, type) {
+                this.agg_name = agg_name;
+                this.input = merchant;
+
+                if (type === "typeMerchant") {
+                    key = merchant
+                } else key = this.operator_name;
+                axios.post('/review/v1/merchant_agg/', {
+                    "agg_name": agg_name,
+                    "top_num": this.top_num,
+                    "key": key,
+                    "type": type
+                })
+                    .then((response) => {
+                        this.Pie.rows = response.data.rows;
+                        this.allcount = response.data.allcount;
+                        console.log(agg_name);
+                        console.log(key);
+                        console.log(this.allcount)
+                    })
+            },
+
+            get_more_pic: function () {
+                this.now_page += 1;
+                console.log('recent', this.recent_img);
+                axios.post('/review/v1/get_all/', {
+                    "model_field": this.model_field,
+                    "term_list": this.term_list,
+                    "interval": "month",
+                    "now_page": this.now_page,
+                    "term_flag": 1
+                })
+                    .then((response) => {
+                        console.log(response.data.change_source);
+                        var i = this.rateAvg;
+                        if (this.value2 === 'face_outline' || this.value2 === 'cloth_outline' || this.value2 === 'body_outline') {
+                            console.log('长度', response.data.change_source.length);
+                            for (var item of response.data.change_source) {
+                                var pic_url = item["_source"]["url"].replace('PIC', '');
+                                var operator = item["_source"]["operator"];
+                                var merchant = item["_source"]["merchantName"];
+                                var old_data = item["_source"][this.model_field];
+                                var new_data = item["_source"][this.value2];
+                                var updateTime = item["_source"]["updateTime"];
+                                var new_img = {
+                                    "src": 'http:' + pic_url + '@!400',
+                                    "operator": operator,
+                                    "pic_id": "pic" + i,
+                                    "region_id": "region" + i,
+                                    "region_right_id": "region-right" + i,
+                                    "order": i,
+                                    "merchantName": merchant,
+                                    "old_data": old_data,
+                                    "new_data": new_data,
+                                    "updateTime": updateTime
+                                };
+                                this.recent_img.push(new_img);
+                                i += 1;
+                            }
+                            ;
+                        } else {
+                            for (var item of response.data.change_source) {
+                                //console.log(pic);
+                                var pic_url = item["_source"]["url"].replace('PIC', '');
+                                var operator = item["_source"]["operator"];
+                                var merchant = item["_source"]["merchantName"];
+                                var old_data = item["_source"][this.model_field];
+                                var new_data = item["_source"][this.value2];
+                                var updateTime = item["_source"]["updateTime"];
+                                var new_img = {
+                                    "src": 'http:' + pic_url + '@!400',
+                                    "operator": operator,
+                                    "pic_id": "pic" + i,
+                                    "order": i,
+                                    "merchantName": merchant,
+                                    "old_data": old_data,
+                                    "new_data": new_data,
+                                    "updateTime": updateTime
+                                };
+                                this.recent_img.push(new_img);
+                                i += 1;
+                            }
+                            ;
+                        }
+                        ;
+                        var timer = setInterval(() => {
+                            if (Object.keys(this.size_list).length === (this.rateAvg)) {
+                                this.prepare_get_pic();
+                                clearInterval(timer);
+                            }
+                        }, 1000);
+                        this.now_page += 1;
+                        this.rateAvg = i;
+                    })
+            },
+
+            prepare_get_pic: function () {
+                for (let i = 0; i < this.recent_img.length; i++) {
+                    let region_temp = this.recent_img[i].old_data;
+                    let region = this.pre_handle(region_temp);
+                    var t = region[0];
+                    var r = region[1];
+                    var b = region[2];
+                    var l = region[3];
+                    this.draw_region(t, r, b, l, i);
+                    let region_right_temp = this.recent_img[i].new_data;
+                    let region_right = this.pre_handle(region_right_temp);
+                    var t_right = region_right[0];
+                    var r_right = region_right[1];
+                    var b_right = region_right[2];
+                    var l_right = region_right[3];
+                    this.draw_right_region(t_right, r_right, b_right, l_right, i);
+                }
+                ;
+            },
+
+            pre_handle: function (region_temp) {
+                let region_new = '';
+                if (region_temp.slice(0, 1) === '[') {
+                    region_new = region_temp.slice(1, region_temp.length - 1);
+                } else {
+                    region_new = region_temp;
+                }
+                ;
+                let region_test = region_new.split(',');
+                let region = region_test.map(Number);
+                return region;
+            },
+
+            choose_model_agg: function (thi, agg_name) {
+                if (agg_name === "merchantName") {
+                    thi.Pie.rows = thi.Model_analyze_data["merchant_buckets"].slice(0, 10);
+                    console.log(thi.Pie.rows)
+                }
+            },
+            get_check_pie_data: function (if_first_change) {
+                if (if_first_change) {
+                    //console.log('vvv');
+                    this.value0 = 'unlimited';
+                    this.value1 = 'unlimited';
+                    this.value3 = 'unlimited';
+                }
+                $('input').eq(0).change(function () {
+                    console.log('vvv');
+                });
+                this.loading_data = true;
+                this.loading_pic = true;
+                this.if_show_pie_selector();
+                this.term_list = [];
+                this.model_field = "_" + this.value2;
+                if (this.value0 !== "unlimited") {
+                    this.term_list.push({"term_key": "merchantName", "term_value": this.value0})
+                }
+                if (this.value1 !== "unlimited") {
+                    this.term_list.push({"term_key": "typ", "term_value": this.value1})
+                }
+                if (this.value3 !== "unlimited") {
+                    this.term_list.push({"term_key": "tradeName", "term_value": this.value3})
+                }
+                console.log("model_field", this.model_field, "term_list", this.term_list);
+                axios.post('/review/v1/get_all_data/', {
+                    merchant_data: this.value0,//this.value0
+                    typ_data: this.value1,
+                    field_data: this.value2,
+                    interval_data: this.choose_interval,
+                    tradeName_data: this.value3
+                }, {timeout: 1000 * 60 * 1})
+                    .then((response) => {
+                        //console.log(response);
+                        this.change_options(response);
+                        //console.log(response);
+                        if (this.unlimited_list.length > 0) {
+                            console.log("过滤列表定位", this.unlimited_list[0]);
+                            this.pie_selector_choice = this.unlimited_list[0];
+                        } else {
+                            //console.log('empty');
+                            $(".el-button").eq(1).removeAttr("disabled");
+                            $('.el-button').eq(1).removeClass('is-disabled');
+                            $(".el-button").eq(2).removeAttr("disabled");
+                            $('.el-button').eq(2).removeClass('is-disabled');
+                            $(".el-button").eq(3).removeAttr("disabled");
+                            $('.el-button').eq(3).removeClass('is-disabled');
+                        }
+                        this.change_check_pie_data(response);
+                        this.features_count = response.data.change_count;
+                        this.flag = 1;
+                        this.change_check_line_data(response);
+                        this.all_response = response;
+                        this.change_check_pic(response);
+                        this.loading_data = false;
+                        this.loading_pic = false;
+                        //console.log(this.value0 + '-----' + this.value1 + '-----' + this.value2 + '-----' + this.value3);
+                        //axios.post('http://review.nps.deepdraw.online/review/v1/get_line_data/', {
+                        //    merchant_data: this.value0,
+                        //    typ_data: this.value1,
+                        //    field_data: this.value2,
+                        //    interval_data: this.choose_interval,
+                        //    tradeName_data: this.value3
+                        //})
+                        //    .then((response) => {
+                        //        this.change_check_pic(response);
+                        //        this.loading_pic = false;
+                        //    })
+                        if (this.unlimited_list[0] == 'merchant_data') {
+                            $('.el-button').eq(1).click();
+                        } else if (this.unlimited_list[0] == 'typ_data') {
+                            console.log('yesyes');
+                            $('.el-button').eq(2).click();
+
+                        } else if (this.unlimited_list[0] == 'tradeName_data') {
+                            $('.el-button').eq(3).click();
+                        } else {
+                            $('.el-button').eq(1).click();
+                        }
+                    });
+            },
+            get_check_line_data: function (e) {
+                //console.log(e.target.innerHTML);
+                if (e.target.innerHTML.indexOf('月') != -1) {
+                    this.choose_interval = 'month';
+                } else {
+                    this.choose_interval = 'day';
+                }
+                this.get_check_pie_data();
+            },
+            change_check_pie_data: function (response_data) {
+                //console.log(response_data);
+                if (this.pie_selector_choice === 'merchant_data') {
+                    var pie_data = response_data.data.merchant_data;
+                    //console.log(pie_data)
+                } else if (this.pie_selector_choice === 'typ_data') {
+                    var pie_data = response_data.data.typ_data
+                } else if (this.pie_selector_choice === 'tradeName_data') {
+                    var pie_data = response_data.data.tradeName_data
+                } else {
+                    //console.log(this.pie_selector_choice);
+                    console.log('角度选择超出预期');
+                }
+                this.PieModel = {
+                    columns: ['name', 'num'],
+                    rows: []
+                };
+                var other_num = 0;
+                this.pie_num = 0;
+                for (var name in pie_data) {
+                    this.pie_num += 1;
+                    //console.log(this.pie_num);
+                    //console.log(name, name[0], name[1]);
+                    if (name < parseInt(this.pie_show_num)) {
+                        this.PieModel.rows.push({'name': pie_data[name][0], 'num': parseInt(pie_data[name][1])})
+                    } else {
+                        other_num += parseInt(pie_data[name][1]);
+                        ////if (other_num != 0 && name >= pie_data.length - 1) {
+                        //    //console.log('other_num', other_num);
+                        //    this.PieModel.rows.push({
+                        //        'name': '其他' + this.pie_selector_choice,
+                        //        'num': other_num
+                        //    })
+                        //}
+                    }
+                }
+                $('#num_input .el-input').attr('max', this.pie_num);
+                if (this.pie_num > 20) {
+                    this.pie_show_num = 20
+                } else {
+                    this.pie_show_num = this.pie_num
+                }
+                if (this.flag === 1) {
+                    console.log("标志位为", this.flag);
+                    this.changeNumInput(this.pie_show_num)
+                }
+
+            },
+            change_check_line_data: function (response_data) {
+                this.check_line_data = {
+                    columns: ['时间', '改正率'],
+                    rows: []
+                };
+                var i = 0;
+                for (var time in response_data.data.line_data) {
+                    //console.log(response_data.data.line_data[time]);
+                    this.check_line_data.rows.push({
+                        '时间': response_data.data.line_data[time]['key_as_string'].split(' ')[0],
+                        '改正率': parseFloat(response_data.data.line_data[time]['doc_count'])
+                    });
+                    i += 1;
+                }
+                this.maxRate = response_data.data.line_data[i - 1]['doc_count'] * 100;
+                this.maxRate = this.maxRate.toFixed(2).toString() + "%";
+                this.minRate = response_data.data.line_data[i - 1]['key_as_string'].split(' ')[0];
+            },
+
+            change_check_pic: function (response) {
+                this.recent_img = [];
+                if (Object.keys(this.size_list).length > 30) {
+                    this.size_list = {};
+                }
+                ;
+                console.log('check 执行', this.size_list);
+                this.now_page = 0;
+                var i = 0;
+                //console.log(response.data['url_list']);
+                if (this.value2 === 'face_outline' || this.value2 === 'cloth_outline' || this.value2 === 'body_outline') {
+                    for (var pic of response.data.img_data) {
+                        // console.log(pic);
+                        var pic_url = pic[2].replace('PIC', '');
+                        var new_img = {
+                            "src": 'http:' + pic_url + '@!400',
+                            "operator": pic[1],
+                            "pic_id": "pic" + i,
+                            "region_id": "region" + i,
+                            "region_right_id": "region-right" + i,
+                            "order": i,
+                            "merchantName": pic[0],
+                            "old_data": '[' + pic[3] + ']',
+                            "new_data": '[' + pic[4] + ']',
+                            "updateTime": pic[5]
+                        };
+                        this.recent_img.push(new_img);
+                        i += 1
+                    }
+                } else {
+                    for (var pic of response.data.img_data) {
+                        //console.log(pic);
+                        var pic_url = pic[2].replace('PIC', '');
+                        var new_img = {
+                            "src": 'http:' + pic_url + '@!400',
+                            "operator": pic[1],
+                            "pic_id": "pic" + i,
+                            "order": i,
+                            "merchantName": pic[0],
+                            "old_data": pic[3],
+                            "new_data": pic[4],
+                            "updateTime": pic[5]
+                        };
+                        this.recent_img.push(new_img);
+                        i += 1
+                    }
+                }
+                ;
+                console.log('个数', this.rateAvg);
+                var timer = setInterval(() => {
+                    if (Object.keys(this.size_list).length === (this.rateAvg)) {
+                        this.prepare_get_pic();
+                        clearInterval(timer);
+                    }
+                }, 1000);
+                this.rateAvg = i;
+                this.now_page = 0;
+                // setTimeout("$(window).resize();", 1000);
+            },
+            get_typ_option: function () {
+                axios.post('/review/v1/get_typ_options/', {}).then((response) => {
+                    //console.log(response.data.aggregations.s.buckets);
+                    var typ_options = response.data.aggregations.s.buckets;
+                    for (var typ_option of typ_options) {
+                        this.typOptions.push({
+                            value: typ_option.key,
+                            label: typ_option.key
+                        });
+                        this.whole_typOptions.push({
+                            value: typ_option.key,
+                            label: typ_option.key
+                        });
+                    }
+                })
+            },
+            get_merchant_option: function () {
+                axios.post('/review/v1/get_merchant_options/', {}).then((response) => {
+                    //console.log(response.data.aggregations.s.buckets);
+                    var merchant_options = response.data.aggregations.s.buckets;
+                    for (var merchant_option of merchant_options) {
+                        this.merchantOptions.push({
+                            value: merchant_option.key,
+                            label: merchant_option.key
+                        });
+                    }
+                })
+            },
+            get_tradeName_option: function () {
+                axios.post('/review/v1/get_tradeName_options/', {}).then((response) => {
+                    //console.log(response.data.aggregations.s.buckets);
+                    var tradeName_options = response.data.aggregations.s.buckets;
+                    for (var tradeName_option of tradeName_options) {
+                        this.tradeNameOptions.push({
+                            value: tradeName_option.key,
+                            label: tradeName_option.key
+                        });
+                    }
+                })
+            },
+            if_show_pie_selector: function () {
+                //console.log($('.el-button').eq(1));
+                //console.log(this.value0, this.value1, this.value3);
+                if (this.value0 != 'unlimited') {
+                    this.unlimited_list.splice($.inArray('merchant_data', this.unlimited_list), 1);
+                    this.unlimited_list.splice($.inArray('merchant_data', this.unlimited_list), 1);
+                    this.unlimited_list.splice($.inArray('merchant_data', this.unlimited_list), 1);
+                    $('.el-button').eq(1).attr('disabled', 'disabled');
+                    $('.el-button').eq(1).addClass('is-disabled');
+                } else {
+
+                    if ($.inArray('merchant_data', this.unlimited_list) === -1) {
+                        this.unlimited_list.splice(0, 0, 'merchant_data');
+                        this.unlimited_list.splice(0, 0, 'merchant_data');
+                        this.unlimited_list.splice(0, 0, 'merchant_data');
+                    }
+                    $(".el-button").eq(1).removeAttr("disabled");
+                    $('.el-button').eq(1).removeClass('is-disabled');
+
+                }
+                if (this.value1 != 'unlimited') {
+                    this.unlimited_list.splice($.inArray('typ_data', this.unlimited_list), 1);
+                    this.unlimited_list.splice($.inArray('typ_data', this.unlimited_list), 1);
+                    $('.el-button').eq(2).attr('disabled', 'disabled');
+                    $('.el-button').eq(2).addClass('is-disabled');
+                } else {
+                    if ($.inArray('typ_data', this.unlimited_list) === -1) {
+                        this.unlimited_list.splice(1, 0, 'typ_data');
+                        this.unlimited_list.splice(1, 0, 'typ_data')
+                    }
+                    $(".el-button").eq(2).removeAttr("disabled");
+                    $('.el-button').eq(2).removeClass('is-disabled');
+                }
+                if (this.value3 != 'unlimited') {
+                    this.unlimited_list.splice($.inArray('tradeName_data', this.unlimited_list), 1);
+                    $('.el-button').eq(3).attr('disabled', 'disabled');
+                    $('.el-button').eq(3).addClass('is-disabled');
+                } else {
+                    if ($.inArray('tradeName_data', this.unlimited_list) === -1) {
+                        this.unlimited_list.splice(2, 0, 'tradeName_data')
+                    }
+                    $(".el-button").eq(3).removeAttr("disabled");
+                    $('.el-button').eq(3).removeClass('is-disabled');
+                }
+                //console.log('this.unlimited_list', this.unlimited_list);
+            },
+            click_pie_selector_merchant: function () {
+                this.if_click = true;
+                this.pie_selector_choice = 'merchant_data';
+                this.change_check_pie_data(this.all_response);
+            },
+            click_pie_selector_typ: function () {
+                this.if_click = true;
+                this.pie_selector_choice = 'typ_data';
+                this.change_check_pie_data(this.all_response);
+            },
+            click_pie_selector_tradeName: function () {
+                this.if_click = true;
+                this.pie_selector_choice = 'tradeName_data';
+                this.change_check_pie_data(this.all_response);
+            },
+            change_options: function (response) {
+                this.merchantOptions = [{
+                    value: 'unlimited',
+                    label: '不限用户'
+                }];
+                for (var merchant in response.data.merchant_data) {
+                    this.merchantOptions.push({
+                        value: response.data.merchant_data[merchant][0],
+                        label: response.data.merchant_data[merchant][0]
+                    })
+                }
+                this.typOptions = [{
+                    value: 'unlimited',
+                    label: '不限图片类型'
+                }];
+                for (var typ in response.data.typ_data) {
+                    this.typOptions.push({
+                        value: response.data.typ_data[typ][0],
+                        label: response.data.typ_data[typ][0]
+                    })
+                }
+                this.tradeNameOptions = [{
+                    value: 'unlimited',
+                    label: '不限品类'
+                }];
+                for (var tradeName in response.data.tradeName_data) {
+                    this.tradeNameOptions.push({
+                        value: response.data.tradeName_data[tradeName][0],
+                        label: response.data.tradeName_data[tradeName][0]
+                    })
+                }
+            },
+
+
+            draw_region: function (t, r, b, l, i) {
+                var temp_list = [];
+                var width;
+                var height;
+                if (this.size_list[i]) {
+                    width = this.size_list[i][0];
+                    height = this.size_list[i][1];
+                    $("#region" + i).width(width * (r - l)).height(height * (b - t));
+                    $("#region" + i).css({'top': height * t + "px", 'left': width * l + "px"});
+                }
+                ;
+            },
+
+            draw_right_region: function (t, r, b, l, i) {
+                var width;
+                var height;
+
+                if (this.size_list[i]) {
+                    width = this.size_list[i][0];
+                    height = this.size_list[i][1];
+                    $("#region-right" + i).width(width * (r - l)).height(height * (b - t));
+                    $("#region-right" + i).css({'top': height * t + "px", 'left': width * l + "px"});
+                }
+                ;
+            },
+
+            draw_dot: function (t, r, b, l, i) {
+                var width;
+                var height;
+                $("img").on("load", function () {
+                    width = $('#pic' + i).width();
+                    height = $('#pic' + i).height();
+                    //console.log(X, Y);
+                    //$("#dot").width(width * (r - l)).height(height * (b - t));
+                    $("#dot").css({
+                        'top': (height * ((t + b) / 2)) - 13 + "px",
+                        'left': width * ((r + l) / 2) - 13 + "px"
+                    });
+                });
+                $(window).resize(function () {
+                    width = $('#pic' + i).width();
+                    height = $('#pic' + i).height();
+                    //console.log(X, Y);
+                    //$("#dot").width(width * (r - l)).height(height * (b - t));
+                    $("#dot").css({
+                        'top': (height * ((t + b) / 2)) - 13 + "px",
+                        'left': width * ((r + l) / 2) - 13 + "px"
+                    });
+                });
+            }
+            ,
+            over_dot: function (i) {
+                $('#dot' + i).css('display', 'none');
+                $('#region' + i).css('display', 'block');
+            }
+            ,
+            over_tag: function (i) {
+                $('#dot' + i).css('display', 'block');
+                $('#region' + i).css('display', 'none');
+            }
+            ,
+            init_all_selector: function () {
+                console.log('init');
+                this.value0 = 'unlimited';
+                this.value1 = 'unlimited';
+                this.value3 = 'unlimited';
+            }
+            ,
+            changeNumInput: function (value) {
+                console.log("刷新", value);
+                console.log(this.pie_show_num);
+                if (this.pie_selector_choice == 'merchant_data') {
+                    var pie_data = this.all_response.data.merchant_data;
+                    //console.log(pie_data)
+                } else if (this.pie_selector_choice == 'typ_data') {
+                    var pie_data = this.all_response.data.typ_data
+                } else if (this.pie_selector_choice == 'tradeName_data') {
+                    var pie_data = this.all_response.data.tradeName_data
+                } else {
+                    //console.log(this.pie_selector_choice);
+                    console.log('角度选择超出预期');
+                }
+                this.PieModel.rows = [];
+                for (var name in pie_data) {
+                    //console.log(this.pie_num);
+                    //console.log(name, name[0], name[1]);
+                    if (name < parseInt(value)) {
+                        this.PieModel.rows.push({'name': pie_data[name][0], 'num': parseInt(pie_data[name][1])})
+                    } else {
+                        //console.log("无法自动调整")
+                        ////if (other_num != 0 && name >= pie_data.length - 1) {
+                        //    //console.log('other_num', other_num);
+                        //    this.PieModel.rows.push({
+                        //        'name': '其他' + this.pie_selector_choice,
+                        //        'num': other_num
+                        //    })
+                        //}
+                    }
+                }
+            }
+
+        }
+
+    });
+
+</script>
+</body>
+</html>
