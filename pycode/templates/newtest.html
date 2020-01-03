@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <script type="text/javascript" src="http://dbr.deepdraw.cn/web/duichang/static/spark_md5.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+        <link rel="stylesheet" href="../static/css/search.css">
+
+
+</head>
+<body>
+        <div id="all" style="width: 60%;margin: 0 auto;border: sandybrown solid 1px">
+            <div id="search">
+                <div class="upload" >
+                    <label class="btn" for="input_img"><p id="fo">上传图片</p></label>
+                    <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" id="input_img" style="display: none;" v-on:input="upload">
+                </div>
+            </div>
+            <div id="main_pic" style="position: relative;left: -300px">
+                <img v-bind:src="main_url" alt="fail">
+                    <div v-for="box in position_list" class="boxs"  @click="chooseBox">
+                        <div v-bind:class="box[4]" v-bind:style="{position:'absolute',border:'1px solid red',width:box[0]+'px',height:box[1]+'px',top:box[2]+'px',left:box[3]+'px'}">
+                        </div>
+                        <div>
+                            <button v-bind:id="box[4]" type="disabled" v-bind:style="{opacity: '0.4',position: 'absolute',top:box[2]+'px',left:box[3]+box[0]+'px'}">{{ box[4].replace(/[0-9]/ig,"")}}</button>
+                        </div>
+                    </div>
+                <p class="tips">
+                    点击筛选方框
+                </p>
+
+            </div>
+            <div id="result">
+                <article class="htmleaf-container" style="width: 90%;height: auto;overflow-y: scroll;">
+                    <div id="wrapper" class='wall'>
+                        <div class="article" v-for="data in result_position_list" style="width: 250px;height: auto;margin: 5px;float: left">
+                            <div >
+                                <img v-bind:src="data[0]" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+
+    <script src="../static/js/jquery-2.1.1.min.js"></script>
+    <script src="../static/js/jaliswall.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-2.1.1.min.js"><\/script>')</script>
+    <script>
+         new Vue({
+             el: '#all',
+             data: {
+                 pics: [
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/4b180eb4-0ecf-4018-88d8-e59d919dd603.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/b5a0e89a-9508-4326-84dd-a095a9543a67.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/5e801db8-769e-4d9b-8643-bb7bac012567.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/cc8ceba5-5583-41dd-afb6-b09b948ba46f.jpeg",
+                "http://product.resources.deepdraw.biz/guangdong/inman/22c1e2b8ec174072841d05a928694a9d/original/f5ae029e150e47f38d835ae8d88306e7.jpg",
+                "http://product.resources.deepdraw.biz/guangdong/inman/9ec87d3fbd0948eaa62bf95e9666b7c6/original/51f86f6198a348f5b55d79981f13206d.jpg",
+                 "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/4b180eb4-0ecf-4018-88d8-e59d919dd603.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/b5a0e89a-9508-4326-84dd-a095a9543a67.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/5e801db8-769e-4d9b-8643-bb7bac012567.jpg",
+                "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/cc8ceba5-5583-41dd-afb6-b09b948ba46f.jpeg",
+                "http://product.resources.deepdraw.biz/guangdong/inman/22c1e2b8ec174072841d05a928694a9d/original/f5ae029e150e47f38d835ae8d88306e7.jpg",
+                "http://product.resources.deepdraw.biz/guangdong/inman/9ec87d3fbd0948eaa62bf95e9666b7c6/original/51f86f6198a348f5b55d79981f13206d.jpg",
+
+                ],
+                activeName:'first',
+                main_url:'',
+                main_height:'',
+                main_width:'',
+                main_box:'',
+                main_box_list:[],
+                activeIndex2:'1',
+                result_list:[],
+                result_body:[],
+                position_list:[],
+                result_position_list:[],
+                result_position_lists:[],
+                isSearchPage:true,
+                isResultPage:false,
+                isLoadings:true,
+             },
+             methods:{
+                 upload:function () {
+                    this.isLoadings = false;
+                    this.isSearchPage = false;
+                    $('#loadings').css("display", "block");
+                    var file = document.getElementById("input_img").files[0];
+                    let spark= new SparkMD5();
+                    var codes = spark.code();
+                    let client = new OSS({
+                        accessKeyId: codes.hs,
+                        accessKeySecret: codes.ah,
+                        endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                        bucket: 'deepdraw-dbr',
+                    });
+                    var file_types = file['name'].split('.');
+                    var file_type = file_types[file_types.length-1];
+                    console.log(file_type);
+                    var storeAs = 'soutu_data/upload_imgs/' + this.uuid() + '.' + file_type;
+                    client.multipartUpload(storeAs, file)
+                    .then((result) => {
+                        if (result.res.requestUrls[0].split('?')[0].length > 0) {
+                            this.main_url = result.res.requestUrls[0].split('?')[0];
+                        } else {
+                            this.main_url = 'wrong';
+                        }
+                        console.log('upload');
+                        this.$options.methods.postUrl(this);
+                    })
+                    },
+
+                 postUrl:function (thi){
+                    document.body.style.backgroundImage="";
+                    document.body.style.backgroundColor="white";
+                    console.log(thi.main_url);
+                    thi.$options.methods.getImageInfo(thi.main_url, thi, (width, height) => {
+                        // 在这里面使用
+                        var real_width = width;
+                        var real_height = height;
+                        console.log(real_height);
+                        console.log(real_width);
+                        thi.main_width = 300;
+                        thi.main_height = real_height / (real_width / 300);
+                        console.log(thi.main_width, thi.main_height);
+                        if (real_width){
+                            thi.$options.methods.getBoxResult(thi);
+                        }
+                    });
+                },
+                                  chooseBox:function (event) {
+                    console.log('点了');
+                    this.result_position_list = [];
+                    this.result_position_lists = [];
+                    this.isResultPage = true;
+                    this.isLoadings = true;
+                    $('#loadings').css("display", "none");
+                    let title = $(event.target).attr('class');
+                    var url = this.main_url;
+                    for (let j = 0; j < this.main_box_list.length; j++) {
+                        if (this.main_box_list[j].contains(title)) {
+                            var box = this.main_box_list[j];
+                        }
+                    }
+                    console.log(box);
+                    axios.post('http://laipan.nps.deepdraw.online/picsearchpic/get_urls/', {
+                        url: url,
+                        box: box,
+                    }).then((response) => {
+                        if (response.data.code == 1) {
+                            this.url_list = response.data.url_list;
+                            this.body_list = response.data.body_list;
+                            var position = [];
+                            for (let j = 0; j < this.url_list.length; j++) {
+                                var sin_url = this.url_list[j];
+                                this.$options.methods.getImageInfo(sin_url, this, (width, height) => {
+                                    position = [];
+                                    console.log(j);
+                                    var single_url = this.url_list[j];
+                                    var boxes = this.body_list[j];
+                                    var box = boxes.split(',');
+                                    var real_height = height;
+                                    var real_width = width;
+                                    console.log(real_height, real_width);
+                                    var t = box[0];
+                                    var r = box[1];
+                                    var b = box[2];
+                                    var l = box[3];
+                                    main_width = 330;
+                                    main_height = real_height / (real_width / 330);
+                                    var now_width = main_width * (r - l);
+                                    var now_height = main_height * (b - t);
+                                    var top = main_height * t;
+                                    var left = main_width * l;
+                                    console.log(single_url, t, r, b, l);
+                                    var fea = single_url.split('/');
+                                    var hrefs = fea[5];
+                                    position.push(single_url, now_width, now_height, top, left, hrefs);
+                                    console.log(position);
+                                    this.result_position_lists.push(position);
+                                });
+                            }
+                            setTimeout(()=>{
+                                console.log(this.result_position_lists,this.url_list);
+                                for (let j = 0; j < this.url_list.length; j++) {
+                                    for (let i = 0; i < this.result_position_lists.length; i++) {
+                                        if(this.url_list[j]==this.result_position_lists[i][0]){
+                                            console.log('real');
+                                            this.result_position_list.push(this.result_position_lists[i])
+                                        }
+                                    }
+                                }
+                                console.log(this.url_list);
+                                console.log(this.result_position_list);
+                                console.log(this.result_position_lists);
+                            }, 1000 );
+                        }
+                        $('.wall').jaliswall({ item: '.article' });
+                    });
+                },
+
+                 preLoads:function (thi) {
+                    thi.isResultPage = true;
+                    thi.isLoadings = true;
+                    $('#loadings').css("display", "none");
+                    console.log(thi.position_list);
+                    //thi.$options.methods.chooseBox(thi);
+                },
+                 uuid: function () {
+                    var s = [];
+                    var hexDigits = "0123456789abcdef";
+                    for (var i = 0; i < 36; i++) {
+                        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+                    }
+                    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+                    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+                    s[8] = s[13] = s[18] = s[23] = "-";
+                    var uuid = s.join("");
+                    return uuid;
+                },
+                 getImageInfo: function (url, thi, callback) {
+                    var img = new Image();
+                    img.src = url;
+                    if (img.complete) {
+                        callback(img.width, img.height);
+                    } else {
+                        img.onload = function () {
+                            callback(img.width, img.height);
+                            img.onload = null;
+                        };
+                    };
+                },
+                 getBoxResult:function (thi) {
+                    console.log(thi.main_url);
+                    console.log(thi.main_width, thi.main_height);
+                    axios.post('http://laipan.nps.deepdraw.online/picsearchpic/get_box/', {
+                        url: thi.main_url,
+                    }).then((response) => {
+                        if (response.data.code == 1) {
+                            thi.main_box = response.data.body_info;
+                            var type_list = [];
+                            for (let j = 0; j < thi.main_box.length; j++) {
+                                console.log(j);
+                                position = [];
+                                boxs = [];
+                                //var pos = '-90';
+                                var type = thi.main_box[j]['type'];
+                                console.log(type_list);
+                                var t = thi.main_box[j]['t'];
+                                var r = thi.main_box[j]['r'];
+                                var b = thi.main_box[j]['b'];
+                                var l = thi.main_box[j]['l'];
+                                var now_width = thi.main_width * (r - l);
+                                var now_height = thi.main_height * (b - t);
+                                var top = thi.main_height * t;
+                                var left = thi.main_width * l;
+                                if (type_list.contains(type)) {
+                                    type = type + j;
+                                    console.log(type);
+                                    //pos = now_width;
+                                }
+                                type_list.push(type);
+                                console.log(t, r, b, l);
+                                position.push(now_width, now_height, top, left, type);
+                                boxs.push(t, r, b, l, type);
+                                console.log(position);
+                                thi.position_list.push(position);
+                                thi.main_box_list.push(boxs);
+                                console.log(thi.position_list);
+                            }
+                        }else{
+                            alert('失败');
+                        }
+                        thi.$options.methods.preLoads(thi);
+                    })
+                },
+             }
+         });
+        $(function(){
+            $('.wall').jaliswall({ item: '.article' });
+        });
+        Array.prototype.contains = function (obj) {
+            var index = this.length;
+            while (index--) {
+                 if (this[index] === obj) {
+                     return true;
+                 }
+            }
+            return false;
+            };
+
+
+    </script>
+</body>
+</html>

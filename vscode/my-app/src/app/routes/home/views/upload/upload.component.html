@@ -1,0 +1,29 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>
+            <span>
+              task_name
+            </span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="4" [nzXs]="24" nzErrorTip="Please input book name!">
+            <input nz-input id="name" formControlName="name" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="numbers" nzRequired>batch_size</nz-form-label>
+        <nz-input-number id="website" formControlName="numbers" [nzMin]="1" [nzMax]="100" [nzStep]="1"></nz-input-number>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+        <nz-form-control style="margin-left: 25%;">
+            <button nz-button id="phoneNumber" nzType="primary" onclick="newUpload.click()">上传文件</button>
+            <span style="margin-left:2%;width: 100%;">{{fileName}}</span>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area" style="margin-left: 10%;">
+        <nz-form-control [nzSpan]="6" [nzOffset]="4" [nzSm]="4">
+            <button nz-button id="phoneNumber" nzType="primary" (click)="onSubmit()">添加</button>
+        </nz-form-control>
+    </nz-form-item>
+
+</form>
+<input type="file" id="newUpload" (change)="getUpload($event)" style="display: none;">

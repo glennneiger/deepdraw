@@ -1,0 +1,39 @@
+<nz-layout class="layout">
+    <nz-header>
+        <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
+            <li nz-menu-item>
+                <p class="title">大规模接口计算</p>
+            </li>
+        </ul>
+    </nz-header>
+    <nz-layout style="padding:0 50px;width: 95%; margin: 0 auto;">
+        <nz-breadcrumb style="margin:16px 0;">
+            <div>
+                <div class="welcome">
+                    <h2>你好!</h2>
+                </div>
+            </div>
+        </nz-breadcrumb>
+        <nz-layout style="padding:24px 0; background: #fff;height: 730px;">
+            <nz-sider [nzWidth]="150" style="background:#fff;">
+                <ul nz-menu [nzMode]="'inline'" style="height:100%">
+                    <div *ngFor="let select of menus">
+                        <li nz-submenu>
+                            <span title><i nz-icon nzType="menu-fold" nzTheme="outline"></i>{{select.key}}</span>
+                            <ul *ngFor="let menu of select.data">
+                                <li nz-menu-item [routerLink]="menu.url">
+                                  {{menu.name}}
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
+            </nz-sider>
+            <nz-content style="padding: 0 24px; min-height: 280px;">
+                <router-outlet style="margin-left: 10%;"></router-outlet>
+            </nz-content>
+        </nz-layout>
+    </nz-layout>
+    <nz-footer style="text-align: center; ">Deepdraw Design ©2019 Implement By Angular</nz-footer>
+
+</nz-layout>

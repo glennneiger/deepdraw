@@ -1,0 +1,230 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url("http://resources-deepdraw-cn.oss-cn-hangzhou.aliyuncs.com/dp_banner/banner06_bg.jpg");
+    background-size: 100%;
+}
+a{
+    text-decoration: none;
+}
+table{
+    width: 100%;
+    height: 100%;
+}
+#all{
+    width: 1538px;
+}
+.nav{
+    float:right;
+}
+.nav td{
+    float: left;
+    padding: 5px 2px 5px 0px;
+}
+.nav a{
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.nav span{
+    font-size: 11px;
+    color: #FFFFFF;
+}
+.test{
+    color: lightblue;;
+}
+#logo_img{
+    width: 100px;
+    height: 22px;
+}
+.logo td{
+    text-align: center;
+}
+.logo img{
+    width: 250px;
+    margin: 50px 0px 10px 0px ;
+}
+#table1{
+    background-color: #5b8098;
+    opacity: 0.8;
+}
+/*搜索框*/
+.search td{
+    text-align: center;
+    padding: 40px 0px 30px 0px;
+}
+.search input{
+    width: 450px;
+    height: 33px;
+    /*input和button对不齐 input和button都加上vertical-align:top；*/
+    vertical-align: top;
+
+}
+.item-if input{
+    width: 450px;
+    height: 31px;
+    /*input和button对不齐 input和button都加上vertical-align:top；*/
+    vertical-align: top;
+    border-radius: 6px;
+}
+.search button{
+    width: 90px;
+    height: 37px;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #38f;
+    /*input和button对不齐 input和button都加上vertical-align:top；*/
+    vertical-align: top;
+    border: #38f;;
+}
+.item-if button{
+    width: 90px;
+    height: 31px;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #38f;
+    /*input和button对不齐 input和button都加上vertical-align:top；*/
+    vertical-align: top;
+    border: #38f;;
+}
+.table_two{
+    width: 1230px;
+    height: 272px;
+    margin: 0 auto;
+    /*半透明背景色  background-color:rgba(255,255,255,0.3);*/
+    background-color:rgba(255,255,255,0.3);
+    padding: 4px 4px 0px 4px;
+}
+
+/*脚注*/
+.foot td{
+    position: fixed;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.foot a,span{
+    color: #FFFFFF;
+    font-size: 15px;
+    padding: 0px 2px 0px 0px;
+}
+#tables2{
+    text-align: center;
+    margin-top: 150px;
+}
+#logo{
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+#fonts{
+    font-size: 40px;
+    color: white;
+    margin-bottom: 10px;
+}
+.upload{
+    width:90px;
+    height: 37px;
+    position: absolute;
+    right: 115px;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: lightslategray;
+
+}
+.upload2{
+    width:90px;
+    height: 36px;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: lightslategray;
+
+}
+.item-ifo{
+    position: relative;
+    width: 600px;
+    height: 40px;
+    float: top;
+    margin: 0 auto;
+}
+
+#fo{
+    font-size: 16px;
+    margin-top: 7px;
+    text-align: center;
+}
+#out{
+    text-align: center;
+}
+
+.table_two img{
+    width: 100%;
+}
+.table_two td{
+    width: 1240px;
+}
+.nav_pic{
+    float: left;
+    width:300px ;
+    height: 450px;
+    margin: 2px 2px 2px 2px;
+    overflow: hidden;
+}
+.result {
+    text-align: center;
+}
+
+.result span {
+    color: #fdf9ff;
+    font-size: 40px;
+    font-weight: bold;
+    display: block;
+}
+
+.result .pic {
+    overflow: hidden;
+    display: inline-block;
+    height: auto;
+    /*width: 20%;*/
+    width: 300px;
+    margin: 50px 15px 15px 30px;
+    position: relative;
+}
+.result .pic img {
+    vertical-align: center;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#main_pic {
+    margin: 30px auto 10px;
+    margin-bottom: -50px;
+}
+
+.pict_single{
+    position: relative;
+    width: 280px;
+    height: 280px;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+    margin: 5px 5px 5px 5px;
+}
+.pict_single img{
+    max-width: 350px;
+}
+#new_button{
+    height: 36px;
+}
+#searchbar-two{
+    position: fixed;
+    top:0;
+}
+.draw_border {
+    position: absolute;
+    border: 1px solid red;
+}

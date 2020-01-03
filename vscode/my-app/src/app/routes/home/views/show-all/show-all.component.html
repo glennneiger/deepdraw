@@ -1,0 +1,56 @@
+<div style="width: 100%;">
+    <div nz-row nzType="flex" nzJustify="space-around">
+        <div nz-col nzSpan="22">
+            <nz-table #borderedTable nzBordered [nzData]="taskList" [nzShowPagination]=false>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>project</th>
+                        <th>action</th>
+                        <th>model</th>
+                        <th>exec_name</th>
+                        <th>bs</th>
+                        <th>total</th>
+                        <th>imported</th>
+                        <th>finished</th>
+                        <th>recent(10m)</th>
+                        <th>状态</th>
+                        <th nzWidth="10%">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of taskList;let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{task.task_name}}</td>
+                        <td>{{task.proj_name}}</td>
+                        <td>{{task.action_name}}</td>
+                        <td>{{task.model_name}}</td>
+                        <td>{{task.exec_name}}</td>
+                        <td>{{task.batch_size}}</td>
+                        <td>{{task.total_task_cnt}}</td>
+                        <td>{{task.imported_task_cnt}}</td>
+                        <td>{{task.finished_task_cnt}}</td>
+                        <td>{{task.recent_active_task_cnt}}</td>
+                        <td>{{task.task_status}}</td>
+                        <td>
+                            <button nz-button nzType="primary" (click)="onStart(task)" [disabled]="task.task_status==='started'||task.task_status==='error'||task.task_status==='finished'||task.task_status==='importing'?true:false">开始</button>
+                            <nz-modal [(nzVisible)]="isStartVisible" nzTitle="确认开始" (nzOnCancel)="handleStartCancel()" (nzOnOk)="handleStartOk(newTask)">
+                                <p>选择重试次数</p>
+                                <nz-input-number [(ngModel)]="numbers" [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                            </nz-modal>
+                            <button nz-button nzType="default" style="margin: 4px 0;" (click)="onStop(task)" [disabled]="task.task_status==='stoped'||task.task_status==='error'||task.task_status==='finished'||task.task_status==='imported'||task.task_status==='importing'?true:false">暂停</button>
+                            <nz-modal [(nzVisible)]="isStopVisible" nzTitle="确认暂停" (nzOnCancel)="handleStopCancel()" (nzOnOk)="handleStopOk(newTask)">
+                                <p>确认是否暂停</p>
+                            </nz-modal>
+                            <button nz-button nzType="danger" (click)="onDelete(task)">删除</button>
+                            <nz-modal [(nzVisible)]="isDeleteVisible" nzTitle="确认删除" (nzOnCancel)="handleDeleteCancel()" (nzOnOk)="handleDeleteOk(newTask)">
+                                <p>确认是否删除</p>
+                            </nz-modal>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</div>

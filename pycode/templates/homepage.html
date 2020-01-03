@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导航主页</title>
+    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.js"></script>
+    <link rel="stylesheet" href="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="referrer" content="no-referrer"/>
+
+    <style>
+        #aa{
+            width: 360px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        #as{
+            width: 360px;
+            height: 180px;
+            background-color: white;
+        }
+        .el-upload-dragger{
+            border:none;
+        }
+
+        {
+            background: url("http://resources-deepdraw-cn.oss-cn-hangzhou.aliyuncs.com/dp_banner/banner06_bg.jpg");
+            /*设置背景图片大小 background-size: 100%;*/
+            background-size: 100%;
+        }
+        #title-name{
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 40px;
+        }
+        #input-upload{
+            position: relative;
+            margin: 0 auto;
+        }
+        #top-menu{
+
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <!--搜索等待加载界面-->
+    <div id="loadings" style="display: none;width: 100%;height: 200%;background-color: #072734">
+        <img src="http://img.lanrentuku.com/img/allimg/1609/5-160914192R3.gif"/>
+    </div>
+    <div id="top-menu" class="test">
+        <div id="table1">
+            <table class="table-one">
+                <div id="navs">
+                    <tr class="nav">
+                        <td><a href="http://www.deepdraw.cn/#/">&nbsp;收藏本页&nbsp;</a></td>
+                        <td><span>|</span></td>
+                        <td><a href="http://www.deepdraw.cn/#/">&nbsp;深绘首页&nbsp;</a></td>
+                        <td><span>|</span></td>
+                        <td><a href="http://www.deepdraw.cn/#/">&nbsp;深绘APP&nbsp;</a></td>
+                        <td><span>|</span></td>
+                        <td><a href="http://www.deepdraw.cn/#/">&nbsp;登录&nbsp;</a></td>
+                        <td><span>&nbsp;</span></td>
+                        <td><a href="http://www.deepdraw.cn/#/">&nbsp;注册&nbsp;</a></td>
+                    </tr>
+                </div>
+            </table>
+        </div>
+    </div>
+    <div id="logo" style="height: 100px">
+        <a href="http://192.168.3.103:8888/picsearchpic/home/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAAAVCAYAAABWtYB0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTYyNjM2NDFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTYyNjM2NTFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5NjI2MzYyMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5NjI2MzYzMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+bKpiOAAABa5JREFUeNqsWX1MllUU54WXVwi1ucQSE8HhjGY6l6S2aDUtcxNpZVKYWZJtlZbpxlYtU5e6/gt1ETodtTbTxixj9jH6soKcjDbWl1+gBYWWvimIHy/wdC773e3s7N7n4+U522/vc+/5nXue5577ce59I47jpIQkrxBWEzIC2Fwk3OzBKSJ8aajvIkwmqA/YQniWkDrEbzhNmIo2tbQQCgzcMsKnhJWE1wnDkvB3iXBHJKQgqA54Owm7dsJED04z4XaLLkKYQDgV0kBSnTKCBeFOwg8W7jTCL4S+Ifp8IxrSy29K0m6XD84+Qr2h/mv8rhKzYydhwKf/TMJaQhrzxUdlBXs+xHxeILQSFoj2qglnffh9hjAWz/emqJnggREWZEN/l2OWK4Q+4DLhgoFzkw//XjjD2stLwr6P2c9i9WmEbqa70WBbxfS1AXw+xuyOuhGXEtoIFw1QHfwSeLWiY3cTJiFI44DRhJWC920IAZjD2jtJyIK/AkLEYjOcMB7vt53Znxa8h5juJ0tbXYwz3eJnnMAYwjxm95ft4wocb9Ejo5fVdbh0WJ2wXxpCEPaw9nqBfnSaLQinwL8q3meD4B1kuncM7dzH9O1CF0FQHbwPxzWsDFrO2T5up0cAPgCvRNSvt7SXK3iqAzKGGIA8l/d7zWLznItNPuONErpFhrZ+Zvp1Qve8E0CiloyjzFB/DbrvCEtQ96Lg1Fs2ortF+SPCFY/NazGhhJBAOYrspRqbYjphPdJcLanYWLer1A/pYwqymDcJbUilue8YNvR2VreEPXcT9hv6qAYb+4AhwThu8GOS6OD7GyIsR/cxQjGWH76R3iB4aoO7zjICtwnuXI9RnukycF71OVOamM3qgLOsxWWUhw7TTFghygsJvxt45aKsDi69lohzbpzQ4DFCZqCtcxhpE5iujo2iQuTpPK3sJ+QQZrEZ3ISDXYTx0mB7AjZa8gjTWfkEbDsJPay+EO0NJJGaR+C/g/CfjEqOGHVNLhE8KbjFPtIx0wZoy2D0nrGb2TYyzn4nHKkUvncJfQK/BxinNCTfrYOHZfECGwSpzNJJxYLX5tKhRwR3dMDpyjOJEtSNdcKTUuZrpAtvC+M1h+S7zrQcLWPPl7GBmuRpUa618HKxtGj5hvBvgGm7md1FqZPoJ3iuZJw/CY9gWVDL0mzCVrGcdrINXi9FmahrFkvZPVgK1bK0F0uHWoY2gnMLu0aJo/2rYqnTMgAd34jTWULQMvjEolskovSuZWTGCD2Cm2vhrhO8xwPOAp7LL0fd9WyJUPKksNnMdN8PYcPcytrZa1kG3w9jY+aFGtFhFRajWwXvRxcHbeIaI8jZ4Alm28nqn2L1/wibYfAjAzQJ6+9hLCVqGUh18T1TfKO+zpjscx/UyIY/7bfKLQgRw91OvqXhNYK3wsKbInh7AgQgJt5nDtP9yurLhV252FCzUJ9umL05Lv7/YLwPWX0jqz/k81uOC78xWxAWCmKDpcFphPOM14/LPMkbheg7lo70Qj2z28fqX2D1vxnsvrJ0nsIm8T5TLL6rxclen30eFvYTfX7LKmFXaAvCAUFsxwXbYaDRkOUo+Zg19jJ4Kq2NC15HgABUMjvVThT1Y0SbU4WdzJjmCf1ioS8y+L5NcBagPkNkaRUBvme8aHO26bA20nAvngd4SRV+dxgOeVyafGZDi3C9oOV+9qfJQeG3Vdjyq4bzhM+F/m9RThPl4YTPWPktdg2zkWVp6hrjDOFBH//kqewr3/OrMYKTkbiPizRbBmPCo8Jmh+UA1WWxb2CcbQa9/N9jhrhgPGtZjuc74YpxJjyA6AaRY+yssAwXVQkDrwf/VtV6tFdKeA95usrRv8C/T3p2LEdbCfFvl5YszNxu5OY1Bk5MfGecnWXUO2ZDf4QwF7p8XM4lxGWcPl85Pq4nHHYtoq4pjkrS/wIMAPiAdiPO9/6/AAAAAElFTkSuQmCC" width="97px" height="21px" alt=">??"/></a>
+    </div>
+    <div id="title-name" class="test">
+        <p>以&nbsp&nbsp&nbsp图&nbsp&nbsp&nbsp搜&nbsp&nbsp&nbsp图&nbsp&nbsp&nbsp</p>
+    </div>
+    <div id="input-upload" class="test" style="height: 60px">
+
+
+        <form action="../tests/" method="post">
+            <div id="search" style="float: left;border: #5c6065 solid">
+                <input type="text" name="searchs" id="get_input" placeholder="请输入图片url" style="border-width: 0;width: 600px;height: 40px" >
+
+            </div>
+            <button  id="click">搜索一下</button>
+
+        </form>
+        <button id="icon" style="background-color: green;width:80px;height: 40px ">
+            <i class="el-icon-picture" id='icon-picture' onclick=document.getElementById('aa').style='display:block' style="width: 100%;height: 100%;color: white"></i>
+        </button>
+    </div>
+    <div id="aa" style="display: none;">
+        <i class="el-icon-close" onclick=document.getElementById('aa').style='display:none' style="float: right;color: black"></i>
+        <div id="as">
+            <el-upload
+                class="upload-demo"
+                drag
+                action=""
+                multiple>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                </el-upload>
+                <img width="100%" :src="dialogImageUrl" alt="" id="aaa">
+            </el-dialog>
+        </div>
+            <el-button type="primary" icon="el-icon-edit">hahaha</el-button>
+    </div>
+<script>
+  new Vue({
+      el:'#as',
+    data :{
+        dialogImageUrl: '',
+        dialogVisible: false
+
+    },
+
+  });
+    new Vue({
+      el:'#top',
+
+  });
+</script>
+
+
+</body>
+</html>
