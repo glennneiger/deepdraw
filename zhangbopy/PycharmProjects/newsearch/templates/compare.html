@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        .cur{
+            border: solid lightskyblue;
+        }
+    </style>
+</head>
+<body>
+<！--
+<label><div style="width: 500px;height: 500px"><input name="Fruit" type="radio" value="" />苹果 </div></label>
+<label><input name="Fruit" type="radio" value="" />桃子 </label>
+<label><input name="Fruit" type="radio" value="" />香蕉 </label>
+<label><input name="Fruit" type="radio" value="" />梨 </label>
+<label><input name="Fruit" type="radio" value="" />其它 </label>
+<label for="radios1" class="btn btn-primary active">
+    <div style="width: 200px;height: 200px;border: solid lightblue">
+        <input type="radio" style="display:none;" name="Fruit" id="radios1" value="one" checked="checked"/>内规划
+        </div>
+</label>
+
+
+<div class="box">
+<p><input type="radio" name="fruit" checked="checked" />苹果</p>
+<p><input type="radio" name="fruit" />香蕉</p>
+<p><input type="radio" name="fruit" />葡萄</p>
+</div>
+//-->
+<script>
+
+$(function(){
+    $(".box input").change(function(){
+        $(":checked").parent().addClass("cur").siblings().removeClass("cur");
+    });
+});
+</script>
+</body>
+</html>

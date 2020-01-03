@@ -1,0 +1,2777 @@
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/threading.py", line 917, in _bootstrap_inner
+    self.run()
+  File "/usr/Python-3.7.2/Lib/threading.py", line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 54, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/commands/runserver.py", line 109, in inner_run
+    autoreload.raise_last_exception()
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 77, in raise_last_exception
+    raise _exception[1]
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/__init__.py", line 337, in execute
+    autoreload.check_errors(django.setup)()
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 54, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/python/lib/python3.7/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/usr/python/lib/python3.7/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/usr/python/lib/python3.7/site-packages/django/contrib/auth/models.py", line 2, in <module>
+    from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+  File "/usr/python/lib/python3.7/site-packages/django/contrib/auth/base_user.py", line 47, in <module>
+    class AbstractBaseUser(models.Model):
+  File "/usr/python/lib/python3.7/site-packages/django/db/models/base.py", line 117, in __new__
+    new_class.add_to_class('_meta', Options(meta, app_label))
+  File "/usr/python/lib/python3.7/site-packages/django/db/models/base.py", line 321, in add_to_class
+    value.contribute_to_class(cls, name)
+  File "/usr/python/lib/python3.7/site-packages/django/db/models/options.py", line 204, in contribute_to_class
+    self.db_table = truncate_name(self.db_table, connection.ops.max_name_length())
+  File "/usr/python/lib/python3.7/site-packages/django/db/__init__.py", line 28, in __getattr__
+    return getattr(connections[DEFAULT_DB_ALIAS], item)
+  File "/usr/python/lib/python3.7/site-packages/django/db/utils.py", line 201, in __getitem__
+    backend = load_backend(db['ENGINE'])
+  File "/usr/python/lib/python3.7/site-packages/django/db/utils.py", line 110, in load_backend
+    return import_module('%s.base' % backend_name)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/usr/python/lib/python3.7/site-packages/django/db/backends/sqlite3/base.py", line 66, in <module>
+    check_sqlite_version()
+  File "/usr/python/lib/python3.7/site-packages/django/db/backends/sqlite3/base.py", line 63, in check_sqlite_version
+    raise ImproperlyConfigured('SQLite 3.8.3 or later is required (found %s).' % Database.sqlite_version)
+django.core.exceptions.ImproperlyConfigured: SQLite 3.8.3 or later is required (found 3.7.17).
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/threading.py", line 917, in _bootstrap_inner
+    self.run()
+  File "/usr/Python-3.7.2/Lib/threading.py", line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 54, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/commands/runserver.py", line 109, in inner_run
+    autoreload.raise_last_exception()
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 77, in raise_last_exception
+    raise _exception[1]
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/__init__.py", line 337, in execute
+    autoreload.check_errors(django.setup)()
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 54, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/python/lib/python3.7/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/usr/python/lib/python3.7/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/usr/python/lib/python3.7/site-packages/django/contrib/auth/models.py", line 2, in <module>
+    from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+  File "/usr/python/lib/python3.7/site-packages/django/contrib/auth/base_user.py", line 47, in <module>
+    class AbstractBaseUser(models.Model):
+  File "/usr/python/lib/python3.7/site-packages/django/db/models/base.py", line 117, in __new__
+    new_class.add_to_class('_meta', Options(meta, app_label))
+  File "/usr/python/lib/python3.7/site-packages/django/db/models/base.py", line 321, in add_to_class
+    value.contribute_to_class(cls, name)
+  File "/usr/python/lib/python3.7/site-packages/django/db/models/options.py", line 204, in contribute_to_class
+    self.db_table = truncate_name(self.db_table, connection.ops.max_name_length())
+  File "/usr/python/lib/python3.7/site-packages/django/db/__init__.py", line 28, in __getattr__
+    return getattr(connections[DEFAULT_DB_ALIAS], item)
+  File "/usr/python/lib/python3.7/site-packages/django/db/utils.py", line 201, in __getitem__
+    backend = load_backend(db['ENGINE'])
+  File "/usr/python/lib/python3.7/site-packages/django/db/utils.py", line 110, in load_backend
+    return import_module('%s.base' % backend_name)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/usr/python/lib/python3.7/site-packages/django/db/backends/sqlite3/base.py", line 66, in <module>
+    check_sqlite_version()
+  File "/usr/python/lib/python3.7/site-packages/django/db/backends/sqlite3/base.py", line 63, in check_sqlite_version
+    raise ImproperlyConfigured('SQLite 3.8.3 or later is required (found %s).' % Database.sqlite_version)
+django.core.exceptions.ImproperlyConfigured: SQLite 3.8.3 or later is required (found 3.7.17).
+
+Watching for file changes with StatReloader
+[03/Aug/2019 08:20:46] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[03/Aug/2019 08:20:58] "POST /api/v1/task/ HTTP/1.1" 200 384
+[03/Aug/2019 08:20:58] "POST /api/v1/get_pic/ HTTP/1.1" 200 552
+[03/Aug/2019 08:48:38] "POST /api/v1/get_pic/ HTTP/1.1" 200 640
+[03/Aug/2019 08:48:48] "POST /api/v1/get_pic/ HTTP/1.1" 200 640
+----------------------------------------
+Exception happened during processing of request from ('104.152.52.27', 58746)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 169, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+[03/Aug/2019 14:34:54] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[03/Aug/2019 14:34:54] "  /*à     Cookie: mstshash=Administr" 400 -
+Not Found: /
+[03/Aug/2019 14:35:51] "GET / HTTP/1.1" 404 2148
+----------------------------------------
+Exception happened during processing of request from ('101.251.242.238', 41208)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[03/Aug/2019 16:10:34] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 59836)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+Not Found: /www.baidu.com:443
+[03/Aug/2019 17:01:54] "CONNECT www.baidu.com:443 HTTP/1.0" 404 1662
+Not Found: /
+[03/Aug/2019 17:04:40] "GET / HTTP/1.1" 404 2148
+[04/Aug/2019 00:20:21] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[04/Aug/2019 00:20:21] "  /*à     Cookie: mstshash=Administr" 400 -
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[04/Aug/2019 02:13:58] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 45228)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+[04/Aug/2019 08:03:17] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[04/Aug/2019 08:03:17] "  /*à     Cookie: mstshash=Administr" 400 -
+[04/Aug/2019 09:33:58] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[04/Aug/2019 09:33:58] "  /*à     Cookie: mstshash=Administr" 400 -
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[04/Aug/2019 12:17:54] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 34726)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+[04/Aug/2019 17:31:20] code 400, message Bad request version ('F\x07\x00tsXrcsXYs9\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00bbXcsXctst\x00\x00\x00\x00\x00\x00')
+[04/Aug/2019 17:31:20] "   TZ          0I    ¨À )t F tsXrcsXYs9                      bbXcsXctst      " 400 -
+Not Found: /api.bilibili.com:443
+[04/Aug/2019 20:37:42] "CONNECT api.bilibili.com:443 HTTP/1.1" 404 1678
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[04/Aug/2019 22:18:10] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 56879)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+[04/Aug/2019 22:18:41] code 400, message Bad request version ('F\x07\x00tsXrcsXYs9\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00bbXcsXctst\x00\x00\x00\x00\x00\x00')
+[04/Aug/2019 22:18:41] "   TZ          0I    ¨À )t F tsXrcsXYs9                      bbXcsXctst      " 400 -
+Not Found: /
+[04/Aug/2019 23:31:52] "GET / HTTP/1.1" 404 2148
+[04/Aug/2019 23:59:45] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00')
+[04/Aug/2019 23:59:45] "    c                           " 400 -
+[05/Aug/2019 02:07:56] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 03, 2019 - 08:20:37
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['undefined/pic/ca16e89c-660c-42b0-85f6-334ad6148673/0.jpg']
+permision_ok
+pic_id:2568
+<class 'str'>
+CALLING API
+Watching for file changes with StatReloader
+[05/Aug/2019 02:17:27] "GET /api/v1/index/ HTTP/1.1" 200 19576
+Not Found: /favicon.ico
+[05/Aug/2019 02:17:29] "GET /favicon.ico HTTP/1.1" 404 2199
+[05/Aug/2019 02:17:37] "POST /api/v1/task/ HTTP/1.1" 200 384
+[05/Aug/2019 02:17:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 527
+[05/Aug/2019 02:17:44] "GET /api/v1/phone_log/ HTTP/1.1" 200 109516
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[05/Aug/2019 02:17:44] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[05/Aug/2019 02:17:44] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[05/Aug/2019 02:17:44] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[05/Aug/2019 02:18:08] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[05/Aug/2019 02:18:14] "POST /api/v1/task/ HTTP/1.1" 200 384
+[05/Aug/2019 02:18:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 552
+[05/Aug/2019 02:22:10] "POST /api/v1/put_task/ HTTP/1.1" 200 106
+[05/Aug/2019 02:22:28] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 02:27:58] "POST /api/v1/start_task/ HTTP/1.1" 200 124
+[05/Aug/2019 02:28:10] "POST /api/v1/start_task/ HTTP/1.1" 200 120
+[05/Aug/2019 02:33:15] "GET /api/v1/phone_log/ HTTP/1.1" 200 109516
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[05/Aug/2019 02:33:15] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[05/Aug/2019 02:33:15] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[05/Aug/2019 02:33:15] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[05/Aug/2019 02:36:37] "GET /api/v1/login/ HTTP/1.1" 200 4463
+[05/Aug/2019 02:36:48] "GET /api/v1/login/ HTTP/1.1" 200 4463
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2019 - 02:17:21
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['undefined/pic/d1f82a5c-25b5-43ce-b6b6-c5dff6d12ada/0.jpg']
+permision_ok
+pic_id:2570
+<class 'str'>
+CALLING API
+--org_pic:['undefined/pic/296ad01f-a3ac-44c4-992b-680b2ba094cf/0.jpg']
+permision_ok
+pic_id:2572
+<class 'str'>
+CALLING API
+--org_pic:['user_id1/pic/uuid/001.jpg', 'user_id1/pic/uuid/001.jpg']
+permision_ok
+<QueryDict: {'user_id': ['1'], 'token': ['da702d26-a224-11e9-ac88-00e070884750'], 'org_pic': ["['undefined/pic/296ad01f-a3ac-44c4-992b-680b2ba094cf/0.jpg']"], 'pic_id_list': ["['2572']"]}>
+tokenda702d26-a224-11e9-ac88-00e070884750
+--org_pic:['undefined/pic/296ad01f-a3ac-44c4-992b-680b2ba094cf/0.jpg']
+permision_ok
+<QueryDict: {'user_id': ['1'], 'token': ['da702d26-a224-11e9-ac88-00e070884750'], 'org_pic': ['undefined/pic/296ad01f-a3ac-44c4-992b-680b2ba094cf/0.jpg'], 'pic_id_list': ["['2572']"]}>
+tokenda702d26-a224-11e9-ac88-00e070884750
+--org_pic:undefined/pic/296ad01f-a3ac-44c4-992b-680b2ba094cf/0.jpg
+permision_ok
+Watching for file changes with StatReloader
+[05/Aug/2019 02:40:19] "GET /api/v1/login/ HTTP/1.1" 200 4462
+[05/Aug/2019 02:40:27] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[05/Aug/2019 02:42:22] "POST /api/v1/user/login/ HTTP/1.1" 200 199
+[05/Aug/2019 02:42:58] "POST /api/v1/msg/ HTTP/1.1" 200 155
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2019 - 02:38:14
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[05/Aug/2019 02:45:24] "POST /api/v1/msg/ HTTP/1.1" 200 106
+[05/Aug/2019 02:45:54] "POST /api/v1/user/login/ HTTP/1.1" 200 181
+[05/Aug/2019 02:47:13] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2019 - 02:45:19
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[05/Aug/2019 02:49:34] "POST /api/v1/msg/ HTTP/1.1" 200 106
+[05/Aug/2019 02:49:46] "POST /api/v1/user/login/ HTTP/1.1" 200 181
+[05/Aug/2019 02:49:53] "POST /api/v1/user/login/ HTTP/1.1" 200 49
+[05/Aug/2019 02:50:34] "POST /api/v1/user/login/ HTTP/1.1" 200 181
+[05/Aug/2019 03:20:32] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:20:50] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:21:30] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:21:37] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+Internal Server Error: /api/v1/start_task/
+Traceback (most recent call last):
+  File "/usr/python/lib/python3.7/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'pic_id_list'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/deepdraw/untitled/api/views.py", line 726, in post
+    pic_id_list = data['pic_id_list']
+  File "/usr/python/lib/python3.7/site-packages/django/utils/datastructures.py", line 80, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'pic_id_list'
+[05/Aug/2019 03:21:40] "POST /api/v1/start_task/ HTTP/1.1" 500 15244
+[05/Aug/2019 03:21:40] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 03:22:09] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:22:57] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:23:15] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:23:19] "POST /api/v1/start_task/ HTTP/1.1" 200 129
+[05/Aug/2019 03:23:19] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 03:24:02] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:24:06] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:24:10] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 03:24:10] "POST /api/v1/start_task/ HTTP/1.1" 200 129
+[05/Aug/2019 03:25:19] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:25:39] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:25:43] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 03:25:43] "POST /api/v1/start_task/ HTTP/1.1" 200 129
+[05/Aug/2019 03:26:15] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:26:21] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:26:24] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 03:26:25] "POST /api/v1/start_task/ HTTP/1.1" 200 129
+[05/Aug/2019 03:27:27] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:27:33] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:27:36] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+Internal Server Error: /api/v1/start_task/
+Traceback (most recent call last):
+  File "/usr/python/lib/python3.7/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'token'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/deepdraw/untitled/api/views.py", line 722, in post
+    token = data['token']
+  File "/usr/python/lib/python3.7/site-packages/django/utils/datastructures.py", line 80, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'token'
+[05/Aug/2019 03:27:36] "POST /api/v1/start_task/ HTTP/1.1" 500 15107
+[05/Aug/2019 03:27:53] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:27:55] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:27:58] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 03:27:59] "POST /api/v1/start_task/ HTTP/1.1" 200 129
+[05/Aug/2019 03:31:59] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 03:32:04] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 03:32:04] "POST /api/v1/start_task/ HTTP/1.1" 200 129
+[05/Aug/2019 03:33:05] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+Watching for file changes with StatReloader
+[05/Aug/2019 06:41:12] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[05/Aug/2019 06:41:13] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[05/Aug/2019 06:41:25] "POST /api/v1/task/ HTTP/1.1" 200 386
+[05/Aug/2019 06:41:25] "POST /api/v1/get_pic/ HTTP/1.1" 200 543
+[05/Aug/2019 07:00:11] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:00:26] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:00:26] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 07:00:33] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:03:37] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:03:43] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:03:46] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:03:48] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:05:17] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:08:09] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:08:39] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:09:02] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:09:15] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:09:19] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:09:20] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:09:36] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:09:39] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:09:43] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:09:45] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:09:45] "OPTIONS /api/v1/pic/ HTTP/1.1" 200 0
+[05/Aug/2019 07:09:45] "POST /api/v1/pic/ HTTP/1.1" 200 49
+[05/Aug/2019 07:10:43] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:10:49] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:10:53] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:10:53] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 07:10:55] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:10:55] "POST /api/v1/pic/ HTTP/1.1" 200 49
+[05/Aug/2019 07:12:11] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:12:17] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:12:20] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:12:22] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:12:22] "POST /api/v1/pic/ HTTP/1.1" 200 634
+[05/Aug/2019 07:13:31] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:13:35] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:13:36] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:13:36] "POST /api/v1/pic/ HTTP/1.1" 200 634
+[05/Aug/2019 07:19:33] "POST /api/v1/get_pic/ HTTP/1.1" 200 640
+[05/Aug/2019 07:19:40] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:19:54] "POST /api/v1/get_pic/ HTTP/1.1" 200 550
+[05/Aug/2019 07:20:40] "POST /api/v1/pic/ HTTP/1.1" 200 605
+[05/Aug/2019 07:21:06] "POST /api/v1/pic/ HTTP/1.1" 200 634
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2019 - 06:41:07
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['undefined/pic/0881768c-a9e3-4e20-881a-61e8a04e8653/0.jpeg']
+permision_ok
+pic_id:2626
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/0c909433-3f2c-4f11-8bc7-71dab6605bee/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/0c909433-3f2c-4f11-8bc7-71dab6605bee/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2628]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/0c909433-3f2c-4f11-8bc7-71dab6605bee/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/0c909433-3f2c-4f11-8bc7-71dab6605bee/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/fd47d223-bc01-4718-b069-394197489511/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/fd47d223-bc01-4718-b069-394197489511/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2630]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/fd47d223-bc01-4718-b069-394197489511/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/fd47d223-bc01-4718-b069-394197489511/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/245752b5-29e4-4730-89ce-ff6d97a4f507/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/245752b5-29e4-4730-89ce-ff6d97a4f507/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2632]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/245752b5-29e4-4730-89ce-ff6d97a4f507/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/245752b5-29e4-4730-89ce-ff6d97a4f507/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/9cfad196-1149-4b18-8236-cdd9f56d0769/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/9cfad196-1149-4b18-8236-cdd9f56d0769/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2634]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/9cfad196-1149-4b18-8236-cdd9f56d0769/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/9cfad196-1149-4b18-8236-cdd9f56d0769/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/5020e1d7-e6a6-45c5-83c9-b9cfbcc90c46/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/5020e1d7-e6a6-45c5-83c9-b9cfbcc90c46/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2636]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/5020e1d7-e6a6-45c5-83c9-b9cfbcc90c46/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/5020e1d7-e6a6-45c5-83c9-b9cfbcc90c46/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/0b3bd9ae-0237-4cf3-afb4-bcfb6c708428/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/0b3bd9ae-0237-4cf3-afb4-bcfb6c708428/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2638]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/0b3bd9ae-0237-4cf3-afb4-bcfb6c708428/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/0b3bd9ae-0237-4cf3-afb4-bcfb6c708428/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/b9d5a32f-f04a-4554-aa9b-cdd44beb2af4/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/b9d5a32f-f04a-4554-aa9b-cdd44beb2af4/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2640]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/b9d5a32f-f04a-4554-aa9b-cdd44beb2af4/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/b9d5a32f-f04a-4554-aa9b-cdd44beb2af4/0.jpg']
+CALLING API
+<class 'str'>
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/threading.py", line 917, in _bootstrap_inner
+    self.run()
+  File "/usr/Python-3.7.2/Lib/threading.py", line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 54, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/commands/runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/base.py", line 390, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/base.py", line 377, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/registry.py", line 72, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/urls.py", line 40, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/urls.py", line 57, in _load_all_namespaces
+    url_patterns = getattr(resolver, 'url_patterns', [])
+  File "/usr/python/lib/python3.7/site-packages/django/utils/functional.py", line 80, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/python/lib/python3.7/site-packages/django/urls/resolvers.py", line 579, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/python/lib/python3.7/site-packages/django/utils/functional.py", line 80, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/python/lib/python3.7/site-packages/django/urls/resolvers.py", line 572, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/root/deepdraw/untitled/untitled/urls.py", line 22, in <module>
+    url(r'^api/v1/',include('api.urls')),
+  File "/usr/python/lib/python3.7/site-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/root/deepdraw/untitled/api/urls.py", line 2, in <module>
+    from . import views
+  File "/root/deepdraw/untitled/api/views.py", line 486
+    )
+    ^
+IndentationError: unexpected indent
+
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+[05/Aug/2019 07:24:26] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:24:30] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[05/Aug/2019 07:24:31] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:24:31] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 07:24:33] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:24:33] "OPTIONS /api/v1/pic/ HTTP/1.1" 200 0
+[05/Aug/2019 07:24:34] "POST /api/v1/pic/ HTTP/1.1" 200 409
+[05/Aug/2019 07:25:21] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:25:31] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:25:35] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:25:36] "POST /api/v1/pic/ HTTP/1.1" 200 385
+[05/Aug/2019 07:28:27] "POST /api/v1/pic/ HTTP/1.1" 200 385
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2019 - 07:23:51
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['input_folder/undefined/9341c6d1-f77b-45fc-a5ce-7ec70353916e/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/9341c6d1-f77b-45fc-a5ce-7ec70353916e/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2642]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/9341c6d1-f77b-45fc-a5ce-7ec70353916e/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/9341c6d1-f77b-45fc-a5ce-7ec70353916e/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/fadc7571-7b2e-45e1-94cc-459cac917b74/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/fadc7571-7b2e-45e1-94cc-459cac917b74/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2643]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/fadc7571-7b2e-45e1-94cc-459cac917b74/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/fadc7571-7b2e-45e1-94cc-459cac917b74/0.jpg']
+CALLING API
+<class 'str'>
+Watching for file changes with StatReloader
+[05/Aug/2019 07:31:43] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:31:49] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:31:50] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:31:51] "POST /api/v1/pic/ HTTP/1.1" 200 525
+[05/Aug/2019 07:32:31] "GET /api/v1/index/ HTTP/1.1" 200 19576
+Not Found: /favicon.ico
+[05/Aug/2019 07:32:31] "GET /favicon.ico HTTP/1.1" 404 2199
+[05/Aug/2019 07:32:36] "POST /api/v1/task/ HTTP/1.1" 200 384
+[05/Aug/2019 07:32:36] "POST /api/v1/get_pic/ HTTP/1.1" 200 644
+[05/Aug/2019 07:32:48] "POST /api/v1/task/ HTTP/1.1" 200 384
+[05/Aug/2019 07:32:48] "POST /api/v1/get_pic/ HTTP/1.1" 200 648
+[05/Aug/2019 07:33:33] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[05/Aug/2019 07:33:42] "POST /api/v1/pic/ HTTP/1.1" 200 525
+[05/Aug/2019 07:33:53] "POST /api/v1/task/ HTTP/1.1" 200 384
+[05/Aug/2019 07:33:53] "POST /api/v1/get_pic/ HTTP/1.1" 200 624
+[05/Aug/2019 07:34:01] "POST /api/v1/put_task/ HTTP/1.1" 200 106
+[05/Aug/2019 07:34:09] "POST /api/v1/start_task/ HTTP/1.1" 200 578
+[05/Aug/2019 07:34:09] "POST /api/v1/pic/ HTTP/1.1" 200 969
+[05/Aug/2019 07:34:43] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[05/Aug/2019 07:34:54] "POST /api/v1/task/ HTTP/1.1" 200 384
+[05/Aug/2019 07:34:55] "POST /api/v1/get_pic/ HTTP/1.1" 200 624
+[05/Aug/2019 07:35:27] "POST /api/v1/get_pic/ HTTP/1.1" 200 666
+[05/Aug/2019 07:44:26] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:45:01] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:45:01] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 07:45:08] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:45:08] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+Internal Server Error: /api/v1/get_pic/
+Traceback (most recent call last):
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/deepdraw/untitled/api/views.py", line 844, in post
+    pic_id = data['pic_id']
+KeyError: 'pic_id'
+[05/Aug/2019 07:45:09] "POST /api/v1/get_pic/ HTTP/1.1" 500 14537
+[05/Aug/2019 07:49:47] "POST /api/v1/get_pic/ HTTP/1.1" 200 644
+[05/Aug/2019 07:49:53] "POST /api/v1/get_pic/ HTTP/1.1" 200 644
+[05/Aug/2019 07:49:57] "POST /api/v1/get_pic/ HTTP/1.1" 200 644
+[05/Aug/2019 07:49:59] "POST /api/v1/get_pic/ HTTP/1.1" 200 644
+[05/Aug/2019 07:49:59] "POST /api/v1/get_pic/ HTTP/1.1" 200 644
+[05/Aug/2019 07:50:01] "POST /api/v1/get_pic/ HTTP/1.1" 200 644
+[05/Aug/2019 07:51:00] "GET /api/v1/phone_log/ HTTP/1.1" 200 109516
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[05/Aug/2019 07:51:00] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[05/Aug/2019 07:51:00] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[05/Aug/2019 07:51:00] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[05/Aug/2019 07:51:06] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:51:10] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 07:51:14] "POST /api/v1/user/login/ HTTP/1.1" 200 181
+[05/Aug/2019 07:51:14] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 07:51:15] "GET /api/v1/index/?userid=18582592676&token=undefined&id=6 HTTP/1.1" 200 19576
+[05/Aug/2019 07:51:16] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 07:51:16] "POST /api/v1/get_pic/ HTTP/1.1" 200 666
+[05/Aug/2019 07:51:19] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=undefined HTTP/1.1" 200 22419
+[05/Aug/2019 07:51:35] "POST /api/v1/task/ HTTP/1.1" 200 49
+[05/Aug/2019 07:51:38] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=undefined HTTP/1.1" 200 22419
+[05/Aug/2019 07:51:40] "POST /api/v1/task/ HTTP/1.1" 200 49
+[05/Aug/2019 07:51:41] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=undefined HTTP/1.1" 200 22419
+[05/Aug/2019 07:51:49] "POST /api/v1/task/ HTTP/1.1" 200 49
+[05/Aug/2019 07:51:52] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=undefined HTTP/1.1" 200 22419
+[05/Aug/2019 07:52:07] "POST /api/v1/task/ HTTP/1.1" 200 49
+[05/Aug/2019 07:52:16] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=undefined HTTP/1.1" 200 22419
+[05/Aug/2019 07:57:48] "POST /api/v1/task/ HTTP/1.1" 200 49
+[05/Aug/2019 07:57:53] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=undefined HTTP/1.1" 200 22419
+[05/Aug/2019 07:58:00] "POST /api/v1/task/ HTTP/1.1" 200 370
+[05/Aug/2019 07:58:00] "POST /api/v1/get_pic/ HTTP/1.1" 200 592
+[05/Aug/2019 08:00:24] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=undefined HTTP/1.1" 200 22419
+[05/Aug/2019 08:00:50] "POST /api/v1/task/ HTTP/1.1" 200 49
+[05/Aug/2019 08:01:21] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=undefined HTTP/1.1" 200 22419
+[05/Aug/2019 08:01:26] "GET /api/v1/index/?userid=18582592676&token=undefined&id=6 HTTP/1.1" 200 19576
+[05/Aug/2019 08:01:40] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[05/Aug/2019 08:01:41] "GET /api/v1/phone_log/ HTTP/1.1" 200 109516
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[05/Aug/2019 08:01:41] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[05/Aug/2019 08:01:41] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[05/Aug/2019 08:01:41] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[05/Aug/2019 08:02:43] "GET /api/v1/phone_log/ HTTP/1.1" 200 109515
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[05/Aug/2019 08:02:43] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[05/Aug/2019 08:02:43] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[05/Aug/2019 08:02:44] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[05/Aug/2019 08:03:00] "POST /api/v1/user/login/ HTTP/1.1" 200 181
+[05/Aug/2019 08:03:02] "GET /api/v1/index/?userid=18582592676&token=71667932-b757-11e9-b196-00163e068aa2&id=6 HTTP/1.1" 200 19576
+[05/Aug/2019 08:03:22] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=71667932-b757-11e9-b196-00163e068aa2 HTTP/1.1" 200 22419
+[05/Aug/2019 08:03:42] "POST /api/v1/task/ HTTP/1.1" 200 1475
+[05/Aug/2019 08:03:43] "POST /api/v1/get_pic/ HTTP/1.1" 200 583
+[05/Aug/2019 08:03:43] "POST /api/v1/get_pic/ HTTP/1.1" 200 583
+[05/Aug/2019 08:03:43] "POST /api/v1/get_pic/ HTTP/1.1" 200 578
+[05/Aug/2019 08:03:43] "POST /api/v1/get_pic/ HTTP/1.1" 200 579
+[05/Aug/2019 08:03:43] "POST /api/v1/get_pic/ HTTP/1.1" 200 598
+[05/Aug/2019 08:03:43] "POST /api/v1/get_pic/ HTTP/1.1" 200 596
+[05/Aug/2019 08:03:57] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=71667932-b757-11e9-b196-00163e068aa2 HTTP/1.1" 200 22419
+[05/Aug/2019 08:04:36] "POST /api/v1/task/ HTTP/1.1" 200 2339
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 575
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 584
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 583
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 610
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 597
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 610
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 588
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 591
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 613
+[05/Aug/2019 08:04:37] "POST /api/v1/get_pic/ HTTP/1.1" 200 584
+[05/Aug/2019 08:06:55] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=71667932-b757-11e9-b196-00163e068aa2 HTTP/1.1" 200 22419
+[05/Aug/2019 08:21:38] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 08:21:48] "POST /api/v1/put_task/ HTTP/1.1" 200 100
+[05/Aug/2019 08:21:48] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 08:21:50] "POST /api/v1/start_task/ HTTP/1.1" 200 331
+[05/Aug/2019 08:21:50] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[05/Aug/2019 08:21:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 666
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[05/Aug/2019 08:22:51] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 57963)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+----------------------------------------
+Exception happened during processing of request from ('101.36.149.66', 62223)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 169, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+----------------------------------------
+Exception happened during processing of request from ('101.36.149.66', 62275)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 169, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+----------------------------------------
+Exception happened during processing of request from ('101.36.149.66', 62349)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 169, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+Not Found: /
+[05/Aug/2019 08:25:14] "GET / HTTP/1.1" 404 2148
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2019 - 07:30:48
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2644]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['undefined/pic/7aac671c-1a81-477e-860c-702ec6e42c3a/0.png']
+permision_ok
+pic_id:2645
+<class 'str'>
+CALLING API
+--org_pic:['undefined/pic/21161744-6edc-4449-8d49-36dffed35125/0.jpg']
+permision_ok
+pic_id:2646
+<class 'str'>
+CALLING API
+--org_pic:['undefined/pic/92b6aef4-9d76-4111-8686-f876bc4a5975/0.jpg']
+permision_ok
+pic_id:2647
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg', 'input_folder/undefined/539afaed-ac22-47c3-8ac1-68232950cf10/1.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg', 'input_folder/undefined/539afaed-ac22-47c3-8ac1-68232950cf10/1.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2648, 2649]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg', 'input_folder/undefined/539afaed-ac22-47c3-8ac1-68232950cf10/1.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg']
+CALLING API
+<class 'str'>
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/f93ce5f7-496f-403b-9b82-90a289ae8fc2/0.jpg', 'https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/539afaed-ac22-47c3-8ac1-68232950cf10/1.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['undefined/pic/b162902c-d806-4df6-81fc-531c6d3d2cf0/0.jpg']
+permision_ok
+pic_id:2650
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/5e1a90cd-eebb-4977-8dd5-d244cf09f657/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/5e1a90cd-eebb-4977-8dd5-d244cf09f657/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2651]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/5e1a90cd-eebb-4977-8dd5-d244cf09f657/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/5e1a90cd-eebb-4977-8dd5-d244cf09f657/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/ebe9b602-29f6-498f-8e14-df8015a99410/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/ebe9b602-29f6-498f-8e14-df8015a99410/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2652]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/ebe9b602-29f6-498f-8e14-df8015a99410/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/ebe9b602-29f6-498f-8e14-df8015a99410/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['6/pic/edf380f3-fb97-4c95-8e07-94160f806b9a/0.jpeg', '6/pic/edf380f3-fb97-4c95-8e07-94160f806b9a/1.jpeg', '6/pic/edf380f3-fb97-4c95-8e07-94160f806b9a/2.jpeg', '6/pic/edf380f3-fb97-4c95-8e07-94160f806b9a/3.jpeg', '6/pic/edf380f3-fb97-4c95-8e07-94160f806b9a/4.jpeg', '6/pic/edf380f3-fb97-4c95-8e07-94160f806b9a/5.jpeg']
+--org_pic:['']
+--org_pic:['6/pic/6b0f3aca-ba2c-4c88-87ca-e48273be7a8a/0.jpeg', '6/pic/6b0f3aca-ba2c-4c88-87ca-e48273be7a8a/1.jpeg', '6/pic/6b0f3aca-ba2c-4c88-87ca-e48273be7a8a/2.jpeg', '6/pic/6b0f3aca-ba2c-4c88-87ca-e48273be7a8a/3.jpeg', '6/pic/6b0f3aca-ba2c-4c88-87ca-e48273be7a8a/4.jpeg', '6/pic/6b0f3aca-ba2c-4c88-87ca-e48273be7a8a/5.jpeg']
+--org_pic:['6/pic/04221050-903f-423c-80e5-20e90269dd20/0.jpeg', '6/pic/04221050-903f-423c-80e5-20e90269dd20/1.jpeg', '6/pic/04221050-903f-423c-80e5-20e90269dd20/2.jpeg', '6/pic/04221050-903f-423c-80e5-20e90269dd20/3.jpeg', '6/pic/04221050-903f-423c-80e5-20e90269dd20/4.jpeg', '6/pic/04221050-903f-423c-80e5-20e90269dd20/5.jpeg']
+--org_pic:['6/pic/016eff67-a905-4275-8bbf-61fb1453f64d/0.jpeg']
+--org_pic:['6/pic/b00e8596-4649-432c-8459-b813f578c7b5/0.jpeg']
+permision_ok
+pic_id:2653
+<class 'str'>
+CALLING API
+--org_pic:['6/pic/64896ccb-32e6-4a85-8637-a565ba8193f1/0.jpeg', '6/pic/64896ccb-32e6-4a85-8637-a565ba8193f1/1.jpeg', '6/pic/64896ccb-32e6-4a85-8637-a565ba8193f1/2.jpeg', '6/pic/64896ccb-32e6-4a85-8637-a565ba8193f1/3.jpeg', '6/pic/64896ccb-32e6-4a85-8637-a565ba8193f1/4.jpeg']
+--org_pic:['6/pic/b171f417-ac75-473d-824a-7f445db300a1/0.jpeg', '6/pic/b171f417-ac75-473d-824a-7f445db300a1/1.jpeg', '6/pic/b171f417-ac75-473d-824a-7f445db300a1/2.jpeg', '6/pic/b171f417-ac75-473d-824a-7f445db300a1/3.jpeg', '6/pic/b171f417-ac75-473d-824a-7f445db300a1/4.jpeg', '6/pic/b171f417-ac75-473d-824a-7f445db300a1/5.jpeg']
+permision_ok
+pic_id:2654
+<class 'str'>
+CALLING API
+pic_id:2655
+<class 'str'>
+CALLING API
+pic_id:2656
+<class 'str'>
+CALLING API
+pic_id:2657
+<class 'str'>
+CALLING API
+pic_id:2658
+<class 'str'>
+CALLING API
+pic_id:2659
+<class 'str'>
+CALLING API
+--org_pic:['6/pic/1378c956-5de8-413c-acca-c68421eb7878/0.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/1.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/2.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/3.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/4.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/5.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/6.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/7.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/8.jpg', '6/pic/1378c956-5de8-413c-acca-c68421eb7878/9.jpg']
+permision_ok
+pic_id:2660
+<class 'str'>
+CALLING API
+pic_id:2661
+<class 'str'>
+CALLING API
+pic_id:2662
+<class 'str'>
+CALLING API
+pic_id:2663
+<class 'str'>
+CALLING API
+pic_id:2664
+<class 'str'>
+CALLING API
+pic_id:2665
+<class 'str'>
+CALLING API
+pic_id:2666
+<class 'str'>
+CALLING API
+pic_id:2667
+<class 'str'>
+CALLING API
+pic_id:2668
+<class 'str'>
+CALLING API
+pic_id:2669
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/c0602193-3add-4ab8-9e85-c572bd6d1580/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/c0602193-3add-4ab8-9e85-c572bd6d1580/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2670]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/c0602193-3add-4ab8-9e85-c572bd6d1580/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/c0602193-3add-4ab8-9e85-c572bd6d1580/0.jpg']
+CALLING API
+<class 'str'>
+Watching for file changes with StatReloader
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2019 - 08:28:10
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[05/Aug/2019 08:35:15] "POST /api/v1/put_task/ HTTP/1.1" 200 280
+[05/Aug/2019 08:38:34] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 08:54:46] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 08:58:00] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:10:57] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:11:48] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:11:50] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:12:02] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:12:51] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[05/Aug/2019 09:12:52] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 09:12:53] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[05/Aug/2019 09:12:53] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[05/Aug/2019 09:12:54] "POST /api/v1/get_pic/ HTTP/1.1" 200 525
+[05/Aug/2019 09:14:17] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:14:24] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:35:24] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:35:28] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[05/Aug/2019 09:35:29] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 09:35:35] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[05/Aug/2019 09:35:36] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[05/Aug/2019 09:35:36] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[05/Aug/2019 09:36:22] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:36:36] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:36:40] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[05/Aug/2019 09:36:41] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[05/Aug/2019 09:36:42] "POST /api/v1/get_pic/ HTTP/1.1" 200 525
+[05/Aug/2019 09:38:30] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:38:36] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[05/Aug/2019 09:38:38] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[05/Aug/2019 09:38:38] "POST /api/v1/get_pic/ HTTP/1.1" 200 525
+[05/Aug/2019 09:41:08] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:41:14] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[05/Aug/2019 09:41:16] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[05/Aug/2019 09:41:16] "POST /api/v1/get_pic/ HTTP/1.1" 200 525
+[05/Aug/2019 09:41:58] "POST /api/v1/put_task/ HTTP/1.1" 200 360
+[05/Aug/2019 09:42:06] "POST /api/v1/start_task/ HTTP/1.1" 200 303
+[05/Aug/2019 09:42:07] "POST /api/v1/get_pic/ HTTP/1.1" 200 525
+[05/Aug/2019 09:42:18] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 09:43:17] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[05/Aug/2019 09:43:19] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[05/Aug/2019 09:43:19] "POST /api/v1/get_pic/ HTTP/1.1" 200 504
+[05/Aug/2019 10:33:09] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 10:33:28] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[05/Aug/2019 10:33:29] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 10:33:36] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[05/Aug/2019 10:33:36] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[05/Aug/2019 10:33:36] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[05/Aug/2019 10:47:24] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[05/Aug/2019 10:49:24] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[05/Aug/2019 10:49:24] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[05/Aug/2019 10:49:31] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[05/Aug/2019 10:49:32] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[05/Aug/2019 10:49:32] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[05/Aug/2019 13:50:45] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[05/Aug/2019 13:50:45] "  /*à     Cookie: mstshash=Administr" 400 -
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[05/Aug/2019 18:21:46] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 32911)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+[05/Aug/2019 21:38:03] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[05/Aug/2019 21:38:03] "  /*à     Cookie: mstshash=Administr" 400 -
+Not Found: /
+[05/Aug/2019 22:39:26] "GET / HTTP/1.1" 404 2148
+[06/Aug/2019 01:03:36] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 01:03:42] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 01:03:42] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 01:03:42] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 01:03:42] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 01:03:42] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 01:03:42] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 01:03:55] "GET /api/v1/index/ HTTP/1.1" 200 19576
+Not Found: /favicon.ico
+[06/Aug/2019 01:03:55] "GET /favicon.ico HTTP/1.1" 404 2199
+[06/Aug/2019 01:11:18] "GET /api/v1/phone_log/ HTTP/1.1" 200 109515
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[06/Aug/2019 01:11:18] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+----------------------------------------
+Exception happened during processing of request from ('171.88.189.2', 9618)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[06/Aug/2019 01:11:19] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[06/Aug/2019 01:11:19] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[06/Aug/2019 01:11:20] "POST /api/v1/task/ HTTP/1.1" 200 384
+[06/Aug/2019 01:11:20] "POST /api/v1/get_pic/ HTTP/1.1" 200 487
+[06/Aug/2019 01:12:11] "POST /api/v1/task/ HTTP/1.1" 200 384
+[06/Aug/2019 01:12:11] "POST /api/v1/get_pic/ HTTP/1.1" 200 487
+[06/Aug/2019 01:45:49] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 01:51:29] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 01:58:25] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 01:59:40] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 02:18:12] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 02:19:29] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 02:20:41] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 02:23:34] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 02:29:03] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 02:34:10] "GET /api/v1/phone_log/ HTTP/1.1" 200 109515
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[06/Aug/2019 02:34:10] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[06/Aug/2019 02:34:10] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[06/Aug/2019 02:34:10] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[06/Aug/2019 03:04:48] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 03:05:32] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 03:05:39] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+Internal Server Error: /api/v1/msg/
+Traceback (most recent call last):
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/deepdraw/untitled/api/views.py", line 103, in post
+    Phone = data['Phone']
+KeyError: 'Phone'
+[06/Aug/2019 03:05:39] "POST /api/v1/msg/ HTTP/1.1" 500 14517
+Internal Server Error: /api/v1/msg/
+Traceback (most recent call last):
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/python/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/usr/python/lib/python3.7/site-packages/rest_framework/views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/deepdraw/untitled/api/views.py", line 103, in post
+    Phone = data['Phone']
+KeyError: 'Phone'
+[06/Aug/2019 03:06:52] "POST /api/v1/msg/ HTTP/1.1" 500 14517
+[06/Aug/2019 03:09:36] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 03:09:50] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 03:11:52] "GET /api/v1/index/ HTTP/1.1" 200 19576
+Not Found: /favicon.ico
+[06/Aug/2019 03:11:52] "GET /favicon.ico HTTP/1.1" 404 2199
+[06/Aug/2019 03:12:24] "POST /api/v1/msg/ HTTP/1.1" 200 106
+[06/Aug/2019 03:32:00] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 03:33:10] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 03:33:11] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 04:14:08] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[06/Aug/2019 04:14:08] "  /*à     Cookie: mstshash=Administr" 400 -
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[06/Aug/2019 04:23:01] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 55113)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+[06/Aug/2019 04:56:44] "POST /api/v1/get_task/ HTTP/1.1" 200 189
+[06/Aug/2019 05:04:37] "POST /api/v1/get_task/ HTTP/1.1" 200 4062
+[06/Aug/2019 05:09:26] "POST /api/v1/get_oss_key/ HTTP/1.1" 200 140
+[06/Aug/2019 05:46:07] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 05:47:20] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 05:48:09] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 05:48:50] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 05:49:41] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 05:49:56] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 05:49:57] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 05:50:52] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 05:51:00] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 05:51:09] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 05:51:09] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 05:56:39] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 05:58:10] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:07:01] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 06:07:02] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 06:07:09] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 06:07:09] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 06:16:39] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:16:47] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 06:17:00] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 06:17:37] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:17:46] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 06:17:46] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 06:17:53] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 06:17:53] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 06:18:07] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:36:00] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:36:17] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 06:36:17] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 06:36:24] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 06:36:25] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 06:36:25] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[06/Aug/2019 06:50:40] "POST /api/v1/put_task/ HTTP/1.1" 200 360
+[06/Aug/2019 06:50:40] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 06:50:54] "POST /api/v1/start_task/ HTTP/1.1" 200 303
+[06/Aug/2019 06:50:54] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 06:50:54] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[06/Aug/2019 06:52:13] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:53:29] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:53:38] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2019 - 08:34:54
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['user_id1/pic/uuid/001.jpg', 'user_id1/pic/uuid/001.jpg']
+permision_ok
+--org_pic:['input_folder/undefined/76d3d3a2-9d60-4aee-8fac-d11b5c8cb066/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/76d3d3a2-9d60-4aee-8fac-d11b5c8cb066/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2673]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/76d3d3a2-9d60-4aee-8fac-d11b5c8cb066/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/76d3d3a2-9d60-4aee-8fac-d11b5c8cb066/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/f37839fb-f57c-401b-8506-bb75dc3ee472/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/f37839fb-f57c-401b-8506-bb75dc3ee472/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2674]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/f37839fb-f57c-401b-8506-bb75dc3ee472/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/f37839fb-f57c-401b-8506-bb75dc3ee472/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/24e892b4-3426-4ca8-90a3-c7c354c826d0/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/24e892b4-3426-4ca8-90a3-c7c354c826d0/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2675]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/24e892b4-3426-4ca8-90a3-c7c354c826d0/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/24e892b4-3426-4ca8-90a3-c7c354c826d0/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/6ae957bf-3dbf-4cd3-a7a8-c780a11e431a/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/6ae957bf-3dbf-4cd3-a7a8-c780a11e431a/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2676]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/6ae957bf-3dbf-4cd3-a7a8-c780a11e431a/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/6ae957bf-3dbf-4cd3-a7a8-c780a11e431a/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2677]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg', 'input_folder/undefined/0e665c49-ea26-481a-8281-a24fc21c50f6/1.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg', 'input_folder/undefined/0e665c49-ea26-481a-8281-a24fc21c50f6/1.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2678, 2679]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg', 'input_folder/undefined/0e665c49-ea26-481a-8281-a24fc21c50f6/1.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg']
+CALLING API
+<class 'str'>
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/010f48a9-3eb7-432c-b1ac-bdb1497c5cce/0.jpg', 'https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/0e665c49-ea26-481a-8281-a24fc21c50f6/1.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/3e99b690-092a-45df-8253-5c6fc0761846/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/3e99b690-092a-45df-8253-5c6fc0761846/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2680]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/3e99b690-092a-45df-8253-5c6fc0761846/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/3e99b690-092a-45df-8253-5c6fc0761846/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/93cbedac-4a31-4cf2-8d53-5cf4ddec6174/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/93cbedac-4a31-4cf2-8d53-5cf4ddec6174/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2681]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/93cbedac-4a31-4cf2-8d53-5cf4ddec6174/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/93cbedac-4a31-4cf2-8d53-5cf4ddec6174/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/04f5c3ff-c74d-4639-877f-57764b4d1e6f/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/04f5c3ff-c74d-4639-877f-57764b4d1e6f/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2682]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/04f5c3ff-c74d-4639-877f-57764b4d1e6f/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/04f5c3ff-c74d-4639-877f-57764b4d1e6f/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['undefined/pic/a11624df-f067-43cf-b2b0-94586a7e0510/0.jpg']
+permision_ok
+pic_id:2683
+<class 'str'>
+CALLING API
+--org_pic:['undefined/pic/8326da88-ac6a-4ca5-8b75-16a94614723e/0.jpg']
+permision_ok
+pic_id:2684
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2685]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg', 'input_folder/undefined/ed69bb47-0084-4a04-8193-ffa73b68862a/1.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg', 'input_folder/undefined/ed69bb47-0084-4a04-8193-ffa73b68862a/1.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2686, 2687]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg', 'input_folder/undefined/ed69bb47-0084-4a04-8193-ffa73b68862a/1.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg']
+CALLING API
+<class 'str'>
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/27e35efa-74a7-4d9e-807a-2a0ab0230d39/0.jpg', 'https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/ed69bb47-0084-4a04-8193-ffa73b68862a/1.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/ac2b963a-f649-412f-954d-b86f45e9f6a9/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/ac2b963a-f649-412f-954d-b86f45e9f6a9/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2688]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/ac2b963a-f649-412f-954d-b86f45e9f6a9/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/ac2b963a-f649-412f-954d-b86f45e9f6a9/0.jpg'][06/Aug/2019 06:53:46] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 06:53:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[06/Aug/2019 06:54:06] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:54:11] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 06:54:18] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 06:54:18] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[06/Aug/2019 06:54:43] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:54:46] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:54:52] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 06:54:53] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 06:54:53] "POST /api/v1/get_pic/ HTTP/1.1" 200 528
+[06/Aug/2019 06:56:06] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 06:56:09] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 06:56:16] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 06:56:16] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[06/Aug/2019 07:05:40] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:05:45] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:05:45] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 07:05:47] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:05:47] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 07:05:47] "POST /api/v1/get_pic/ HTTP/1.1" 200 525
+[06/Aug/2019 07:06:00] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:06:03] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:06:11] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:06:12] "POST /api/v1/get_pic/ HTTP/1.1" 200 505
+[06/Aug/2019 07:06:39] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 07:06:44] "POST /api/v1/task/ HTTP/1.1" 200 384
+[06/Aug/2019 07:06:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 512
+[06/Aug/2019 07:07:01] "POST /api/v1/task/ HTTP/1.1" 200 384
+[06/Aug/2019 07:07:01] "POST /api/v1/get_pic/ HTTP/1.1" 200 492
+[06/Aug/2019 07:07:24] "POST /api/v1/task/ HTTP/1.1" 200 384
+[06/Aug/2019 07:07:25] "POST /api/v1/get_pic/ HTTP/1.1" 200 516
+[06/Aug/2019 07:08:15] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 07:10:23] "GET /api/v1/echarts/ HTTP/1.1" 200 866
+[06/Aug/2019 07:10:51] "GET /api/v1/bar/ HTTP/1.1" 200 1693
+[06/Aug/2019 07:16:35] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:16:41] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:16:41] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 07:16:48] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:16:49] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 07:16:49] "POST /api/v1/get_pic/ HTTP/1.1" 200 505
+[06/Aug/2019 07:17:52] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:21:56] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:22:00] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:22:08] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:22:09] "POST /api/v1/get_pic/ HTTP/1.1" 200 505
+[06/Aug/2019 07:30:36] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:35:02] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+[06/Aug/2019 07:35:42] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+[06/Aug/2019 07:36:20] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:36:37] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:36:44] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 07:36:44] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 07:36:52] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 07:36:52] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 07:37:03] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:37:16] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:37:28] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:37:28] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 07:37:35] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:37:35] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 07:37:36] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[06/Aug/2019 07:38:36] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:38:43] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:38:44] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:38:45] "POST /api/v1/get_pic/ HTTP/1.1" 200 528
+[06/Aug/2019 07:39:01] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 07:39:06] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/0769369d-fdab-45d6-826a-4bfd4a704b43/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/0769369d-fdab-45d6-826a-4bfd4a704b43/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2689]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/0769369d-fdab-45d6-826a-4bfd4a704b43/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/0769369d-fdab-45d6-826a-4bfd4a704b43/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/146822ad-0cfa-411f-8821-74f93c9f0f61/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/146822ad-0cfa-411f-8821-74f93c9f0f61/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2690]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/146822ad-0cfa-411f-8821-74f93c9f0f61/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/146822ad-0cfa-411f-8821-74f93c9f0f61/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/f01a7d0b-a1bc-4c35-98b6-424fb9d0d112/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/f01a7d0b-a1bc-4c35-98b6-424fb9d0d112/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2691]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/f01a7d0b-a1bc-4c35-98b6-424fb9d0d112/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/f01a7d0b-a1bc-4c35-98b6-424fb9d0d112/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/43a434c8-02d5-4e5c-80e7-c0a4a3cc7b54/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/43a434c8-02d5-4e5c-80e7-c0a4a3cc7b54/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2692]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/43a434c8-02d5-4e5c-80e7-c0a4a3cc7b54/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/43a434c8-02d5-4e5c-80e7-c0a4a3cc7b54/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/5a1eb450-b939-405c-834d-e1d9270c40e2/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/5a1eb450-b939-405c-834d-e1d9270c40e2/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2693]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/5a1eb450-b939-405c-834d-e1d9270c40e2/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/5a1eb450-b939-405c-834d-e1d9270c40e2/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['undefined/pic/0d1aa890-a74c-4499-8f50-1e7539054850/0.png']
+permision_ok
+pic_id:2694
+<class 'str'>
+CALLING API
+--org_pic:['undefined/pic/7837482d-acde-4fa3-b4e6-56bf2289afbd/0.jpg']
+permision_ok
+pic_id:2695
+<class 'str'>
+CALLING API
+--org_pic:['undefined/pic/a146c128-e6f3-44af-82f5-87242aebb874/0.jpg']
+permision_ok
+pic_id:2696
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/07b4bcfa-8ca5-4d27-abfa-62470b4905cc/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/07b4bcfa-8ca5-4d27-abfa-62470b4905cc/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2697]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/07b4bcfa-8ca5-4d27-abfa-62470b4905cc/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/07b4bcfa-8ca5-4d27-abfa-62470b4905cc/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/d1d31458-434e-497f-8cac-a2f88cd671e2/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/d1d31458-434e-497f-8cac-a2f88cd671e2/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2698]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/d1d31458-434e-497f-8cac-a2f88cd671e2/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/d1d31458-434e-497f-8cac-a2f88cd671e2/0.jpg']
+CALLING API
+<class 'str'>
+['205.1B7C2018622355.jpg']
+['xinyada/a52cfe3b-55e3-4f4c-8715-d91ab3e0715a.jpg']
+1
+http://47.96.132.7:8083/polls/analyze_str/?str={"action": "xinyada", "inputparams": [{"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/a52cfe3b-55e3-4f4c-8715-d91ab3e0715a.jpg"}], "model": "default", "proj": "mobilenetv3", "exec": "online"}
+['83.e25j5umcmdz.jpg', '140.tk1960438.jpg', '144.TB2lbzNao.jyKJjy0FpXXX2wVXa_!!918801.jpg', '172.product_img115382990380.jpg', '181.08af189e5ccbc275bc6fd2dca89c1d7aa73a.png', '205.1B7C2018622355.jpg', '217.5aefb7deN58842b2c.jpg', '321.41EiOvCaiyL._SL260_SX200_CR0,0,200,260_.jpg', '20190725170007.jpg']
+['xinyada/662dba14-f558-4db6-b23c-9e53ba607502.jpg', 'xinyada/7aa0c416-7ccc-4f88-aea7-2a8a1c841a37.jpg', 'xinyada/7a6d21ee-3a57-4b37-b3e9-cace39073877.jpg', 'xinyada/7a99490b-03c0-481b-842b-c5025d1d16f2.jpg', 'xinyada/3fdf5abf-0b8d-4ee1-9f5e-53963014ff04.png', 'xinyada/8b22599a-ce8d-43ce-83b7-8fd919385d2d.jpg', 'xinyada/11f44846-929d-4014-8760-49b9d56f8cd5.jpg', 'xinyada/6a1e9a0c-9ce4-4ae5-8c8b-59441824093a.jpg', 'xinyada/953f956f-caa0-4c97-8141-fa8216e214fa.jpg']
+9
+http://47.96.132.7:8083/polls/analyze_str/?str={"action": "xinyada", "inputparams": [{"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/662dba14-f558-4db6-b23c-9e53ba607502.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/7aa0c416-7ccc-4f88-aea7-2a8a1c841a37.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/7a6d21ee-3a57-4b37-b3e9-cace39073877.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/7a99490b-03c0-481b-842b-c5025d1d16f2.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/3fdf5abf-0b8d-4ee1-9f5e-53963014ff04.png"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/8b22599a-ce8d-43ce-83b7-8fd919385d2d.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/11f44846-929d-4014-8760-49b9d56f8cd5.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/6a1e9a0c-9ce4-4ae5-8c8b-59441824093a.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/953f956f-caa0-4c97-8141-fa8216e214fa.jpg"}], "model": "default", "proj": "mobilenetv3", "exec": "online"}
+--org_pic:['input_folder/undefined/67172d7c-2624-4423-a421-3fa3fedd2399/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/67172d7c-2624-4423-a421-3fa3fedd2399/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2699]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/67172d7c-2624-4423-a421-3fa3fedd2399/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/67172d7c-2624-4423-a421-3fa3fedd2399/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/8310c676-da56-41eb-8ca8-e21788e4bcfb/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/8310c676-da56-41eb-8ca8-e21788e4bcfb/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2700]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/8310c676-da56-41eb-8ca8-e21788e4bcfb/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/8310c676-da56-41eb-8ca8-e21788e4bcfb/0.jpg']
+CALLING API
+<class 'str'>
+['37.TB2iJA0om0mpuFjSZPiXXbssVXa_!!2561352821.jpg', '42.2877A.jpg', '61.90.jpg', '83.e25j5umcmdz.jpg', '140.tk1960438.jpg', '144.TB2lbzNao.jyKJjy0FpXXX2wVXa_!!918801.jpg', '172.product_img115382990380.jpg', '181.08af189e5ccbc275bc6fd2dca89c1d7aa73a.png', '205.1B7C2018622355.jpg', '217.5aefb7deN58842b2c.jpg', '321.41EiOvCaiyL._SL260_SX200_CR0,0,200,260_.jpg', '20190725170007.jpg']
+['xinyada/920094fa-2a1b-4a10-80ca-5a63c6b3d64d.jpg', 'xinyada/18acf101-6ca1-44a2-82b6-d858ecbd24ae.jpg', 'xinyada/c815e8f5-8fe9-4af8-896c-e93093c97022.jpg', 'xinyada/6263cc14-6fcf-4749-85d0-5b9de48f5c16.jpg', 'xinyada/76780def-8d71-439a-a70f-e0ccb957b83b.jpg', 'xinyada/a396cd1b-d7cf-4ad0-88b4-898eddc0480b.jpg', 'xinyada/213555f3-ed50-45ed-9a23-b7904e0504fb.jpg', 'xinyada/f8b3e8f0-7feb-4988-8309-745d389243b3.png', 'xinyada/bd6ee8e7-868d-4a75-832b-b3004788c897.jpg', 'xinyada/cb60842c-aee0-428f-8b08-3af7434512e8.jpg', 'xinyada/3ef1b5a4-9501-4f1e-92ad-46382d1ca4b4.jpg', 'xinyada/bbcdaba9-a9a5-48fc-95c8-68c46252a107.jpg'][06/Aug/2019 07:40:08] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:40:14] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+/root/deepdraw/untitled/xinyada/urls.py changed, reloading.
+
+12
+http://47.96.132.7:8083/polls/analyze_str/?str={"action": "xinyada", "inputparams": [{"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/920094fa-2a1b-4a10-80ca-5a63c6b3d64d.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/18acf101-6ca1-44a2-82b6-d858ecbd24ae.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/c815e8f5-8fe9-4af8-896c-e93093c97022.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/6263cc14-6fcf-4749-85d0-5b9de48f5c16.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/76780def-8d71-439a-a70f-e0ccb957b83b.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/a396cd1b-d7cf-4ad0-88b4-898eddc0480b.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/213555f3-ed50-45ed-9a23-b7904e0504fb.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/f8b3e8f0-7feb-4988-8309-745d389243b3.png"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/bd6ee8e7-868d-4a75-832b-b3004788c897.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/cb60842c-aee0-428f-8b08-3af7434512e8.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/3ef1b5a4-9501-4f1e-92ad-46382d1ca4b4.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/bbcdaba9-a9a5-48fc-95c8-68c46252a107.jpg"}], "model": "default", "proj": "mobilenetv3", "exec": "online"}
+--org_pic:['input_folder/undefined/e5e8b4fd-3e37-4d1a-83f4-c8c19c93b63f/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/e5e8b4fd-3e37-4d1a-83f4-c8c19c93b63f/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2701]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/e5e8b4fd-3e37-4d1a-83f4-c8c19c93b63f/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/e5e8b4fd-3e37-4d1a-83f4-c8c19c93b63f/0.jpg']
+CALLING API
+<class 'str'>
+Watching for file changes with StatReloader
+[06/Aug/2019 07:41:08] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:41:14] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:41:15] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:41:16] "POST /api/v1/get_pic/ HTTP/1.1" 200 525
+/root/deepdraw/untitled/xinyada/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 06, 2019 - 07:40:20
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['input_folder/undefined/bb65a9f4-e327-4b9d-8fa7-1ea499f53229/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/bb65a9f4-e327-4b9d-8fa7-1ea499f53229/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2702]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/bb65a9f4-e327-4b9d-8fa7-1ea499f53229/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/bb65a9f4-e327-4b9d-8fa7-1ea499f53229/0.jpg']
+CALLING API
+<class 'str'>
+Watching for file changes with StatReloader
+[06/Aug/2019 07:43:04] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+[06/Aug/2019 07:43:06] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+[06/Aug/2019 07:43:26] "POST /xinyada/demo/analysis/ HTTP/1.1" 200 3206
+[06/Aug/2019 07:43:59] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+[06/Aug/2019 07:43:59] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+[06/Aug/2019 07:49:39] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:51:54] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:51:54] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 07:51:58] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:51:59] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 07:51:59] "POST /api/v1/get_pic/ HTTP/1.1" 200 501
+[06/Aug/2019 07:52:10] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:52:18] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:52:18] "POST /api/v1/get_pic/ HTTP/1.1" 200 529
+[06/Aug/2019 07:52:42] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 07:52:49] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 07:52:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 505
+[06/Aug/2019 07:53:57] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:54:49] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:59:13] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 07:59:38] "POST /api/v1/get_task/ HTTP/1.1" 200 49
+[06/Aug/2019 07:59:51] "POST /api/v1/get_task/ HTTP/1.1" 200 4062
+[06/Aug/2019 07:59:59] "POST /api/v1/get_task/ HTTP/1.1" 200 4062
+[06/Aug/2019 08:00:43] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 08:00:46] "GET /api/v1/phone_log/ HTTP/1.1" 200 109515
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[06/Aug/2019 08:00:47] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[06/Aug/2019 08:00:47] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[06/Aug/2019 08:00:47] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[06/Aug/2019 08:01:00] "POST /api/v1/user/login/ HTTP/1.1" 200 199
+[06/Aug/2019 08:01:10] "GET /api/v1/index/?userid=wzs&token=547b0030-b820-11e9-8f2d-00163e068aa2&id=3 HTTP/1.1" 200 19576
+[06/Aug/2019 08:01:15] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=547b0030-b820-11e9-8f2d-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 08:01:49] "POST /api/v1/task/ HTTP/1.1" 200 3002
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 470
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 489
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 454
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 451
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 460
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 459
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 486
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 473
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 486
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 470
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 464
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 492
+[06/Aug/2019 08:01:50] "POST /api/v1/get_pic/ HTTP/1.1" 200 463
+[06/Aug/2019 08:02:13] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 08:02:13] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=547b0030-b820-11e9-8f2d-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 08:02:14] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 08:02:28] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 08:02:28] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 08:02:43] "POST /api/v1/task/ HTTP/1.1" 200 2339
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 451
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 460
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 459
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 486
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 473
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 486
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 467
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 460
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 464
+[06/Aug/2019 08:02:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 489
+[06/Aug/2019 08:03:28] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=547b0030-b820-11e9-8f2d-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 08:03:41] "POST /api/v1/task/ HTTP/1.1" 200 1025
+[06/Aug/2019 08:03:42] "POST /api/v1/get_pic/ HTTP/1.1" 200 464
+[06/Aug/2019 08:03:42] "POST /api/v1/get_pic/ HTTP/1.1" 200 467
+[06/Aug/2019 08:03:42] "POST /api/v1/get_pic/ HTTP/1.1" 200 489
+[06/Aug/2019 08:03:42] "POST /api/v1/get_pic/ HTTP/1.1" 200 460
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 06, 2019 - 07:42:39
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+['140.tk1960438.jpg', '144.TB2lbzNao.jyKJjy0FpXXX2wVXa_!!918801.jpg', '172.product_img115382990380.jpg', '181.08af189e5ccbc275bc6fd2dca89c1d7aa73a.png', '205.1B7C2018622355.jpg', '217.5aefb7deN58842b2c.jpg', '321.41EiOvCaiyL._SL260_SX200_CR0,0,200,260_.jpg', '20190725170007.jpg']
+['xinyada/ed63881e-f61f-4335-8147-6a9ec93ab3d7.jpg', 'xinyada/262d1bd7-3955-4f20-9ea1-49e96781d2e7.jpg', 'xinyada/33e208b1-4cef-4979-82ba-23741ca4594e.jpg', 'xinyada/6a77dda1-7a7d-42d9-886f-9f6a21f88ac4.png', 'xinyada/a6395770-2d48-42a8-b29e-90a10569e424.jpg', 'xinyada/a52e05b7-41cb-467b-95e2-dfdf721ac04a.jpg', 'xinyada/9be2c1af-e631-476f-a028-47b293ebf3f9.jpg', 'xinyada/9068f9fd-17a6-4797-bea4-af308ed368c7.jpg']
+8
+http://47.96.178.21:8088/hznz_framework/polls/analyze_str/?str={"action": "xinyada", "inputparams": [{"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/ed63881e-f61f-4335-8147-6a9ec93ab3d7.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/262d1bd7-3955-4f20-9ea1-49e96781d2e7.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/33e208b1-4cef-4979-82ba-23741ca4594e.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/6a77dda1-7a7d-42d9-886f-9f6a21f88ac4.png"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/a6395770-2d48-42a8-b29e-90a10569e424.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/a52e05b7-41cb-467b-95e2-dfdf721ac04a.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/9be2c1af-e631-476f-a028-47b293ebf3f9.jpg"}, {"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/9068f9fd-17a6-4797-bea4-af308ed368c7.jpg"}], "model": "default", "proj": "mobilenetv3", "exec": "online"}
+{"date_str": "2019-08-06", "errCode": 0, "predictions": [{"type": "unsigned"}, {"type": "bank_card"}, {"type": "bank_card"}, {"type": "unsigned"}, {"type": "unsigned"}, {"type": "unsigned"}, {"type": "unsigned"}, {"type": "unsigned"}], "real_model": "default", "async_batchsize": 999, "task_uuid_list": ["341b70c06a0249c697892c7390c72744"]}
+--org_pic:['input_folder/undefined/b63d8ac5-989c-4e5e-9f37-8efd72006def/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/b63d8ac5-989c-4e5e-9f37-8efd72006def/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2703]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/b63d8ac5-989c-4e5e-9f37-8efd72006def/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/b63d8ac5-989c-4e5e-9f37-8efd72006def/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/18547e6a-5515-4665-889b-4142655af83e/1.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/18547e6a-5515-4665-889b-4142655af83e/1.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2704]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/18547e6a-5515-4665-889b-4142655af83e/1.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/18547e6a-5515-4665-889b-4142655af83e/1.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/c54a25b8-201f-4fea-8e9b-997da962c6de/2.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/c54a25b8-201f-4fea-8e9b-997da962c6de/2.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2705]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/c54a25b8-201f-4fea-8e9b-997da962c6de/2.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/c54a25b8-201f-4fea-8e9b-997da962c6de/2.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/0.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/1.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/2.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/3.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/4.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/5.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/6.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/7.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/8.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/9.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/10.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/11.jpg', '3/pic/ec24954b-d87e-4dd6-b931-5e56705b66f5/12.jpg']
+permision_ok
+pic_id:2706
+<class 'str'>
+CALLING API
+pic_id:2707
+<class 'str'>
+CALLING API
+pic_id:2708
+<class 'str'>
+CALLING API
+pic_id:2709
+<class 'str'>
+CALLING API
+pic_id:2710
+<class 'str'>
+CALLING API
+pic_id:2711
+<class 'str'>
+CALLING API
+pic_id:2712
+<class 'str'>
+CALLING API
+pic_id:2713
+<class 'str'>
+CALLING API
+pic_id:2714
+<class 'str'>
+CALLING API
+pic_id:2715
+<class 'str'>
+CALLING API
+pic_id:2716
+<class 'str'>
+CALLING API
+pic_id:2717
+<class 'str'>
+CALLING API
+pic_id:2718
+<class 'str'>
+CALLING API
+--org_pic:['3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/0.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/1.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/2.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/3.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/4.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/5.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/6.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/7.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/8.jpg', '3/pic/a5784ef5-594d-4844-8f26-33b03ec877e5/9.jpg']
+permision_ok
+pic_id:2719
+<class 'str'>
+CALLING API
+pic_id:2720
+<class 'str'>
+CALLING API
+pic_id:2721
+<class 'str'>
+CALLING API
+pic_id:2722
+<class 'str'>
+CALLING API
+pic_id:2723
+<class 'str'>
+CALLING API
+pic_id:2724
+<class 'str'>
+CALLING API
+pic_id:2725
+<class 'str'>
+CALLING API
+pic_id:2726
+<class 'str'>
+CALLING API
+pic_id:2727
+<class 'str'>
+CALLING API
+pic_id:2728
+<class 'str'>
+CALLING API
+--org_pic:['3/pic/2d803208-47fb-45bc-826e-87a0588c083a/0.jpg', '3/pic/2d803208-47fb-45bc-826e-87a0588c083a/1.jpg', '3/pic/2d803208-47fb-45bc-826e-87a0588c083a/2.jpg', '3/pic/2d803208-47fb-45bc-826e-87a0588c083a/3.jpg']
+permision_ok
+pic_id:2729
+<class 'str'>
+CALLING API
+pic_id:2730
+<class 'str'>
+CALLING API
+pic_id:2731
+<class 'str'>
+CALLING API
+pic_id:2732
+<class 'str'>
+CALLING API
+Watching for file changes with StatReloader
+[06/Aug/2019 08:05:33] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=547b0030-b820-11e9-8f2d-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 08:05:36] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=547b0030-b820-11e9-8f2d-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 08:05:38] "POST /api/v1/task/ HTTP/1.1" 200 66
+[06/Aug/2019 08:05:39] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=547b0030-b820-11e9-8f2d-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 08:05:53] "POST /api/v1/task/ HTTP/1.1" 200 1244
+[06/Aug/2019 08:05:54] "POST /api/v1/get_pic/ HTTP/1.1" 200 610
+[06/Aug/2019 08:05:54] "POST /api/v1/get_pic/ HTTP/1.1" 200 588
+[06/Aug/2019 08:05:54] "POST /api/v1/get_pic/ HTTP/1.1" 200 613
+[06/Aug/2019 08:05:54] "POST /api/v1/get_pic/ HTTP/1.1" 200 591
+[06/Aug/2019 08:05:54] "POST /api/v1/get_pic/ HTTP/1.1" 200 584
+[06/Aug/2019 08:06:16] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:07:26] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:12:46] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:12:55] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 08:12:56] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 08:13:07] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 08:13:07] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+Not Found: /
+[06/Aug/2019 08:18:02] "GET / HTTP/1.1" 404 2148
+[06/Aug/2019 08:21:22] "POST /api/v1/pic/ HTTP/1.1" 200 2122
+[06/Aug/2019 08:24:35] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:24:38] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:24:46] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 08:24:46] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 08:24:52] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 08:24:53] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 08:26:31] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:26:35] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:27:04] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 08:27:09] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 08:27:13] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:27:33] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:29:39] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:29:42] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:31:53] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:32:02] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:32:14] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:32:23] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 08:32:30] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 08:32:34] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:34:25] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:34:30] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:38:35] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:38:56] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:39:10] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 08:39:11] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 08:39:15] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 08:39:15] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 08:39:19] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:40:00] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:40:22] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:40:25] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:40:35] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 08:40:42] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 08:40:45] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:41:39] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:41:43] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:41:56] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:42:12] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:42:14] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:52:53] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 08:53:04] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 08:53:05] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 08:53:22] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 08:53:22] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 08:53:26] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:03:01] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:03:01] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 09:03:09] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:03:09] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 09:03:09] "POST /api/v1/get_pic/ HTTP/1.1" 200 670
+[06/Aug/2019 09:13:16] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:13:23] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 09:13:33] "POST /api/v1/task/ HTTP/1.1" 200 384
+[06/Aug/2019 09:13:34] "POST /api/v1/get_pic/ HTTP/1.1" 200 648
+[06/Aug/2019 09:19:10] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:19:20] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:23:46] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[06/Aug/2019 09:23:47] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 09:23:54] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:24:47] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 09:26:49] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:27:55] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[06/Aug/2019 09:28:06] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[06/Aug/2019 09:28:06] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[06/Aug/2019 09:28:10] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:28:18] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:29:25] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:29:37] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:29:54] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:29:54] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 09:30:01] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:30:01] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 09:30:02] "POST /api/v1/get_pic/ HTTP/1.1" 200 670
+[06/Aug/2019 09:30:24] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:30:31] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:30:31] "POST /api/v1/get_pic/ HTTP/1.1" 200 646
+[06/Aug/2019 09:33:01] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:33:14] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:33:16] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:33:16] "POST /api/v1/get_pic/ HTTP/1.1" 200 645
+[06/Aug/2019 09:34:37] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:34:48] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:34:55] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:34:55] "POST /api/v1/get_pic/ HTTP/1.1" 200 646
+[06/Aug/2019 09:36:52] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:38:49] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:38:53] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:38:53] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 09:38:58] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:38:58] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 09:38:58] "POST /api/v1/get_pic/ HTTP/1.1" 200 642
+[06/Aug/2019 09:39:09] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:45:16] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:45:29] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:45:29] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 09:45:31] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:45:31] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 09:45:32] "POST /api/v1/get_pic/ HTTP/1.1" 200 666
+[06/Aug/2019 09:45:45] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:48:26] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:48:26] "OPTIONS /api/v1/start_task/ HTTP/1.1" 200 0
+[06/Aug/2019 09:48:28] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:48:28] "OPTIONS /api/v1/get_pic/ HTTP/1.1" 200 0
+[06/Aug/2019 09:48:28] "POST /api/v1/get_pic/ HTTP/1.1" 200 666
+[06/Aug/2019 09:51:51] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 09:52:00] "POST /api/v1/task/ HTTP/1.1" 200 384
+[06/Aug/2019 09:52:00] "POST /api/v1/get_pic/ HTTP/1.1" 200 659
+[06/Aug/2019 09:52:30] "POST /api/v1/task/ HTTP/1.1" 200 384
+[06/Aug/2019 09:52:30] "POST /api/v1/get_pic/ HTTP/1.1" 200 643
+[06/Aug/2019 09:52:56] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[06/Aug/2019 09:53:45] "GET /api/v1/phone_log/ HTTP/1.1" 200 109515
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[06/Aug/2019 09:53:46] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5329
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[06/Aug/2019 09:53:46] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5368
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[06/Aug/2019 09:53:46] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5365
+[06/Aug/2019 09:54:09] "POST /api/v1/user/login/ HTTP/1.1" 200 49
+[06/Aug/2019 09:54:22] "POST /api/v1/user/login/ HTTP/1.1" 200 49
+[06/Aug/2019 09:55:37] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:55:42] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:55:44] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:55:44] "POST /api/v1/get_pic/ HTTP/1.1" 200 666
+[06/Aug/2019 09:56:24] "POST /api/v1/user/login/ HTTP/1.1" 200 49
+[06/Aug/2019 09:56:32] "POST /api/v1/user/login/ HTTP/1.1" 200 49
+[06/Aug/2019 09:56:32] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:56:48] "POST /api/v1/user/login/ HTTP/1.1" 200 49
+[06/Aug/2019 09:56:51] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:56:57] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 09:57:03] "POST /api/v1/msg/ HTTP/1.1" 200 106
+[06/Aug/2019 09:57:06] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[06/Aug/2019 09:57:08] "POST /api/v1/start_task/ HTTP/1.1" 200 183
+[06/Aug/2019 09:57:08] "POST /api/v1/get_pic/ HTTP/1.1" 200 666
+[06/Aug/2019 09:57:29] "POST /api/v1/user/login/ HTTP/1.1" 200 181
+[06/Aug/2019 09:57:31] "GET /api/v1/index/?userid=18582592676&token=9a615710-b830-11e9-bda2-00163e068aa2&id=6 HTTP/1.1" 200 19576
+[06/Aug/2019 09:57:32] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=9a615710-b830-11e9-bda2-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 09:58:13] "POST /api/v1/task/ HTTP/1.1" 200 3002
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 594
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 575
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 578
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 613
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 583
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 584
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 610
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 597
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 610
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 588
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 595
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 617
+[06/Aug/2019 09:58:14] "POST /api/v1/get_pic/ HTTP/1.1" 200 588
+[06/Aug/2019 09:59:24] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=9a615710-b830-11e9-bda2-00163e068aa2 HTTP/1.1" 200 22419
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 06, 2019 - 08:05:30
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['']
+permision_ok
+--org_pic:['3/pic/3deb3918-99e7-4080-87dc-2cf052e2bfcb/0.png', '3/pic/3deb3918-99e7-4080-87dc-2cf052e2bfcb/1.png', '3/pic/3deb3918-99e7-4080-87dc-2cf052e2bfcb/2.png', '3/pic/3deb3918-99e7-4080-87dc-2cf052e2bfcb/3.png', '3/pic/3deb3918-99e7-4080-87dc-2cf052e2bfcb/4.png']
+permision_ok
+pic_id:2733
+<class 'str'>
+CALLING API
+pic_id:2734
+<class 'str'>
+CALLING API
+pic_id:2735
+<class 'str'>
+CALLING API
+pic_id:2736
+<class 'str'>
+CALLING API
+pic_id:2737
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/83fc0dd7-e4da-4854-83e7-940ffd60d004/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/83fc0dd7-e4da-4854-83e7-940ffd60d004/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2738]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/83fc0dd7-e4da-4854-83e7-940ffd60d004/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/83fc0dd7-e4da-4854-83e7-940ffd60d004/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['undefined/pic/fe60fcd6-d9a6-4204-883a-c7787ad16b93/0.jpg']
+permision_ok
+pic_id:2739
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/1d0cfabd-f372-4e02-916d-6423fdeb667c/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/1d0cfabd-f372-4e02-916d-6423fdeb667c/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2740]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/1d0cfabd-f372-4e02-916d-6423fdeb667c/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/1d0cfabd-f372-4e02-916d-6423fdeb667c/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/730545fc-2fcd-4b34-ba39-26e00714d4fd/1.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/730545fc-2fcd-4b34-ba39-26e00714d4fd/1.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2741]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/730545fc-2fcd-4b34-ba39-26e00714d4fd/1.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/730545fc-2fcd-4b34-ba39-26e00714d4fd/1.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/b2d8bd7d-e050-4a81-8823-87bd37927c8b/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/b2d8bd7d-e050-4a81-8823-87bd37927c8b/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2742]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/b2d8bd7d-e050-4a81-8823-87bd37927c8b/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/b2d8bd7d-e050-4a81-8823-87bd37927c8b/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/1ce3e84a-ddbc-47e0-a331-618ee207469c/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/1ce3e84a-ddbc-47e0-a331-618ee207469c/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2743]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/1ce3e84a-ddbc-47e0-a331-618ee207469c/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/1ce3e84a-ddbc-47e0-a331-618ee207469c/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/11645e31-2fce-4e01-8d66-412b33df4453/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/11645e31-2fce-4e01-8d66-412b33df4453/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2744]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/11645e31-2fce-4e01-8d66-412b33df4453/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/11645e31-2fce-4e01-8d66-412b33df4453/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/767595f6-4690-4241-b8e6-6715e73d4a3b/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/767595f6-4690-4241-b8e6-6715e73d4a3b/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2745]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/767595f6-4690-4241-b8e6-6715e73d4a3b/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/767595f6-4690-4241-b8e6-6715e73d4a3b/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/a97edaf4-847a-4840-83c9-88c21cb8b43d/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/a97edaf4-847a-4840-83c9-88c21cb8b43d/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2746]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/a97edaf4-847a-4840-83c9-88c21cb8b43d/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/a97edaf4-847a-4840-83c9-88c21cb8b43d/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['undefined/pic/ce563af9-06df-447a-84df-a8c1161f8f1b/0.jpg']
+permision_ok
+pic_id:2747
+<class 'str'>
+CALLING API
+--org_pic:['undefined/pic/a3e2e9ae-c918-46d7-877c-8786c88409fd/0.jpg']
+permision_ok
+pic_id:2748
+<class 'str'>
+CALLING API
+--org_pic:['input_folder/undefined/2df957fb-3029-4508-8741-b8a6bf6f1b01/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/2df957fb-3029-4508-8741-b8a6bf6f1b01/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2749]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/2df957fb-3029-4508-8741-b8a6bf6f1b01/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/2df957fb-3029-4508-8741-b8a6bf6f1b01/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['input_folder/undefined/21d0a786-ebb7-499d-83c5-ca4b03822e37/0.jpg']
+permision_ok
+{'user_id': 2, 'org_pic': ['input_folder/undefined/21d0a786-ebb7-499d-83c5-ca4b03822e37/0.jpg'], 'token': '71dcb9c2-a225-11e9-9e3f-00e070884750', 'pic_id_list': [2750]}
+token71dcb9c2-a225-11e9-9e3f-00e070884750
+--org_pic:['input_folder/undefined/21d0a786-ebb7-499d-83c5-ca4b03822e37/0.jpg']
+<class 'list'>
+permision_ok
+['https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/input_folder/undefined/21d0a786-ebb7-499d-83c5-ca4b03822e37/0.jpg']
+CALLING API
+<class 'str'>
+--org_pic:['6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/0.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/1.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/2.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/3.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/4.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/5.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/6.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/7.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/8.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/9.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/10.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/11.jpg', '6/pic/b63e4e63-4a85-4f40-85da-e2268a6aaaa2/12.jpg']
+permision_ok
+pic_id:2751
+<class 'str'>
+CALLING API
+pic_id:2752
+<class 'str'>
+CALLING API
+pic_id:2753
+<class 'str'>
+CALLING API
+pic_id:2754
+<class 'str'>
+CALLING API
+pic_id:2755
+<class 'str'>
+CALLING API
+pic_id:2756
+<class 'str'>
+CALLING API
+pic_id:2757
+<class 'str'>
+CALLING API
+pic_id:2758
+<class 'str'>
+CALLING API
+pic_id:2759
+<class 'str'>
+CALLING API
+pic_id:2760
+<class 'str'>
+CALLING API
+pic_id:2761
+<class 'str'>
+CALLING API
+pic_id:2762
+<class 'str'>
+CALLING API
+pic_id:2763
+<class 'str'>
+CALLING API
+--org_pic:['6/pic/35b9546c-ee5b-43fd-818b-508b4f27b52c/0.jpg', '6/pic/35b9546c-ee5b-43fd-818b-508b4f27b52c/1.jpg', '6/pic/35b9546c-ee5b-43fd-818b-508b4f27b52c/2.jpg', '6/pic/35b9546c-ee5b-43fd-818b-508b4f27b52c/3.jpg']
+permision_ok
+pic_id:2764
+<class 'str'>
+CALLING API
+pic_id:2765
+<class 'str'>[06/Aug/2019 09:59:37] "POST /api/v1/task/ HTTP/1.1" 200 1025
+[06/Aug/2019 09:59:38] "POST /api/v1/get_pic/ HTTP/1.1" 200 588
+[06/Aug/2019 09:59:39] "POST /api/v1/get_pic/ HTTP/1.1" 200 591
+[06/Aug/2019 09:59:39] "POST /api/v1/get_pic/ HTTP/1.1" 200 613
+[06/Aug/2019 09:59:39] "POST /api/v1/get_pic/ HTTP/1.1" 200 584
+[06/Aug/2019 10:01:19] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=9a615710-b830-11e9-bda2-00163e068aa2 HTTP/1.1" 200 22419
+Not Found: /favicon.ico
+[06/Aug/2019 10:01:27] "GET /favicon.ico HTTP/1.1" 404 2199
+[06/Aug/2019 10:01:46] "POST /api/v1/task/ HTTP/1.1" 200 370
+[06/Aug/2019 10:01:47] "POST /api/v1/get_pic/ HTTP/1.1" 200 583
+[06/Aug/2019 10:02:40] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=9a615710-b830-11e9-bda2-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 10:06:56] "GET /api/v1/mtp_upload_v2/?userid=18582592676&usertype=undefined&id=6&token=9a615710-b830-11e9-bda2-00163e068aa2 HTTP/1.1" 200 22419
+[06/Aug/2019 10:07:19] "POST /api/v1/task/ HTTP/1.1" 200 1682
+[06/Aug/2019 10:07:20] "POST /api/v1/get_pic/ HTTP/1.1" 200 610
+[06/Aug/2019 10:07:20] "POST /api/v1/get_pic/ HTTP/1.1" 200 597
+[06/Aug/2019 10:07:20] "POST /api/v1/get_pic/ HTTP/1.1" 200 610
+[06/Aug/2019 10:07:20] "POST /api/v1/get_pic/ HTTP/1.1" 200 588
+[06/Aug/2019 10:07:20] "POST /api/v1/get_pic/ HTTP/1.1" 200 591
+[06/Aug/2019 10:07:20] "POST /api/v1/get_pic/ HTTP/1.1" 200 613
+[06/Aug/2019 10:07:20] "POST /api/v1/get_pic/ HTTP/1.1" 200 584
+[06/Aug/2019 10:39:22] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[06/Aug/2019 11:45:51] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[06/Aug/2019 14:26:32] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 34917)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+Not Found: /
+[06/Aug/2019 23:11:11] "GET / HTTP/1.1" 404 2144
+Not Found: /
+[06/Aug/2019 23:15:25] "GET / HTTP/1.1" 404 2148
+----------------------------------------
+Exception happened during processing of request from ('101.251.242.238', 35655)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[07/Aug/2019 00:27:42] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738
+----------------------------------------
+Exception happened during processing of request from ('80.82.70.187', 48566)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+[07/Aug/2019 01:29:47] "GET /api/v1/index/?userid=wzs&token=547b0030-b820-11e9-8f2d-00163e068aa2&id=3 HTTP/1.1" 200 19576
+[07/Aug/2019 01:45:32] "GET /xinyada/demo/index/ HTTP/1.1" 200 17091
+[07/Aug/2019 02:13:02] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+Not Found: /
+[07/Aug/2019 02:26:43] "GET / HTTP/1.1" 404 2148
+----------------------------------------
+Exception happened during processing of request from ('198.108.67.48', 23606)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+[07/Aug/2019 02:33:35] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[07/Aug/2019 02:33:36] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[07/Aug/2019 02:33:42] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[07/Aug/2019 02:33:42] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[07/Aug/2019 02:34:26] "POST /api/v1/pic/ HTTP/1.1" 200 2122
+[07/Aug/2019 02:36:13] "POST /api/v1/pic/ HTTP/1.1" 200 2122
+[07/Aug/2019 02:43:00] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 03:14:50] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 03:16:04] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 03:19:08] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+/root/deepdraw/untitled/api/urls.py changed, reloading.
+
+CALLING API
+pic_id:2766
+<class 'str'>
+CALLING API
+pic_id:2767
+<class 'str'>
+CALLING API
+--org_pic:['6/pic/86fde620-b196-49dd-8ba2-0b2df3f17bbf/0.jpeg']
+permision_ok
+pic_id:2768
+<class 'str'>
+CALLING API
+--org_pic:['6/pic/9a4111dc-538c-41f0-bd86-7ea328032d61/0.jpg', '6/pic/9a4111dc-538c-41f0-bd86-7ea328032d61/1.jpg', '6/pic/9a4111dc-538c-41f0-bd86-7ea328032d61/2.jpg', '6/pic/9a4111dc-538c-41f0-bd86-7ea328032d61/3.jpg', '6/pic/9a4111dc-538c-41f0-bd86-7ea328032d61/4.jpg', '6/pic/9a4111dc-538c-41f0-bd86-7ea328032d61/5.jpg', '6/pic/9a4111dc-538c-41f0-bd86-7ea328032d61/6.jpg']
+permision_ok
+pic_id:2769
+<class 'str'>
+CALLING API
+pic_id:2770
+<class 'str'>
+CALLING API
+pic_id:2771
+<class 'str'>
+CALLING API
+pic_id:2772
+<class 'str'>
+CALLING API
+pic_id:2773
+<class 'str'>
+CALLING API
+pic_id:2774
+<class 'str'>
+CALLING API
+pic_id:2775
+<class 'str'>
+CALLING API
+Watching for file changes with StatReloader
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 07, 2019 - 03:47:23
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+/root/deepdraw/untitled/api/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 07, 2019 - 03:48:22
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[07/Aug/2019 03:48:49] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[07/Aug/2019 03:49:02] "GET /api/v1/index_v2/ HTTP/1.1" 200 1009
+[07/Aug/2019 03:49:02] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 03:49:02] "GET /static/img/banner.d8794ba.png HTTP/1.1" 404 1693
+[07/Aug/2019 04:19:06] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:21:12] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:22:14] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:22:25] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:23:58] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:27:16] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:32:01] "GET /api/v1/index_v2/ HTTP/1.1" 200 1009
+[07/Aug/2019 04:32:02] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:32:02] "GET /static/img/banner.d8794ba.png HTTP/1.1" 200 391288
+[07/Aug/2019 04:34:13] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[07/Aug/2019 04:34:13] "  /*à     Cookie: mstshash=Administr" 400 -
+[07/Aug/2019 04:34:18] "GET /api/v1/index_v2/ HTTP/1.1" 200 631
+Not Found: /api/v1/index_v2/src/assets/css/reset.css
+[07/Aug/2019 04:34:18] "GET /api/v1/index_v2/src/assets/css/reset.css HTTP/1.1" 404 5539
+[07/Aug/2019 04:34:18] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js HTTP/1.1" 200 1219
+[07/Aug/2019 04:34:18] "GET /static/js/app.d9a31bc7a554a8b51bd2.js HTTP/1.1" 200 28289
+[07/Aug/2019 04:34:19] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css HTTP/1.1" 200 347596
+[07/Aug/2019 04:34:22] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js.map HTTP/1.1" 200 4972
+[07/Aug/2019 04:34:27] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css.map HTTP/1.1" 200 393145
+[07/Aug/2019 04:34:39] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js HTTP/1.1" 200 2205844
+Not Found: /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png
+[07/Aug/2019 04:34:40] "GET /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png HTTP/1.1" 404 2457
+[07/Aug/2019 04:34:40] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:34:40] "GET /static/js/app.d9a31bc7a554a8b51bd2.js.map HTTP/1.1" 200 78332
+[07/Aug/2019 04:35:25] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js.map HTTP/1.1" 200 6054455
+[07/Aug/2019 04:36:43] "GET /api/v1/index_v2/ HTTP/1.1" 200 696
+[07/Aug/2019 04:36:43] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css HTTP/1.1" 304 0
+[07/Aug/2019 04:36:43] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js HTTP/1.1" 304 0
+[07/Aug/2019 04:36:43] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js HTTP/1.1" 304 0
+[07/Aug/2019 04:36:43] "GET /static/js/app.d9a31bc7a554a8b51bd2.js HTTP/1.1" 304 0
+[07/Aug/2019 04:36:43] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:36:43] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js.map HTTP/1.1" 304 0
+Not Found: /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png
+[07/Aug/2019 04:36:43] "GET /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png HTTP/1.1" 404 2457
+[07/Aug/2019 04:36:43] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:36:43] "GET /static/js/app.d9a31bc7a554a8b51bd2.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:36:43] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css.map HTTP/1.1" 304 0
+[07/Aug/2019 04:40:45] "GET /api/v1/index_v2/ HTTP/1.1" 200 629
+[07/Aug/2019 04:40:45] "GET /static/css/reset.css HTTP/1.1" 200 1005
+[07/Aug/2019 04:40:45] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css HTTP/1.1" 304 0
+[07/Aug/2019 04:40:45] "GET /static/js/app.d9a31bc7a554a8b51bd2.js HTTP/1.1" 304 0
+[07/Aug/2019 04:40:45] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js HTTP/1.1" 304 0
+[07/Aug/2019 04:40:45] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js HTTP/1.1" 304 0
+[07/Aug/2019 04:40:45] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css.map HTTP/1.1" 304 0
+[07/Aug/2019 04:40:45] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:40:45] "GET /static/js/app.d9a31bc7a554a8b51bd2.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:40:45] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js.map HTTP/1.1" 304 0
+Not Found: /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png
+[07/Aug/2019 04:40:45] "GET /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png HTTP/1.1" 404 2457
+[07/Aug/2019 04:40:45] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:40:47] "GET /api/v1/index_v2/ HTTP/1.1" 200 629
+Not Found: /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png
+[07/Aug/2019 04:40:48] "GET /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png HTTP/1.1" 404 2457
+[07/Aug/2019 04:40:48] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:40:51] "GET /api/v1/index_v2/ HTTP/1.1" 200 629
+Not Found: /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png
+[07/Aug/2019 04:40:52] "GET /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png HTTP/1.1" 404 2457
+[07/Aug/2019 04:40:52] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:44:44] "GET /api/v1/index_v2/ HTTP/1.1" 200 668
+[07/Aug/2019 04:44:44] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css HTTP/1.1" 304 0
+[07/Aug/2019 04:44:44] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js HTTP/1.1" 304 0
+[07/Aug/2019 04:44:44] "GET /static/css/reset.css HTTP/1.1" 304 0
+[07/Aug/2019 04:44:44] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js HTTP/1.1" 304 0
+[07/Aug/2019 04:44:44] "GET /static/js/app.d9a31bc7a554a8b51bd2.js HTTP/1.1" 304 0
+[07/Aug/2019 04:44:44] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:44:44] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css.map HTTP/1.1" 304 0
+[07/Aug/2019 04:44:44] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js.map HTTP/1.1" 304 0
+Not Found: /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png
+[07/Aug/2019 04:44:44] "GET /https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/koutu_lzq/static/img/banner.d8794ba.png HTTP/1.1" 404 2457
+[07/Aug/2019 04:44:44] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:44:44] "GET /static/js/app.d9a31bc7a554a8b51bd2.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "GET /api/v1/index_v2/ HTTP/1.1" 200 668
+[07/Aug/2019 04:46:53] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "GET /static/css/reset.css HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "GET /static/js/app.d9a31bc7a554a8b51bd2.js HTTP/1.1" 200 28223
+[07/Aug/2019 04:46:53] "GET /static/css/app.c6157101988db93e0a093909a493ed05.css.map HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "GET /static/js/manifest.2ae2e69a05c33dfc65f8.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "GET /static/js/vendor.8fbb5bed83a70670c2d4.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "GET /static/js/app.d9a31bc7a554a8b51bd2.js.map HTTP/1.1" 304 0
+[07/Aug/2019 04:46:53] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:47:09] "GET /api/v1/index_v2/ HTTP/1.1" 200 668
+[07/Aug/2019 04:47:09] "GET /static/js/app.d9a31bc7a554a8b51bd2.js HTTP/1.1" 304 0
+[07/Aug/2019 04:47:09] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:47:40] "GET /api/v1/index_v2/ HTTP/1.1" 200 668
+[07/Aug/2019 04:47:41] "GET /static/js/app.d9a31bc7a554a8b51bd2.js HTTP/1.1" 200 28222
+[07/Aug/2019 04:47:41] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 04:47:41] "GET /static/img/banner.d8794ba.png HTTP/1.1" 304 0
+[07/Aug/2019 04:48:08] "POST /api/v1/put_task/ HTTP/1.1" 200 234
+[07/Aug/2019 04:48:32] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[07/Aug/2019 04:50:24] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[07/Aug/2019 04:50:25] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[07/Aug/2019 04:50:40] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[07/Aug/2019 04:50:44] "GET /api/v1/phone_log/ HTTP/1.1" 200 109515
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[07/Aug/2019 04:50:44] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5509
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[07/Aug/2019 04:50:44] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5548
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[07/Aug/2019 04:50:44] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5545
+[07/Aug/2019 04:50:50] "POST /api/v1/user/login/ HTTP/1.1" 200 49
+[07/Aug/2019 04:51:00] "POST /api/v1/user/login/ HTTP/1.1" 200 199
+[07/Aug/2019 04:51:02] "GET /api/v1/index/?userid=wzs&token=f4033f6a-b8ce-11e9-a50b-00163e068aa2&id=3 HTTP/1.1" 200 19576
+[07/Aug/2019 04:51:05] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=f4033f6a-b8ce-11e9-a50b-00163e068aa2 HTTP/1.1" 200 22419
+Watching for file changes with StatReloader
+[07/Aug/2019 07:29:48] "GET /xinyada/demo/index/ HTTP/1.1" 200 17093
+[07/Aug/2019 07:29:48] "GET /xinyada/demo/index/ HTTP/1.1" 200 17093
+[07/Aug/2019 07:29:54] "POST /xinyada/demo/analysis/ HTTP/1.1" 200 828
+[07/Aug/2019 07:42:29] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 07:42:35] "OPTIONS /api/v1/msg/ HTTP/1.1" 200 0
+[07/Aug/2019 07:42:37] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[07/Aug/2019 07:42:42] "OPTIONS /api/v1/user/login/ HTTP/1.1" 200 0
+[07/Aug/2019 07:42:42] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[07/Aug/2019 07:43:55] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 07:44:48] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 07:44:58] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 07:45:47] "POST /api/v1/msg/ HTTP/1.1" 200 107
+[07/Aug/2019 07:45:53] "POST /api/v1/user/login/ HTTP/1.1" 200 182
+[07/Aug/2019 07:46:00] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[07/Aug/2019 07:49:00] "GET /api/v1/mtp_upload/?userid=undefined&usertype=undefined&id=undefined&token=undefined HTTP/1.1" 200 20344
+Not Found: /
+[07/Aug/2019 08:03:21] "GET / HTTP/1.0" 404 2151
+Not Found: /
+[07/Aug/2019 08:03:21] "OPTIONS / HTTP/1.0" 404 2155
+[07/Aug/2019 08:03:21] code 400, message Bad request version ('RTSP/1.0')
+[07/Aug/2019 08:03:21] "OPTIONS / RTSP/1.0" 400 -
+[07/Aug/2019 08:03:26] code 400, message Bad request version ('\x00\x01\x97|\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+[07/Aug/2019 08:03:26] "  (rþ          |                    " 400 -
+[07/Aug/2019 08:03:31] code 400, message Bad HTTP/0.9 request type ('\x00')
+[07/Aug/2019 08:03:31] "          versionbind   " 400 -
+[07/Aug/2019 08:03:31] code 400, message Bad request syntax ('HELP')
+[07/Aug/2019 08:03:31] "HELP" 400 -
+[07/Aug/2019 08:03:31] code 400, message Bad request syntax ('\x16\x03\x00\x00S\x01\x00\x00O\x03\x00?G×÷º,îê²`~ó\x00ý\x82{¹Õ\x96Èw\x9bæÄÛ<=Ûoï\x10n\x00\x00(\x00\x16\x00\x13\x00')
+[07/Aug/2019 08:03:31] You're accessing the development server over HTTPS, but it only supports HTTP.
+
+[07/Aug/2019 08:03:31] code 400, message Bad request version ('\x00/\x00')
+[07/Aug/2019 08:03:31] You're accessing the development server over HTTPS, but it only supports HTTP.
+
+[07/Aug/2019 08:03:31] code 400, message Bad request version ('SIP/2.0')
+[07/Aug/2019 08:03:31] "OPTIONS sip:nm SIP/2.0" 400 -
+Not Found: /
+[07/Aug/2019 08:03:31] "GET / HTTP/1.1" 404 2143
+Not Found: /sdk
+[07/Aug/2019 08:03:31] "POST /sdk HTTP/1.1" 404 2176
+Not Found: /nmaplowercheck1565165011
+[07/Aug/2019 08:03:31] "GET /nmaplowercheck1565165011 HTTP/1.1" 404 2238
+----------------------------------------
+Exception happened during processing of request from ('123.125.21.189', 38796)
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 650, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/Python-3.7.2/Lib/socketserver.py", line 720, in __init__
+    self.handle()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 171, in handle
+    self.handle_one_request()
+  File "/usr/python/lib/python3.7/site-packages/django/core/servers/basehttp.py", line 179, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/Python-3.7.2/Lib/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+Not Found: /evox/about
+[07/Aug/2019 08:03:31] "GET /evox/about HTTP/1.1" 404 2196
+[07/Aug/2019 08:03:32] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03¹JòA}³×ó\x12*ï?:\x88CBé9É.Ö\x99FÌ\x95fÍÿãªíä\x00\x00Æ\x00\x05\x00\x04\x00\x02\x00\x08\x00\x14\x00\x03\x00\x01\x00\x15\x00\x06\x00\x16\x00\x17\x003\x009\x00\x19\x00:\x00\x1a\x00\x18\x005\x00')
+[07/Aug/2019 08:03:32] You're accessing the development server over HTTPS, but it only supports HTTP.
+
+[07/Aug/2019 08:03:32] code 400, message Bad request syntax ('\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03!eð\x8f\x18')
+[07/Aug/2019 08:03:32] You're accessing the development server over HTTPS, but it only supports HTTP.
+
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 07, 2019 - 07:29:43
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+['20190725170007.jpg']
+['xinyada/2c289855-a368-4463-89ae-3936e4e48aef.jpg']
+1
+http://47.96.178.21:8088/hznz_framework/polls/analyze_str/?str={"action": "xinyada", "inputparams": [{"pic_url": "https://deepdraw-zip.oss-cn-shanghai.aliyuncs.com/xinyada/2c289855-a368-4463-89ae-3936e4e48aef.jpg"}], "model": "default", "proj": "mobilenetv3", "exec": "online"}
+{"date_str": "2019-08-07", "errCode": 0, "predictions": [{"type": "unsigned"}], "real_model": "default", "async_batchsize": 999, "task_uuid_list": ["9eface52316b499b8c26aca1df4c8f4f"]}
+Watching for file changes with StatReloader
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 07, 2019 - 08:26:40
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/threading.py", line 917, in _bootstrap_inner
+    self.run()
+  File "/usr/Python-3.7.2/Lib/threading.py", line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 54, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/commands/runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/base.py", line 390, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/base.py", line 377, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/registry.py", line 72, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/urls.py", line 40, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/urls.py", line 57, in _load_all_namespaces
+    url_patterns = getattr(resolver, 'url_patterns', [])
+  File "/usr/python/lib/python3.7/site-packages/django/utils/functional.py", line 80, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/python/lib/python3.7/site-packages/django/urls/resolvers.py", line 579, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/python/lib/python3.7/site-packages/django/utils/functional.py", line 80, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/python/lib/python3.7/site-packages/django/urls/resolvers.py", line 572, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/root/deepdraw/untitled/untitled/urls.py", line 22, in <module>
+    url(r'^api/v1/',include('api.urls')),
+  File "/usr/python/lib/python3.7/site-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/root/deepdraw/untitled/api/urls.py", line 2, in <module>
+    from . import views
+  File "/root/deepdraw/untitled/api/views.py", line 574
+    elif type == '2':
+       ^
+SyntaxError: invalid syntax
+
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/Python-3.7.2/Lib/threading.py", line 917, in _bootstrap_inner
+    self.run()
+  File "/usr/Python-3.7.2/Lib/threading.py", line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/utils/autoreload.py", line 54, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/commands/runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/base.py", line 390, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/python/lib/python3.7/site-packages/django/core/management/base.py", line 377, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/registry.py", line 72, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/python/lib/python3.7/site-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/usr/python/lib/python3.7/site-packages/django/urls/resolvers.py", line 398, in check
+    for pattern in self.url_patterns:
+  File "/usr/python/lib/python3.7/site-packages/django/utils/functional.py", line 80, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/python/lib/python3.7/site-packages/django/urls/resolvers.py", line 579, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/python/lib/python3.7/site-packages/django/utils/functional.py", line 80, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/python/lib/python3.7/site-packages/django/urls/resolvers.py", line 572, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/root/deepdraw/untitled/untitled/urls.py", line 22, in <module>
+    url(r'^api/v1/',include('api.urls')),
+  File "/usr/python/lib/python3.7/site-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/Python-3.7.2/Lib/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/root/deepdraw/untitled/api/urls.py", line 17, in <module>
+    url(r'^get_history/$',views.GetHistoryPicView.as_view()),
+AttributeError: module 'api.views' has no attribute 'GetHistoryPicView'
+
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+[10/Aug/2019 14:20:02] "POST /api/v1/download/ HTTP/1.1" 200 141
+[10/Aug/2019 14:24:00] "GET /api/v1/index/ HTTP/1.1" 200 19576
+Not Found: /favicon.ico
+[10/Aug/2019 14:24:01] "GET /favicon.ico HTTP/1.1" 404 2199
+Not Found: /
+[10/Aug/2019 14:30:44] "GET / HTTP/1.1" 404 2143
+Not Found: /favicon.ico
+[10/Aug/2019 14:30:45] "GET /favicon.ico HTTP/1.1" 404 2199
+[10/Aug/2019 14:44:56] "POST /api/v1/task/ HTTP/1.1" 200 122
+[10/Aug/2019 14:45:02] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[10/Aug/2019 14:57:04] "GET /api/v1/index/ HTTP/1.1" 200 19576
+[10/Aug/2019 15:23:29] "GET /api/v1/mtp_upload/?userid=17721355964&usertype=undefined&id=8&token=1203aa30-ac46-11e9-a242-00163e068aa2 HTTP/1.1" 200 20344
+/root/deepdraw/untitled/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 10, 2019 - 14:19:52
+Django version 2.2.3, using settings 'untitled.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+--org_pic:['undefined/pic/a11b0613-ba51-4dcd-8f85-cbb3da2e5ea7/0.jpg']
+permision_ok
+Watching for file changes with StatReloader
+Not Found: /
+[10/Aug/2019 15:54:45] "GET / HTTP/1.1" 404 2148
+Not Found: /favicon.ico
+[10/Aug/2019 15:54:45] "GET /favicon.ico HTTP/1.1" 404 2199
+[10/Aug/2019 15:54:52] "GET /api/v1/index/ HTTP/1.1" 200 19576
+Not Found: /favicon.ico
+[10/Aug/2019 15:54:53] "GET /favicon.ico HTTP/1.1" 404 2199
+[10/Aug/2019 15:55:04] "POST /api/v1/task/ HTTP/1.1" 200 383
+[10/Aug/2019 15:55:04] "POST /api/v1/get_pic/ HTTP/1.1" 200 682
+[10/Aug/2019 15:55:09] "GET /api/v1/phone_log/ HTTP/1.1" 200 109515
+Not Found: /api/v1/phone_log/new/bg@2x.jpg
+[10/Aug/2019 15:55:09] "GET /api/v1/phone_log/new/bg@2x.jpg HTTP/1.1" 404 5861
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.woff
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-demi.woff HTTP/1.1" 404 5900
+Not Found: /favicon.ico
+[10/Aug/2019 15:55:10] "GET /favicon.ico HTTP/1.1" 404 2199
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.ttf
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-demi.ttf HTTP/1.1" 404 5897
+Not Found: /api/v1/phone_log/fonts/new/avenir-demi.svg
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-demi.svg HTTP/1.1" 404 5897
+Not Found: /api/v1/phone_log/fonts/new/avenir-bold.woff
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-bold.woff HTTP/1.1" 404 5900
+Not Found: /api/v1/phone_log/fonts/new/avenir-bold.ttf
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-bold.ttf HTTP/1.1" 404 5897
+Not Found: /api/v1/phone_log/fonts/new/avenir-bold.svg
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-bold.svg HTTP/1.1" 404 5897
+Not Found: /api/v1/phone_log/fonts/new/avenir-regular.woff
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-regular.woff HTTP/1.1" 404 5909
+Not Found: /api/v1/phone_log/fonts/new/avenir-regular.ttf
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-regular.ttf HTTP/1.1" 404 5906
+Not Found: /api/v1/phone_log/fonts/new/avenir-regular.svg
+[10/Aug/2019 15:55:10] "GET /api/v1/phone_log/fonts/new/avenir-regular.svg HTTP/1.1" 404 5906
+[10/Aug/2019 15:55:23] "POST /api/v1/user/login/ HTTP/1.1" 200 199
+[10/Aug/2019 15:55:26] "GET /api/v1/index/?userid=wzs&token=3523ea54-bb44-11e9-bab3-00163e068aa2&id=3 HTTP/1.1" 200 19576
+Not Found: /favicon.ico
+[10/Aug/2019 15:55:26] "GET /favicon.ico HTTP/1.1" 404 2199
+[10/Aug/2019 15:55:27] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=3523ea54-bb44-11e9-bab3-00163e068aa2 HTTP/1.1" 200 22419
+Not Found: /favicon.ico
+[10/Aug/2019 15:55:28] "GET /favicon.ico HTTP/1.1" 404 2199
+[10/Aug/2019 15:55:45] "POST /api/v1/task/ HTTP/1.1" 200 1893
+[10/Aug/2019 15:55:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 631
+[10/Aug/2019 15:55:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 658
+[10/Aug/2019 15:55:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 658
+[10/Aug/2019 15:55:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 645
+[10/Aug/2019 15:55:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 639
+[10/Aug/2019 15:55:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 636
+[10/Aug/2019 15:55:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 661
+[10/Aug/2019 15:55:46] "POST /api/v1/get_pic/ HTTP/1.1" 200 632
+[10/Aug/2019 16:04:40] "GET /api/v1/mtp_upload_v2/?userid=wzs&usertype=undefined&id=3&token=3523ea54-bb44-11e9-bab3-00163e068aa2 HTTP/1.1" 200 22419
+Not Found: /favicon.ico
+[10/Aug/2019 16:04:41] "GET /favicon.ico HTTP/1.1" 404 2199
+[10/Aug/2019 16:13:37] "POST /api/v1/tourist/ HTTP/1.1" 200 58
+[10/Aug/2019 16:26:29] "POST /api/v1/get_history/ HTTP/1.1" 200 49
+[10/Aug/2019 16:26:58] "POST /api/v1/get_history/ HTTP/1.1" 200 19357
+Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+[10/Aug/2019 16:35:18] "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1" 404 1738

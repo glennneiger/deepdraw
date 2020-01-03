@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="button">
+    <el-button>哈哈哈</el-button>
+</div>
+    <div id="aa" style="display: block;">
+        <i class="el-icon-close" onclick=document.getElementById('aa').style='display:none' style="float: right;color: black"></i>
+        <div id="as">
+            <el-upload
+                class="upload-demo"
+                drag
+                action=""
+                multiple>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                </el-upload>
+                <img width="100%" :src="dialogImageUrl" alt="" id="aaa">
+            </el-dialog>
+        </div>
+            <el-button type="primary" icon="el-icon-edit">hahaha</el-button>
+    </div>
+<script>
+  new Vue({
+      el:'#as',
+    data :{
+        dialogImageUrl: '',
+        dialogVisible: false
+
+    },
+
+  });
+    new Vue({
+      el:'#button',
+  });
+  </script>
+</body>
+</html>

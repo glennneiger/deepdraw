@@ -1,0 +1,525 @@
+<!CTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>批量上传界面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link href="https://cdn.staticfile.org/ionic/1.3.2/css/ionic.css" rel="stylesheet">-->
+    <!--<script src="https://cdn.staticfile.org/ionic/1.3.2/js/ionic.bundle.min.js"></script>-->
+    <script src="https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/FileSaver.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/jszip.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .top {
+            width: 100%;
+            height: 80px;
+            background-color: rgb(152, 152, 153, 0.8);
+            opacity: 0.8;
+        }
+
+        .top .left {
+            float: left;
+            margin: 15px 7% 0;
+            font-size: 25px;
+        }
+
+        .top .left em {
+
+        }
+
+        .mid {
+            width: 80%;
+            margin: 15px auto 0;
+            height: 550px;
+            background-color: #f0f0f1;
+            overflow: auto;
+        }
+
+        .mid .btn-primary {
+            float: left;
+            height: 35px;
+            width: 120px;
+            border-radius: 15px;
+            background-color: #156eec;
+            margin: 25px 2% 40px;
+            /*font-family: "Microsoft YaHei";*/
+        }
+
+        .mid .top_describe {
+            font-size: 10px;
+            float: left;
+            font-weight: bold;
+            margin-top: 35px;
+        }
+
+        .mid .table-striped {
+            /*float: left;*/
+            background-color: #e2e2e3;
+            width: 90%;
+            margin: 100px auto 0;
+            height: auto;
+            vertical-align: center;
+            text-align: center;
+            /*text-align: center;*/
+        }
+
+        .mid .table-striped td, th {
+            height: 50px;
+            text-align: center;
+        }
+
+        .mid .table-striped th {
+            font-size: 18px;
+        }
+
+        .table-striped input {
+            width: 17px;
+            height: 17px;
+        }
+
+        .mid .table-striped .first_line {
+            width: 1%;
+        }
+
+        .mid .table-striped .second_line {
+            width: 40%;
+        }
+
+        .mid .table-striped .third_line {
+
+        }
+
+        .mid .table-striped .forth_line {
+            width: 20%;
+        }
+
+        .mid .table-striped .fifth_line {
+
+        }
+
+        .mid .pull {
+            width: 8%;
+            height: 33px;
+            background-color: #1b84ec;
+            float: right;
+            border-radius: 10px;
+            border-width: 0;
+            margin: 40px 10% 0;
+            margin-left: 3%;
+            margin-right: 12%;
+        }
+
+        .mid .start {
+            width: 6%;
+            height: 33px;
+            background-color: #1b84ec;
+            float: right;
+            border-radius: 10px;
+            border-width: 0;
+            margin: 40px 10% 0;
+            margin-right: 3%;
+        }
+
+
+        /*.has-header p {*/
+        /*text-align: center;*/
+        /*margin-bottom: 40px !important;*/
+        /*float: left;*/
+        /*}*/
+        .spinner {
+            margin: 0px auto 0;
+            width: 150px;
+            text-align: center;
+        }
+
+        .spinner > div {
+            width: 15px;
+            height: 15px;
+            background-color: #949295;
+            border-radius: 100%;
+            display: inline-block;
+            -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+            animation: bouncedelay 1.4s infinite ease-in-out;
+            /* Prevent first frame from flickering when animation starts */
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        .spinner .bounce1 {
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+        }
+
+        .spinner .bounce2 {
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+        }
+
+        @-webkit-keyframes bouncedelay {
+            0%, 80%, 100% {
+                -webkit-transform: scale(0.0)
+            }
+            40% {
+                -webkit-transform: scale(1.0)
+            }
+        }
+
+        @keyframes bouncedelay {
+            0%, 80%, 100% {
+                transform: scale(0.0);
+                -webkit-transform: scale(0.0);
+            }
+            40% {
+                transform: scale(1.0);
+                -webkit-transform: scale(1.0);
+            }
+        }
+
+        td .loaded {
+            height: 6px;
+            color: #0fc420;
+            font-size: 22px;
+            width: 10%;
+            font-weight: 800;
+        }
+
+        td .unload {
+            height: 6px;
+            color: red;
+            font-size: 22px;
+            width: 10%;
+            font-weight: 800;
+        }
+
+        .mid .a-upload {
+            position: relative;
+            left: 0%;
+            display: inline-block;
+            /*background: #D0EEFF;*/
+            border: 1px solid #99D3F5;
+            padding: 8px 15px;
+            overflow: hidden;
+            color: white;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+            float: left;
+            margin-left: 6%;
+            margin-right: 1%;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            /*margin-top: 5px;*/
+            background-color: #156eec;
+            width: 130px;
+            height: 40px;
+            border-radius: 15px;
+        }
+
+        .a-upload input {
+            position: absolute;
+            /*font-size: 100px;*/
+            padding-top: 0;
+            margin-top: 0px;
+            right: 0;
+            top: 0;
+            height: 50px;
+            width: 190px;
+            opacity: 0;
+            /*margin-left: 45%;*/
+        }
+
+        .a-upload:hover {
+            /*border-color: #78C3F3;*/
+            font-weight: 600;
+            text-decoration: none;
+            background-color: #0052eb;
+        }
+
+        input:hover {
+            font-weight: bolder;
+            cursor: pointer;
+            background-color: #003deb;
+        }
+        #pull_out,#start{
+            float: right;
+        }
+    </style>
+</head>
+<body ng-controller="MyCtrl">
+<!-- 顶部 -->
+<div class="top">
+    <span class="left"><em>深绘</em>|智能设计</span>
+</div>
+<div class="mid">
+    <!-- 展示列表 -->
+    <table class="table table-bordered table-striped">
+        <a href="javascript:;" class="a-upload"><input type="file" id="mtp_upload" accept="image/*" multiple="multiple">上传多张图片</input>
+        </a>
+        <span class="top_describe">图片背景越简单，主体越突出，阴影越少，抠图效果越好</span>
+        <thead>
+        <tr>
+            <th class="first_line"><input type="checkbox"></th>
+            <th class="second_line">文件名</th>
+            <th class="third_line">原名尺寸</th>
+            <th class="forth_line">状态</th>
+            <th class="fifth_line">预览</th>
+        </tr>
+        </thead>
+        <tbody id="main_body">
+        </tbody>
+    </table>
+    <button class="btn btn-primary pull" id="pull_out">导出结果图</button>
+    <button class="btn btn-primary start" id="start">开始</button>
+</div>
+<script>
+    $(function () {
+        function dataURLtoFile(dataurl, filename) {
+            var arr = dataurl.split(','),
+                mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]),
+                n = bstr.length,
+                u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new File([u8arr], filename, {type: mime});
+        }
+
+        function getBase64(img) {
+            function getBase64Image(img, width, height) {//width、height调用时传入具体像素值，控制大小 ,不传则默认图像大小
+                var canvas = document.createElement("canvas");
+                canvas.width = width ? width : img.width;
+                canvas.height = height ? height : img.height;
+
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                var dataURL = canvas.toDataURL();
+                console.log(dataURL);
+                dataurl_list.push(dataURL);
+                return dataURL;
+            }
+
+            var image = new Image();
+            image.setAttribute("crossOrigin", "Anonymous");
+            // response.addHeader("Access-Control-Allow-Origin", "*");
+            // image.crossOrigin = 'Anonymous';
+            image.src = img;
+            var deferred = $.Deferred();
+            if (img) {
+                image.onload = function () {
+                    deferred.resolve(getBase64Image(image));//将base64传给done上传处理
+                };
+                return deferred.promise();//问题要让onload完成后再return sessionStorage['imgTest']
+            }
+        }
+
+        function GetRequest(value) {   //用于get地址栏中用户信息的函数
+            var url = decodeURI(location.search); //如?id="123456"&Name="bicycle";
+            var object = {};
+            //console.log(location.search)
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                var strs = str.split("&");  //将得到的参数分隔成数组[id="123456",Name="bicycle"];
+                for (var i = 0; i < strs.length; i++) {
+                    object[strs[i].split("=")[0]] = strs[i].split("=")[1]
+                }
+            }
+            return object[value];
+        }
+
+        function sleep(n) { //n表示的毫秒数
+            var start = new Date().getTime();
+            while (true) if (new Date().getTime() - start > n) break;
+        }
+
+        function uuid() {    //生成随机字符串标记本次任务函数
+            var s = [];
+            var hexDigits = "0123456789abcdef";
+            for (var i = 0; i < 36; i++) {
+                s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+            }
+            s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+            s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+            s[8] = s[13] = s[18] = s[23] = "-";
+            var uuid = s.join("");
+            return uuid;
+        }
+
+        userid = GetRequest('userid');
+        userType = GetRequest('usertype');
+        id = GetRequest('id');
+        token = GetRequest('token');
+        var status = [];
+        var pic_index = 0;
+        //点击“上传多张按钮”事件
+        var sizes = [];
+        var dataurl_list = [];
+        // var pic_status = [];
+        var pic_list = [];
+        var pic_name_list = [];
+        var storedir = uuid();
+        $('#pull_out').click(function () {
+
+        });
+        $('#start').click(function () {
+            pic_list = pic_list.join(',');
+            console.log(document.getElementById('mtp_upload').files);
+            let files = document.getElementById('mtp_upload').files;
+            for (i = 0; i < files.length; i++) {
+                let file = files[i];
+                console.log('sizes:' + sizes[i]);
+                $('#main_body').children()[pic_index + i].innerHTML =
+                    '            <td><input type="checkbox"></td>\n' +
+                    '            <td>' + file.name + '</td>\n' +
+                    '            <td>' + sizes[i] + '</td>\n' +
+                    '            <td>\n' +
+                    '                <div class="spinner">\n' +
+                    '                    <div class="bounce1"></div>\n' +
+                    '                    <div class="bounce2"></div>\n' +
+                    '                    <div class="bounce3"></div>\n' +
+                    '                </div>\n' +
+                    '            </td>' +
+                    '            <td>等待</td>\n';
+            }
+            //let file = files[i];
+            // pic_list = pic_list.join(',');
+            // pic_name_list = pic_name_list.join(',');
+            console.log("picnamelist:" + pic_name_list + '    type:' + typeof (pic_name_list));
+            console.log("piclist:" + pic_list + '    type:' + typeof (pic_list));
+            axios.post('http://47.102.96.81:8000/api/v1/task/', {     //部署时需要修改post目标地址
+                //post传参
+                user_id: id,
+                task_status: '1',
+                token: token,
+                org_pic: pic_list,
+                org_pic_name: pic_name_list,
+                error_pic_name: [],
+            })
+                .then(function (response) {
+                    var if_compelet = 0;      //标记任务是否完成
+                    // sleep(1000);
+                    console.log(response);
+                    // window.alert(response.data.msg);
+                    console.log(response.data.code);
+                    if (response.data.code == 1001) {
+                        console.log('success');
+                        console.log(response.data);
+                        // var pic_id_list=[];
+                        var pic_id_list = response.data.pic_id_list;
+
+                        function get_task() {
+                            var task_num = files.length;
+                            // var times = 0;
+                            // times += 1;
+                            sleep(1000);
+                            for (let j = 0; j < files.length; j++) {
+                                let file = files[j];
+                                // sleep(1000);
+                                axios.post(' http://47.102.96.81:8000/api/v1/get_pic/', {     //部署时需要修改post目标地址
+                                    //post传参
+                                    user_id: id,
+                                    token: token,
+                                    pic_id: pic_id_list[j],
+                                })
+                                    .then(function (response) {
+                                        console.log(response);
+                                        // console.log("picidlist:"+pic_id_list[j])
+                                        // window.alert(response.data.msg);
+                                        console.log(response.data.code);
+                                        if (response.data.code != '' && response.data.code != undefined) {
+                                            pic_index += 1;
+                                            if_compelet += 1;
+                                            // var status_num = response.data.result[0].pic_status;
+                                            if (response.data.url_list[0] != '' && response.data.url_list[0] != undefined) {
+                                                var pic_href = response.data.url_list[0];
+                                                $('#main_body').children()[pic_index - if_compelet + j].innerHTML = '            <td><input type="checkbox" name="baseTable" value="'+if_compelet+'"></td>\n' +
+                                                    '            <td>' + file.name + '</td>\n' +
+                                                    '            <td>' + sizes[pic_index - if_compelet + j] + '</td>\n' +
+                                                    '            <td><span class="loaded">√</span></td>\n' +
+                                                    '            <td><a href="' + pic_href + '" target="_blank">预览</a></td>\n'
+                                            } else {
+                                                $('#main_body').children()[pic_index - if_compelet + j].innerHTML = '            <td><input type="checkbox" name="baseTable" value="'+if_compelet+'"></td>\n' +
+                                                    '            <td>' + file.name + '</td>\n' +
+                                                    '            <td>' + sizes[pic_index - if_compelet + j] + '</td>\n' +
+                                                    '            <td><span class="unload">x</span></td>\n' +
+                                                    '            <td><a href="">/</a></td>\n'
+                                            }
+                                            console.log('success');
+                                        } else {
+                                        }
+                                        // if (if_compelet == e.target.files.length||times==3) {
+                                        //      break
+                                        // }
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error);
+                                    });
+                            }
+                            sizes = [];
+                            // var pic_status = [];
+                            pic_list = [];
+                            pic_name_list = [];
+                            storedir = uuid();
+                        }
+
+                        get_task()
+                    } else {
+                        window.alert("本次任务提交失败，请重新提交");
+                        location.reload();
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+        document.getElementById('mtp_upload').addEventListener('change', function (e) {
+            console.log(pic_index);
+            var my_pic_name_list = [];
+            for (let i = 0; i < e.target.files.length; i++) {  //遍历每张图片以开始任务
+                let file = e.target.files[i];
+                sizes.push('200*200');
+                let storeAs = id + '/pic/' + storedir + '/' + i + '.' + this.value.toLowerCase().split('.').splice(-1);
+                pic_list.push(storeAs);
+                console.log(pic_name_list);
+                pic_name_list.push(file.name);
+                my_pic_name_list.push(file.name);
+                //browserMD5File(file, function (err, md5) {
+                //    console.log(md5); // 97027eb624f85892c69c4bcec8ab0f11
+                //});
+                let client = new OSS({
+                    accessKeyId: 'LTAI4VIH8rP2cjtg',
+                    accessKeySecret: 'uzXZC3TB4egoT5FZe0nYn1BsoqXo5x',
+                    //stsToken: result.SecurityToken,
+                    endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                    bucket: 'deepdraw-test',
+                });
+                var add_line = '<tr>\n' +
+                    '            <td><input type="checkbox"></td>\n' +
+                    '            <td>' + file.name + '</td>\n' +
+                    '            <td>' + sizes[i] + '</td>\n' +
+                    '            <td>等待开始' +
+                    '            </td>' +
+                    '            <td>等待</td>\n' +
+                    '        </tr>';
+                $("#main_body").append(add_line);
+                //storeAs表示上传的object name , file表示上传的文件
+                client.multipartUpload(storeAs, file)
+                    .then(function (result) {
+                        console.log(result);
+                        ///上传至oss，成功后添加展示列表一列
+                        //console.log("sizelist:" + sizes.length + "   files:" + e.target.files.length);
+                    }).catch(function (err) {
+                    console.log(err);
+                });
+            }
+            alert('上传成功');
+        });
+    });
+</script>
+</body>
+</html>
+

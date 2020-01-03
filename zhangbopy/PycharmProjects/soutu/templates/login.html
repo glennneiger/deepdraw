@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <title>登录</title>
+    <link href="//resources1.deepdraw.biz/dp_admin/css/admin/style.css" type="text/css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="https://resources.deepdraw.biz/img/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <script type="text/javascript">
+
+        function initialize() {
+
+            if (window.location != window.top.location) {
+                window.top.location = window.location;
+            }
+
+            window.moveTo(0, 0); //初始化窗口最大化
+            window.resizeTo(screen.availWidth, screen.availHeight);
+            document.getElementById("account").focus();
+        }
+
+        document.onkeydown = function (e) {
+            if (!e) e = window.event;
+            if ((e.keyCode || e.which) == 13) {
+                document.getElementById("submitb").click();
+            }
+        };
+        $(function () {
+            $('#submit').click(function () {
+                user_name = $('#account').val();
+                pwd = $('#password').val();
+                if (user_name == 'root' && pwd == '123456') {
+                    $(location).attr('href', "http://192.168.3.101:8000/marking/index?user_name=" + user_name);
+                }
+                else{
+                    alert('用户名或密码错误');
+                }
+            })
+        })
+
+    </script>
+</head>
+<body scroll="no" onload="initialize();"
+      style="background: url(//resources1.deepdraw.biz/dp_admin/img/admin/bg.jpg);background-size: cover;background-position: 50% 50%;width: 100%;height: 100%;background-repeat: no-repeat;">
+<div class="pagewide"
+     style="height: 303px;position: absolute;top: 50%;left: 50%;margin: -200px 0 0 -195px;padding: 30px;background: rgba(255,255,255,0.1);">
+    <div class="dis tc">
+        <img src="//resources1.deepdraw.biz/dp_admin/img/admin/logo2.png"
+             style="display: inline-block;vertical-align: bottom;width: 90px">
+        <span class="tc white font1 font18 mgl10"
+              style="display: inline-block;vertical-align: bottom;color: #fff;line-height: 1">搜图打标demo</span>
+    </div>
+    <div class="tc white font1" style="color: #fff;opacity: 0.5;margin-top: 15px">DEEPDRAW WEBSITE MANAGEMENT SYSTEM
+    </div>
+    <form id="loginForm" action="/helicon" method="post">
+        <div class="pt20">
+            <div class="tc blue b">
+                <!-- 用户名 -->
+                <input tabindex="1" name="account" id="account" type="text" class="logininput" placeholder="用户名"/>
+            </div>
+            <div class="mgt10 tc blue b">
+                <!-- 密&nbsp;&nbsp;&nbsp;&nbsp;码 -->
+                <input name="password" tabindex="2" type="password" class="logininput" style="vertical-align: middle;"
+                       value="" placeholder="密码" id="password"/>
+            </div>
+            <div class="dd_warning mgt10" style="padding-left: 10px; height:17px;">
+
+            </div>
+            <div>
+                <input type="button" name="button" id="submit" value="登 录" class="submit1 mgt10"/>
+            </div>
+        </div>
+    </form>
+    <div class="tc mgt30" style="color: #fff;opacity: 0.5;line-height: 1">
+        COPYRIGHT © 2017 ALL RIGHTS RESERVED DEEPDRAW
+    </div>
+</div>
+</body>
+</html>

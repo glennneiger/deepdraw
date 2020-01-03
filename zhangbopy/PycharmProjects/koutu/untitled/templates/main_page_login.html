@@ -1,0 +1,86 @@
+<!CTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <!--<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>-->
+    <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <!--<script type="text/javascript" src="./axios_app.js"></script>-->
+</head>
+<body>
+<form>
+    <p style="font-size: 30px;"><em>用户名:</em><input type="text" name="user_name" id="user_name"></p>
+    <p style="font-size: 30px;"><em>密码:</em><input type="password" name="pwd" id="pwd"></p>
+    <button id="submit_btn" type="button">登陆</button>
+</form>
+<p></p>
+<p style="font-size: 30px;"><em>用户名:</em><input type="text" name="rej_user_name" id="rej_user_name"></p>
+<p style="font-size: 30px;"><em>用户等级:</em><input type="text" name="rej_user_type" id="rej_user_type"></p>
+<p style="font-size: 30px;"><em>用户详情:</em><input type="text" name="rej_user_detail" id="rej_user_detail"></p>
+<p style="font-size: 30px;"><em>密码:</em><input type="password" name="rej_pwd" id="rej_pwd"></p>
+<button id="register_btn" type="buttion">注册</button>
+</body>
+<script>
+    $(function () {
+        $('#submit_btn').click(function () {
+            var userid = $('#user_name').val(); //获取文本框用户输入的id信息
+            var pwd = $('#pwd').val();          //获取文本框用户输入的密码信息
+            // console.log(userid);
+            // console.log(pwd);
+            axios.post('http://47.102.96.81:8000/api/v1/user/login/', {     //部署时需要修改post目标地址	//post传参
+                user_name: userid,
+                password: pwd,
+            })
+                .then(function (response) {
+                    console.log(response);
+                    console.log(response.data.code);    //可能需要修改获取数据路径
+                    window.alert(response.data.msg);
+                    console.log(response.data.code);
+                    if (response.data.code === 1001) {
+                        console.log('success');
+                        // console.log(response.data);
+                        window.location.href = "http://47.102.96.81:8000/api/v1/index/?userid="+response.data.result.user_name+"&usertype="+response.data.result.user_type+"&id="+response.data.result.id+"&token="+response.data.token;
+                    }
+                    else {
+                        $("#user_name").val("");
+                        $("#pwd").val("");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+        $('#register_btn').click(function () {
+            var userId = $('#rej_user_name').val();   //获取文本框用户注册输入的id信息
+            var userType = $('#rej_user_type').val();   //获取文本框用户注册输入的用户类型信息
+            var userDetail = $('#rej_user_detail').val();   //获取文本框用户注册输入的详情信息
+            var pwd = $('#pwd').val();         //获取文本框用户注册输入的密码信息
+            // console.log(userid);
+            // console.log(pwd);
+            axios.post('http://47.102.96.81:8000/api/v1/user/signup/', {      //需要修改post目标地址
+                //post传参
+                user_name: userId,
+                user_type: userType,
+                user_detil: userDetail,
+                password: pwd,
+            })
+                .then(function (response) {
+                    console.log(response);
+                    console.log(response.data.code);    //可能需要修改获取数据路径
+                    window.alert(response.data.msg);
+                    if (response.data.code === 1001) {
+                        // console.log(response.data);
+                        window.location.href = "http://47.102.96.81:8000/api/v1/index/?userid="+response.data.result.user_name+"&usertype="+response.data.result.user_type+"&id="+response.data.result.id;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        })
+})
+</script>
+</html>
+

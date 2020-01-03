@@ -1,0 +1,75 @@
+.first{
+    display: block;
+}
+.second{
+    margin: 5% 20%;
+    float: left;
+    font-size: 20px;
+    display: none;
+}
+.second div{
+    height: 300px;
+    width: 1300px;
+    overflow: auto;
+}
+.second div img{
+    max-height: 290px;
+    max-width: 500px;
+    display: inline-block;
+}
+.second p span{
+    margin-left:50px ;
+}
+.left {
+    float: left;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    float: left;
+    background-color: #d7d5d4;
+    text-align: center;
+}
+
+.left .word {
+    color: black;
+    font-weight: bold;
+    /*float: left;*/
+    font-size: 20px;
+    margin: 50px auto;
+    text-decoration: none;
+    letter-spacing: 5px;
+    display: block;
+}
+
+.left .active {
+    background-color: #46aad7;
+}
+
+input {
+    height: 30px;
+    width: 200px;
+    margin: 200px 30%;
+    margin-right: 0px;
+    margin-bottom: 40px;
+}
+
+#upload {
+    background-color: #00baf1;
+    height: 50px;
+    width: 70px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.description {
+    background-color: white;
+    width: 80%;
+    height: 80px;
+    margin: 10px 30%;
+}
+
+.description span {
+    width: 50px;
+    height: 1px;
+    margin-right: 100px;
+}

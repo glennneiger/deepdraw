@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+@-webkit-keyframes scan {
+ 0% {
+  height:0
+ }
+ to {
+  opacity:0;
+  height:100%
+ }
+}
+@-moz-keyframes scan {
+ 0% {
+  height:0
+ }
+ to {
+  opacity:0;
+  height:100%
+ }
+}
+@keyframes scan {
+ 0% {
+  height:0
+ }
+ to {
+  opacity:0;
+  height:100%
+ }
+}
+
+.tech-recognition-scan {
+ z-index:7;
+ top:0;
+ left:0;
+ width:100%;
+ border-bottom:3px solid #3e88f1;
+ -webkit-animation:scan 1.2s infinite;
+ -moz-animation:scan 1.2s infinite;
+ animation:scan 1.2s infinite;
+ background:-webkit-gradient(linear,left top,left bottom,from(transparent),to(#3e88f1));
+ background:-webkit-linear-gradient(top,transparent,#3e88f1);
+ background:-moz-linear-gradient(top,transparent,#3e88f1);
+ background:linear-gradient(180deg,transparent,#3e88f1)
+}
+
+
+    </style>
+</head>
+<body>
+<div class="tech-recognition-scan"></div>
+<script>
+
+    </script>
+</body>
+</html>

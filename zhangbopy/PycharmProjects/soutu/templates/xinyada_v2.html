@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=edge"/>
+    <title>深绘 |制式卡片分类</title>
+    <link rel="shortcut icon" href="//resources.deepdraw.biz/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="//dmis.deepdraw.cn:9898/bootstrap/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="//resources.deepdraw.biz/js/marking/css/layui.css">
+
+    <link rel="stylesheet" href="//dmis.deepdraw.cn:9898/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="//resources.deepdraw.biz/js/marking/css/font-awesome.css" />
+    <link rel="stylesheet" href="//dmis.deepdraw.cn:9898/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="//dmis.deepdraw.cn:9898/css/app-new.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/foundation/5.5.3/css/foundation.min.css">
+    <link rel="stylesheet" href="http://static.runoob.com/assets/foundation-icons/foundation-icons.css">
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+    <style type="text/css">
+        .loading {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background-color: rgba(134, 134, 134, 0.4);
+            z-index: 800;
+            display: none;
+        }
+        .loading1 {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background-color: rgba(134, 134, 134, 0.4);
+            z-index: 800;
+            display: inline;
+        }
+        .loading .progress {
+            margin: 21% 28%;
+            width: 45%;
+            height: 10px;
+            background-color: #f7f7f7;
+        }
+
+
+        .loading .progress-bar {
+            background-color: #2cfea0;
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="app app-header-fixed app-aside-fixed" >
+    <div class="loading" v-bind:class="{ loading1: isLoading }" >
+        <div class="progress progress-striped active" >
+            <div class="progress-bar progress-bar-success" role="progressbar"
+                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                 :style="{width:proBar+'%',}">
+            </div>
+        </div>
+    </div>
+    <!-- navbar -->
+    <div class="app-header navbar">
+        <!-- navbar header -->
+        <div class="navbar-header bg-black">
+            <!-- brand -->
+            <a href="#/" class="navbar-brand text-lt padder-md">
+
+            </a>
+            <!-- / brand -->
+        </div>
+        <!-- / navbar header -->
+        <!-- navbar collapse -->
+        <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only" style="font-size: large;height: 50px">
+            <!-- buttons for toggle aside-nav
+            <div class="nav navbar-nav">
+                <a href="javascript:void(0);" class="btn no-shadow navbar-btn" data-toggle="class:app-aside-folded" data-target=".app">
+                    <i class="fa fa-dedent fa-fw text"></i>
+                    <i class="fa fa-indent fa-fw text-active"></i>
+                </a>
+            </div>-->
+
+
+            <p class="btn no-shadow navbar-btn" style="margin-left: 45%;font-size: large">制式卡片分类</p>
+
+            <!-- / buttons -->
+            <!-- nabar right -->
+
+            <!-- / navbar right -->
+        </div>
+        <!-- / navbar collapse -->
+    </div>
+    <!-- / navbar -->
+    <!-- menu -->
+    <div class="app-aside">
+        <div class="aside-wrap bg-black" >
+            <!-- 左侧树形菜单 -->
+            <nav class="navi" v-on:click="first=true" >
+                <ul class="nav">
+                    <li>
+                        <a>
+                            <i class="fa fa-photo"></i>
+                            <span style="font-size: medium;color: snow"> 图片上传</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="navi" v-on:click="first=false">
+                <ul class="nav">
+                    <li>
+                        <a >
+                            <i class="fa fa-cubes"></i>
+                            <span style="font-size: medium;color: snow"> 分析结果</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- vue事件绑定 -->
+        </div>
+    </div>
+    <!-- / menu -->
+    <ul v-if="!first" class="layui-timeline" style="margin-top: 10%;position: fixed;z-index: 99;margin-left: 93%">
+        <li class="layui-timeline-item">
+            <a href="#1">
+                <i class="layui-icon layui-timeline-axis" style="display: block">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">驾驶证: {{driver_license_list.length}}</div>
+                </div>
+            </a>
+        </li>
+
+        <li class="layui-timeline-item">
+            <a href="#2">
+                <i class="layui-icon layui-timeline-axis" style="display: block">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">行驶证: {{driving_license_list.length}}</div>
+                </div>
+            </a>
+        </li>
+        <li class="layui-timeline-item">
+            <a href="#3">
+                <i class="layui-icon layui-timeline-axis" style="display: block">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">身份证: {{id_card_list.length}}</div>
+                </div>
+            </a>
+        </li>
+        <li class="layui-timeline-item">
+            <a href="#4">
+                <i class="layui-icon layui-timeline-axis" style="display:block">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">银行卡：{{bank_card_list.length}}</div>
+                </div>
+            </a>
+        </li>
+        <li class="layui-timeline-item">
+            <a href="#5">
+                <i class="layui-icon layui-timeline-axis" >&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">未标识: {{unsigned_list.length}}</div>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <!-- content -->
+    <div v-if="first" class="app-content">
+        <div  id="upload" class="app-content-body" >
+            <!-- COPY the content from "tpl/" -->
+
+            <div style="margin: auto;width: 1356px;height: 431px;overflow-y: auto;text-align: center;margin-left: 9.5%;margin-right: 10.5%;margin-top: 2%;border: 1px;border-color: darkseagreen">
+
+                <table class="layui-table" style="margin-top: 1px">
+                    <thead v-html="table">
+
+                    </thead>
+                </table>
+            </div>
+            <div style="margin-top: 2%;margin-left: 68%">
+                <input id="upload_file" @change="get_file($event)" type="file" multiple="multiple"  style="display: none" >
+                <label @click="choose_file" for="file" class="btn btn-primary" style="">选择图片</label>
+                <a href="xinyada_v2.html" type="button" class="btn btn-primary" style="margin-left: 10%;background: white;color: slategrey">清空信息</a>
+                <label @click="upload" type="button" class="btn btn-primary" style="margin-left: 10%;background: white;color: slategrey">上传图片</label>
+
+            </div>
+        </div>
+    </div>
+
+    <div v-if="!first" class="app-content" style="margin-top: 0%">
+        <div style="margin-top: 5%;background-color: white;height: 8%" id="1"></div>
+            <div class="layui-card" >
+                <div class="layui-card-header">
+                    <p style="margin-left: 10%;font-size: medium">类 别 : 驾驶证
+                        <span style="margin-left: 10px"> 数 量 : {{ driver_license_list.length }}</span>
+                    </p>
+                </div>
+                <div class="layui-card-body">
+                    <div  style="margin-left: 10%;height: 500px;width: 1380px;overflow: auto;">
+                        <img v-for="item in driver_license_list" v-bind:src="item" style="margin-left: 15px;margin-top: 15px;height: 220px;width: 320px" alt="驾驶证"/>
+                    </div>
+                </div>
+            </div>
+        <div style="margin-top: 2%;background-color: white;height: 1%" id="2"></div>
+            <div class="layui-card" style="margin-top: 5%">
+                <div class="layui-card-header">
+                    <p style="margin-left: 10%;font-size: medium">类 别 : 行驶证
+                        <span style="margin-left: 10px"> 数 量 : {{ driving_license_list.length }}</span>
+                    </p>
+                </div>
+                <div class="layui-card-body">
+                    <div  style="margin-left: 10%;height: 500px;width: 1380px;overflow: auto;">
+                        <img v-for="item in driving_license_list" v-bind:src="item" style="margin-left: 15px;margin-top: 15px;height: 220px;width: 320px" alt="行驶证"/>
+                    </div>
+                </div>
+            </div>
+        <div style="margin-top: 2%;background-color: white;height: 1%" id="3"></div>
+            <div class="layui-card" style="margin-top: 5%">
+                <div class="layui-card-header">
+                    <p style="margin-left: 10%;font-size: medium">类 别 : 身份证
+                        <span style="margin-left: 10px"> 数 量 : {{ id_card_list.length }}</span>
+                    </p>
+                </div>
+                <div class="layui-card-body">
+                    <div  style="margin-left: 10%;height: 500px;width: 1380px;overflow: auto;">
+                        <img v-for="item in id_card_list" v-bind:src="item" style="margin-left: 15px;margin-top: 15px;height: 220px;width: 320px" alt="身份证"/>
+                    </div>
+                </div>
+            </div>
+        <div style="margin-top: 2%;background-color: white;height: 1%" id="4"></div>
+            <div class="layui-card" style="margin-top: 5%">
+                <div class="layui-card-header">
+                    <p style="margin-left: 10%;font-size: medium">类 别 : 银行卡
+                        <span style="margin-left: 10px"> 数 量 : {{ bank_card_list.length }}</span>
+                    </p>
+                </div>
+                <div class="layui-card-body">
+                    <div  style="margin-left: 10%;height: 500px;width: 1380px;overflow: auto;">
+                        <img v-for="item in bank_card_list" v-bind:src="item" style="margin-left: 15px;margin-top: 15px;height: 220px;width: 320px" alt="银行卡"/>
+                    </div>
+                </div>
+            </div>
+        <div style="margin-top: 2%;background-color: white;height: 0%" id="5"></div>
+            <div class="layui-card" style="margin-top: 5%">
+                <div class="layui-card-header">
+                    <p style="margin-left: 10%;font-size: medium">类 别 : 未标识
+                        <span style="margin-left: 10px"> 数 量 : {{ unsigned_list.length }}</span>
+                    </p>
+                </div>
+                <div class="layui-card-body">
+                    <div  style="margin-left: 10%;height: 500px;width: 1380px;overflow: auto;margin-bottom: 15%">
+                        <img v-for="item in unsigned_list" v-bind:src="item" style="margin-left: 15px;margin-top: 15px;height: 220px;width: 320px" alt="未标识"/>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- /content -->
+    <!-- footer -->
+
+    <!-- / footer -->
+</div>
+
+
+<script type="text/javascript">
+
+    new Vue({
+        el:'#app',
+        data:{
+            v:100,
+            isAnalysucces:false,
+            isUploadsucces: false,
+            proBar: 0,
+            isLoading:false,
+            first:true,
+            file:[],
+            local_path_list:[],
+            pic_name_list:[],
+            pic_path_list:[],
+            bank_card_list:[],
+            driving_license_list:[],
+            driver_license_list:[],
+            id_card_list:[],
+            unsigned_list:[],
+            table:"<tr style=\"background-color: white\">\n" +
+                "<th style=\"text-align: center\">图片名称</th>\n" +
+                "<th style=\"text-align: center\">图片格式</th>\n" +
+                "<th style=\"text-align: center\">图片大小</th>\n" +
+                "</tr>\n"
+        },
+        mounted: function () {
+        this.$nextTick(function () {
+            setInterval(this.timer, this.v);
+        })
+    },
+        methods: {
+            say: function (msg) {
+                alert(msg)
+            },
+            uuid: function () {
+                var s = [];
+                var hexDigits = "0123456789abcdef";
+                for (var i = 0; i < 36; i++) {
+                    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+                }
+                s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+                s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+                s[8] = s[13] = s[18] = s[23] = "-";
+
+                var uuid = s.join("");
+                return uuid;
+            },
+            randomNum: function (minNum, maxNum) {
+                switch (arguments.length) {
+                    case 1:
+                        return parseInt(Math.random() * minNum + 1, 10);
+                        break;
+                    case 2:
+                        return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                        break;
+                    default:
+                        return 0;
+                        break;
+                }
+            },
+            get_file: function (e) {
+
+                for (i = 0; i < e.target.files.length; i++) {
+                    let file = e.target.files[i];
+                    //let local_path = e.target[i];
+                    //console.log(file);
+
+
+                    this.file.push(file);
+                    //this.local_path_list.push(local_path);
+                    this.pic_name_list.push(file.name);
+                    var spstr = file.name.split('.');
+                    this.pic_path_list.push('xinyada_v1/' + this.uuid() + '.' + spstr[spstr.length - 1]);
+                    //console.log(file.name.split('.')[1]);
+                    //console.log(file.size);
+                    //console.log((file.size / 1000).toFixed(1));
+                    //var spstr = file.name.split('.');
+                    var add_line = '<tr style="background-color: white">\n' +
+                        '            <td style="text-align: center">' + file.name + '</td>\n' +
+                        '            <td style="text-align: center">' + spstr[spstr.length - 1] + '</td>\n' +
+                        '            <td style="text-align: center">' + (file.size / 1000).toFixed(1) + 'KB' + '</td>\n' +
+                        '        </tr>';
+                    this.table = this.table + add_line;
+
+                }
+                //document.getElementById('upload_file').value = null;
+            },
+            choose_file: function (){
+                document.getElementById('upload_file').click();
+            },
+            upload: function () {
+                console.time("上传耗时:");
+                var files = this.file;
+                if (files.length !== 0){
+                    var count = 0;
+                    this.proBar = 0;
+                    this.isLoading = true;
+
+                    console.log('start!');
+                    let client = new OSS({
+                        accessKeyId: 'LTAITSW4pCG7v6Il',
+                        accessKeySecret: 'Rlntps3egQWCWMoEHsbFY3Fw7UaomH',
+                        endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                        bucket: 'deepdraw-test',
+                    });
+                    //storeAs表示上传的object name , file表示上传的文件
+                    for (i = 0; i < files.length; i++) {
+                        var storeAs = this.pic_path_list[i];
+                        let file = files[i];
+                        //开始上传
+                        client.multipartUpload(storeAs, file)
+                            .then((result) => {
+                                    console.log(result);
+                                    count += 1;
+                                    this.proBar = count / files.length * 18;
+
+                                    if (count === files.length) {
+                                        console.timeEnd("上传耗时:");
+                                        this.isUploadsucces = true;
+                                        this.$options.methods.analyze(this);
+
+                                    }
+                                }
+                            )
+                            .catch(function (err) {
+                                    console.log(err);
+                                }
+                            );
+                    }
+                }
+                else {
+                    alert("请先选择图片！")
+                }
+            },
+            analyze: function (thi) {
+                //console.log(thi.pic_path_list);
+                console.time("分析耗时:");
+                axios.post('http://47.110.64.35:8008/xinyada/demo/analysis/', {     //部署时需要修改post目标地址
+                    //post传参
+                    pic_name: thi.pic_name_list,
+                    pic_path: thi.pic_path_list,
+                })
+                    .then((response)=> {
+                            console.timeEnd("分析耗时:");
+                            thi.bank_card_list = response.data.result.bank_card;
+                            thi.driver_license_list = response.data.result.driver_license;
+                            thi.driving_license_list = response.data.result.driving_license;
+                            thi.id_card_list = response.data.result.id_card;
+                            thi.unsigned_list = response.data.result.unsigned;
+                            console.log(response);
+                            thi.isAnalysucces = true;
+                            console.log('解压重传发起请求耗时:',response.data.alltime*1000-response.data.modeltime*1000,'ms');
+                            console.log('模型处理返回时间',response.data.modeltime*1000,'ms')
+                        }
+                    );
+            },
+            sleep: function (delay) {
+                var start = (new Date()).getTime();
+                while ((new Date()).getTime() - start < delay) {
+                    continue;
+                }
+            },
+            timer: function () {
+                //console.log(this.proBar);
+                if (this.proBar <75 && this.isUploadsucces && !this.isAnalysucces){
+                    this.proBar += 1;
+                }
+                else if (this.proBar>=75 && this.proBar<90 && this.isUploadsucces && !this.isAnalysucces){
+                    this.proBar +=0.5;
+                }
+                else if (this.proBar>=90 && this.proBar<95 && this.isUploadsucces && !this.isAnalysucces){
+                    this.proBar +=0.05;
+                }
+                else if (this.proBar>=95 && this.proBar<98 && this.isUploadsucces && !this.isAnalysucces){
+                    this.proBar +=0.005;
+                }
+                else if(this.isAnalysucces && this.proBar<100){
+                    var l = (100 - this.proBar)/2;
+                    if (l < 8){
+                        l = 8
+                    }
+                    this.proBar+=l
+                }
+                else if(this.proBar>=100){
+                    this.isAnalysucces = false;
+                    this.proBar = 0;
+                    this.isUploadsucces = false;
+                    this.isLoading = false;
+                    this.first = false;
+                }
+            },
+        }
+    })
+</script>
+</body>
+</html>

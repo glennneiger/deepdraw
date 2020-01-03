@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人脸融合</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.js"></script>
+    <link rel="stylesheet" href="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/face.css">
+    <script type="text/javascript" src="http://dbr.deepdraw.cn/web/duichang/static/spark_md5.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--首页导航-->
+    <div id="top">
+        <div id="top_background">
+            <div id="nav" style="background-color: #2f343d;">
+                <div id="logo">
+                    <a href="http://dbr.deepdraw.cn/web/soutu_menu/facesearch/soutunew/soutunew.html">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAAAVCAYAAABWtYB0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTYyNjM2NDFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTYyNjM2NTFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5NjI2MzYyMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5NjI2MzYzMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+bKpiOAAABa5JREFUeNqsWX1MllUU54WXVwi1ucQSE8HhjGY6l6S2aDUtcxNpZVKYWZJtlZbpxlYtU5e6/gt1ETodtTbTxixj9jH6soKcjDbWl1+gBYWWvimIHy/wdC773e3s7N7n4+U522/vc+/5nXue5577ce59I47jpIQkrxBWEzIC2Fwk3OzBKSJ8aajvIkwmqA/YQniWkDrEbzhNmIo2tbQQCgzcMsKnhJWE1wnDkvB3iXBHJKQgqA54Owm7dsJED04z4XaLLkKYQDgV0kBSnTKCBeFOwg8W7jTCL4S+Ifp8IxrSy29K0m6XD84+Qr2h/mv8rhKzYydhwKf/TMJaQhrzxUdlBXs+xHxeILQSFoj2qglnffh9hjAWz/emqJnggREWZEN/l2OWK4Q+4DLhgoFzkw//XjjD2stLwr6P2c9i9WmEbqa70WBbxfS1AXw+xuyOuhGXEtoIFw1QHfwSeLWiY3cTJiFI44DRhJWC920IAZjD2jtJyIK/AkLEYjOcMB7vt53Znxa8h5juJ0tbXYwz3eJnnMAYwjxm95ft4wocb9Ejo5fVdbh0WJ2wXxpCEPaw9nqBfnSaLQinwL8q3meD4B1kuncM7dzH9O1CF0FQHbwPxzWsDFrO2T5up0cAPgCvRNSvt7SXK3iqAzKGGIA8l/d7zWLznItNPuONErpFhrZ+Zvp1Qve8E0CiloyjzFB/DbrvCEtQ96Lg1Fs2ortF+SPCFY/NazGhhJBAOYrspRqbYjphPdJcLanYWLer1A/pYwqymDcJbUilue8YNvR2VreEPXcT9hv6qAYb+4AhwThu8GOS6OD7GyIsR/cxQjGWH76R3iB4aoO7zjICtwnuXI9RnukycF71OVOamM3qgLOsxWWUhw7TTFghygsJvxt45aKsDi69lohzbpzQ4DFCZqCtcxhpE5iujo2iQuTpPK3sJ+QQZrEZ3ISDXYTx0mB7AjZa8gjTWfkEbDsJPay+EO0NJJGaR+C/g/CfjEqOGHVNLhE8KbjFPtIx0wZoy2D0nrGb2TYyzn4nHKkUvncJfQK/BxinNCTfrYOHZfECGwSpzNJJxYLX5tKhRwR3dMDpyjOJEtSNdcKTUuZrpAtvC+M1h+S7zrQcLWPPl7GBmuRpUa618HKxtGj5hvBvgGm7md1FqZPoJ3iuZJw/CY9gWVDL0mzCVrGcdrINXi9FmahrFkvZPVgK1bK0F0uHWoY2gnMLu0aJo/2rYqnTMgAd34jTWULQMvjEolskovSuZWTGCD2Cm2vhrhO8xwPOAp7LL0fd9WyJUPKksNnMdN8PYcPcytrZa1kG3w9jY+aFGtFhFRajWwXvRxcHbeIaI8jZ4Alm28nqn2L1/wibYfAjAzQJ6+9hLCVqGUh18T1TfKO+zpjscx/UyIY/7bfKLQgRw91OvqXhNYK3wsKbInh7AgQgJt5nDtP9yurLhV252FCzUJ9umL05Lv7/YLwPWX0jqz/k81uOC78xWxAWCmKDpcFphPOM14/LPMkbheg7lo70Qj2z28fqX2D1vxnsvrJ0nsIm8T5TLL6rxclen30eFvYTfX7LKmFXaAvCAUFsxwXbYaDRkOUo+Zg19jJ4Kq2NC15HgABUMjvVThT1Y0SbU4WdzJjmCf1ioS8y+L5NcBagPkNkaRUBvme8aHO26bA20nAvngd4SRV+dxgOeVyafGZDi3C9oOV+9qfJQeG3Vdjyq4bzhM+F/m9RThPl4YTPWPktdg2zkWVp6hrjDOFBH//kqewr3/OrMYKTkbiPizRbBmPCo8Jmh+UA1WWxb2CcbQa9/N9jhrhgPGtZjuc74YpxJjyA6AaRY+yssAwXVQkDrwf/VtV6tFdKeA95usrRv8C/T3p2LEdbCfFvl5YszNxu5OY1Bk5MfGecnWXUO2ZDf4QwF7p8XM4lxGWcPl85Pq4nHHYtoq4pjkrS/wIMAPiAdiPO9/6/AAAAAElFTkSuQmCC"
+                             width="140px" height="30px">
+                    </a>
+                </div>
+                <div id="nav_select">
+                    <el-menu
+                            :default-active="activeIndex2"
+                            class="el-menu-demo"
+                            mode="horizontal"
+                            background-color="rgb(47,52,61)"
+                            text-color="#fff"
+                            active-text-color="#66b1ff">
+                        <el-menu-item index="1"><a
+                                href="http://dbr.deepdraw.cn/web/soutu_menu/facesearch/soutunew/soutunew.html">搜图主页</a>
+                        </el-menu-item>
+                        <el-menu-item index="3"><a
+                                href="http://dbr.deepdraw.cn/web/soutu_menu/facemerge/facemerge.html">人脸融合</a>
+                        </el-menu-item>
+                        <el-menu-item index="4"><a
+                                href="http://dbr.deepdraw.cn/web/soutu_menu/%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/contentSearch.html">文本分类</a>
+                        </el-menu-item>
+                        <el-submenu index="2">
+                            <template slot="title">我的账户</template>
+                            <el-menu-item index="2-1">选项1</el-menu-item>
+                            <el-menu-item index="2-2">选项2</el-menu-item>
+                            <el-menu-item index="2-3">选项3</el-menu-item>
+                            <el-submenu index="2-4">
+                                <template slot="title">选项4</template>
+                                <el-menu-item index="2-4-1">选项1</el-menu-item>
+                                <el-menu-item index="2-4-2">选项2</el-menu-item>
+                                <el-menu-item index="2-4-3">选项3</el-menu-item>
+                            </el-submenu>
+                        </el-submenu>
+                    </el-menu>
+                </div>
+                <div id="sign">
+                    <el-button type="primary" id="regest">&nbsp;&nbsp;注&nbsp;&nbsp;册&nbsp;&nbsp;</el-button>
+                </div>
+            </div>
+            <div id="slogen">
+                <h1>人脸融合</h1>
+                <p>对模板图和融合图中的人脸进行融合操作，返回融合过后的图片</p>
+            </div>
+            <div id="top_button">
+                <a href="#title2" id="left_href">
+                    <el-button type="primary">开始使用</el-button>
+                </a>
+                <a href="#title2" id="right_href">
+                    <el-button type="primary">产品介绍</el-button>
+                </a>
+            </div>
+        </div>
+        <div id="introduction">
+            <div id="advantages">
+                <h2 class="titles">产品优势</h2>
+                <div id="single_logo" v-for="(key,value) in logos" style="float: left">
+                    <img v-bind:src="key" alt="图标" width="130px" height="130px" class="logos">
+                    <p style="text-align: center">{{ value }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="title2">
+        <h2 class="titles">人脸融合</h2>
+    </div>
+    <!--产品介绍-->
+    <el-card id="demo" shadow="hover">
+        <div id="nav_bar" style="width: 500px;margin: 0 auto">
+            <el-steps :active="ACTIVE" finish-status="success">
+                <el-step title="上传融合图"></el-step>
+                <el-step title="上传模板图"></el-step>
+                <el-step title="开始融合"></el-step>
+                <el-step title="正在融合"></el-step>
+                <el-step title="融合成功"></el-step>
+            </el-steps>
+        </div>
+        <!--主要页面-->
+        <div id="box" style="width: auto">
+            <div id="refresh" style="width: 150px">
+                <el-button @click="refreshs" type="primary" icon="el-icon-refresh-right">重新加载</el-button>
+            </div>
+            <div id="temp" style="display: none;"></div>
+            <div id="temp2" style="display: none;"></div>
+            <div id="left_box">
+                <div class="label">
+                    <label for="radios1" class="btn">
+                        <el-card id="show_pictures_left" class="show_update" shadow="hover">
+                            <div class="tip">
+                                <strong>融合图</strong>
+                            </div>
+                            <div v-if="isLeftUploaded" style="border: dashed #85a6ea 1px">
+                                <input id="upload_file_left" name="chooseside" type="file" style="display: none"
+                                       @change="waitInputLeft($event)">
+
+                                <div style="text-align: center;height:300px;">
+                                    <label style="font-size: 100px;color: #85a6ea;height: 300px;width: 350px;"
+                                           for="upload_file_left"><p style="margin-top: 75px"><i
+                                            class="el-icon-plus"></i></p></label>
+                                </div>
+
+                            </div>
+                            <div v-if="isLeftPict" style="overflow: hidden;height: 320px">
+                                <img v-bind:src='left_url' id="left_pic" width="auto" height="100%">
+                            </div>
+                            <input type="radio" style="display: none;" name="choose" id="radios1" value="left">
+                        </el-card>
+                    </label>
+                </div>
+                <div class="label">
+                    <label for="radios2" class="btn" class="label">
+                        <el-card id="show_pictures_right" class="show_update" shadow="hover">
+                            <div class="tip">
+                                <strong>模板图</strong>
+                            </div>
+                            <div v-if="isRightUploaded" style="border: dashed #85a6ea 1px">
+                                <input id="upload_file_right" name="chooseside" type="file" style="display: none"
+                                       @input="waitInputRight($event)">
+                                <div style="text-align: center;height:300px;">
+                                    <label style="font-size: 100px;color: #85a6ea;height: 300px;width: 350px;"
+                                           for="upload_file_right"><p style="margin-top: 75px"><i
+                                            class="el-icon-plus"></i></p></label>
+                                </div>
+                            </div>
+                            <div v-if="isRightPict" style="overflow: hidden;height: 320px">
+                                <img v-bind:src="right_url" id="right_pic" width="auto" height="100%">
+                            </div>
+                            <input type="radio" style="display: none;" name="choose" id="radios2" value="right">
+                        </el-card>
+                    </label>
+                </div>
+                <div id="nav_menu">
+                    <div id="tips">
+                        <p>点击上方空白区域上传本地图片或者拖拽下方示例图片至上方空白区域实现上传</p>
+                    </div>
+                    <div id="circle_picts">
+                        <template>
+                            <el-carousel :interval="4000" type="card" height="220px" width="auto" style="float: left">
+                                <el-carousel-item v-for="item in nav_imgs" :key="item">
+                                    <img v-bind:src="item" width="400px" height="auto">
+                                </el-carousel-item>
+                            </el-carousel>
+                        </template>
+                    </div>
+
+                </div>
+            </div>
+            <el-card id="right_box" shadow="hover">
+                <div class="tip">
+                    <strong>结果图</strong>
+                </div>
+                <div style="width:410px;height: 380px" shadow="hover">
+                    <img v-bind:src="result" alt="" width="auto" height="100%" style="margin:0 auto;">
+                    <div class="tech-recognition-scan" style="display: none"></div>
+                </div>
+            </el-card>
+            <div id="else_parts">
+                <div id="choose">
+                    <el-progress type="dashboard" :percentage="percentage" :color="colors"></el-progress>
+                    <div>
+                        <el-button-group style="margin-left: 12px">
+                            <el-button icon="el-icon-minus" @click="decrease"></el-button>
+                            <el-button icon="el-icon-plus" @click="increase"></el-button>
+                        </el-button-group>
+                    </div>
+                    <div id="tipp">
+                        <p>选择融合程度，默认50%</p>
+                    </div>
+                </div>
+                <div id="left_button">
+                    <el-button type="info" size="medium" icon="el-icon-switch-button" @click="submit"
+                               style="width: 120px;height: 50px">开始融合
+                    </el-button>
+                </div>
+                <div id="right_button">
+                    <el-button type="info" size="medium" icon="el-icon-download" style="width: 120px;height: 50px"
+                               @click="download_result">下载
+                    </el-button>
+                </div>
+            </div>
+        </div>
+
+    </el-card>
+
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            logos:
+                {
+                    "响应迅速": "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/%E5%89%8D%E7%AB%AF%E7%B4%A0%E6%9D%90/%E5%9B%BE%E6%A0%87/xt4.png",
+                    "图像自然": "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/%E5%89%8D%E7%AB%AF%E7%B4%A0%E6%9D%90/%E5%9B%BE%E6%A0%87/xt1.png",
+                    "数量不限": "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/%E5%89%8D%E7%AB%AF%E7%B4%A0%E6%9D%90/%E5%9B%BE%E6%A0%87/xt2.png",
+                },
+            sites: [
+                {url: "http://www.deepdraw.cn/#/", name: "深绘APP"},
+                {url: "http://www.deepdraw.cn/#/", name: "深绘首页"},
+                {url: "http://www.deepdraw.cn/#/", name: "收藏本页"},
+            ],
+            nav_imgs:
+                [
+                    "http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/data_image/face_merge_history/input/92147ace7f4dc29f3f4a3600bbc3719b.jpeg",
+                    "http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/data_image/face_merge_history/input/6abcf80b7d72382e35e7f4459bf229ed.jpeg",
+                    "http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/data_image/face_merge_history/input/0d8e8d183641ec2ef3da89141e077346.jpeg",
+                    "http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/data_image/face_merge_history/input/c7038079cb26ffd820cafa6f5418a093.jpeg",
+                    "http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/data_image/face_merge_history/input/4da8db56be1a839f3f40424b37782264.jpeg",
+                ],
+            percentage: 50,
+            colors: [
+                {color: '#f56c6c', percentage: 25},
+                {color: '#e6a23c', percentage: 50},
+                {color: '#5cb87a', percentage: 75},
+                //{color: '#1989fa', percentage: 80},
+                {color: '#6f7ad3', percentage: 100}
+            ],
+            ACTIVE: 0,
+            activeIndex2: '3',
+            isLeftUploaded: true,
+            isRightUploaded: true,
+            isLeftPict: false,
+            isRightPict: false,
+            left_url: '',
+            right_url: '',
+            file: '',
+            pic_hash: '123',
+            url: '',
+            result: 'http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/element/%E7%B4%A0%E6%9D%90/015b1456cd26db32f7a84.jpg%401280w_1l_2o_100sh.jpg',
+        },
+        methods: {
+            increase: function () {
+                //融合度增加
+                this.percentage += 25;
+                if (this.percentage > 100) {
+                    this.percentage = 100;
+                }
+            },
+            decrease: function () {
+                //融合度减少
+                this.percentage -= 25;
+                if (this.percentage < 25) {
+                    this.percentage = 25;
+                }
+            },
+            next: function (thi) {
+                //步骤条
+                thi.ACTIVE++;
+                if (thi.ACTIVE > 4) {
+                    thi.ACTIVE = 0;
+                }
+            },
+            refreshs: function () {
+                //重新加载
+                document.location.reload();
+                window.location.href = "http://dbr.deepdraw.cn/web/soutu_menu/facemerge/facemerge.html#title2"
+            },
+
+            waitInputLeft: function (e) {
+                //上传图片
+                var file = e.target.files[0];
+                this.file = file;
+                this.$options.methods.picMd(this);
+                console.log(file);
+                $("#temp").bind("DOMNodeInserted", this.changes);
+                this.ACTIVE = 1;
+            },
+            waitInputRight: function (e) {
+                console.log('cc', this.left_url);
+                var file = e.target.files[0];
+                this.file = file;
+                this.$options.methods.picMd2(this);
+                console.log(file);
+                $("#temp2").bind("DOMNodeInserted", this.change);
+                this.ACTIVE = 2;
+            },
+            changes: function () {
+                var div_str = $('#temp').text();
+                var url = '';
+                console.log('???', div_str);
+                this.pic_hash = div_str;
+                console.log(this.file);
+                //接口数据加密
+                let spark = new SparkMD5();
+                var codes = spark.code();
+                let client = new OSS({
+                    accessKeyId: codes.hs,
+                    accessKeySecret: codes.ah,
+                    endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                    bucket: 'deepdraw-dbr',
+                });
+                var spstr = $('#upload_file_left').val().split('.');
+                var storeAs = 'data_image/face_merge_history/input/' + div_str + '.' + spstr[spstr.length - 1];
+                console.log(storeAs);
+                let file = this.file;
+                client.multipartUpload(storeAs, file)
+                    .then((result) => {
+                        if (result.res.requestUrls[0].split('?')[0].length > 0) {
+                            url = result.res.requestUrls[0].split('?')[0];
+                            this.left_url = url;
+                        } else {
+                            url = 'wrong';
+                        }
+                        this.isLeftUploaded = false;
+                        console.log(this.left_url);
+                        console.log(url);
+                        this.isLeftPict = true;
+                    }),
+                    console.log(this.left_url)
+            },
+            download_result: function () {
+                imgsrc = this.result;
+                var image = new Image();
+                image.setAttribute("crossOrigin", "anonymous");
+                image.onload = function () {
+                    var canvas = document.createElement("canvas");
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    var context = canvas.getContext("2d");
+                    context.drawImage(image, 0, 0, image.width, image.height);
+                    var url = canvas.toDataURL("image/png"); //得到图片的base64编码数据
+                    var a = document.createElement("a"); // 生成一个a元素
+                    var event = new MouseEvent("click"); // 创建一个单击事件
+                    a.download = "融合结果.jpg"; // 设置图片名称
+                    a.href = url; // 将生成的URL设置为a.href属性
+                    a.dispatchEvent(event); // 触发a的单击事件
+                };
+                image.src = imgsrc;
+            },
+
+            change: function () {
+                var div_str = $('#temp2').text();
+                var url = '';
+                console.log('???', div_str);
+                this.pic_hash = div_str;
+                console.log(this.file);
+                let spark = new SparkMD5();
+                var codes = spark.code();
+                let client = new OSS({
+                    accessKeyId: codes.hs,
+                    accessKeySecret: codes.ah,
+                    endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                    bucket: 'deepdraw-dbr',
+                });
+                var spstr = $('#upload_file_right').val().split('.');
+                var storeAs = 'data_image/face_merge_history/input/' + div_str + '.' + spstr[spstr.length - 1];
+                console.log(storeAs);
+                let file = this.file;
+                client.multipartUpload(storeAs, file)
+                    .then((result) => {
+                        if (result.res.requestUrls[0].split('?')[0].length > 0) {
+                            url = result.res.requestUrls[0].split('?')[0];
+                            this.right_url = url;
+                        } else {
+                            url = 'wrong';
+                        }
+                        this.isRightUploaded = false;
+                        console.log(this.right_url);
+                        console.log(url);
+                        this.isRightPict = true;
+                    })
+            },
+
+            picMd: function (thi) {
+                var file = thi.file;
+                console.log('file', file);
+                var fileReader = new FileReader(),
+                    box = document.getElementById('temp');
+                blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice,
+                    file = thi.file,
+                    chunkSize = 2097152,
+                    // read in chunks of 2MB
+                    chunks = Math.ceil(file.size / chunkSize),
+                    currentChunk = 0,
+                    spark = new SparkMD5();
+
+                fileReader.onload = function (e) {
+                    spark.appendBinary(e.target.result); // append binary string
+                    currentChunk++;
+                    if (currentChunk < chunks) {
+                        loadNext();
+                    } else {
+                        box.innerText = spark.end();
+                    }
+                };
+
+                function loadNext() {
+                    var start = currentChunk * chunkSize,
+                        end = start + chunkSize >= file.size ? file.size : start + chunkSize;
+
+                    fileReader.readAsBinaryString(blobSlice.call(file, start, end));
+                };
+
+                loadNext();
+            },
+            picMd2: function (thi) {
+                var file = thi.file;
+                console.log('file', file);
+                var fileReader = new FileReader(),
+                    box = document.getElementById('temp2');
+                blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice,
+                    file = thi.file,
+                    chunkSize = 2097152,
+                    // read in chunks of 2MB
+                    chunks = Math.ceil(file.size / chunkSize),
+                    currentChunk = 0,
+                    spark = new SparkMD5();
+
+                fileReader.onload = function (e) {
+                    spark.appendBinary(e.target.result); // append binary string
+                    currentChunk++;
+                    if (currentChunk < chunks) {
+                        loadNext();
+                    } else {
+                        box.innerText = spark.end();
+                    }
+                };
+
+                function loadNext() {
+                    var start = currentChunk * chunkSize,
+                        end = start + chunkSize >= file.size ? file.size : start + chunkSize;
+
+                    fileReader.readAsBinaryString(blobSlice.call(file, start, end));
+                };
+
+                loadNext();
+            },
+            submit: function () {
+                if (this.left_url && this.right_url && this.ACTIVE >= 1) {
+                    this.result = '';
+                    var left = this.left_url;
+                    var right = this.right_url;
+                    console.log('程度', this.percentage);
+                    var cal = this.percentage;
+                    var chengdu = '';
+                    if (cal == 25) {
+                        chengdu = 'LOW'
+                    } else if (cal == 50) {
+                        chengdu = 'NORMAL'
+                    } else if (cal == 75) {
+                        chengdu = 'HIGH'
+                    } else {
+                        chengdu = 'COMPLETE'
+                    }
+                    console.log(chengdu);
+                    var params = {'url2': left, 'url1': right, 'type': chengdu};
+                    var jsonstr = JSON.stringify(params);
+                    this.ACTIVE = 3;
+                    this.ACTIVE = 4;
+                    $('.tech-recognition-scan').css("display", "block");
+                    post_url = "http://60.191.84.99:8031/face_merge/?str=" + jsonstr;
+                    console.log(post_url);
+                    axios.get(post_url).then((response) => {
+                        console.log(response.data);
+                        this.ACTIVE = 5;
+                        if (response.data.length > 15) {
+                            this.result = response.data;
+                            $('.tech-recognition-scan').css("display", "none");
+                            console.log(this.result);
+                        } else {
+                            alert('融合失败，检查图片格式尺寸');
+                            document.location.reload();
+                            window.location.href = "http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/facemerge/facemerge.html#title2"
+                        }
+                    }).catch(function (error) {
+                    })
+                } else if (this.left_url && !this.right_url) {
+                    alert('请上传融合图')
+                } else {
+                    alert('请上传模板图')
+                }
+            }
+
+        },
+        mounted() {
+            var that = this;
+            var section = document.getElementById('show_pictures_left');
+            var section2 = document.getElementById('show_pictures_right');
+            var target = document.getElementById('circle_picts');
+
+            target.ondragstart = function (event) {
+                var e = event;
+                e.dataTransfer.effectAllowed = 'move'; //此时样式已换成了move样式//把拖拽的次数放进setData里边
+            };
+            section.ondragover = function (event) {
+                var e = event;
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+            };
+            section.ondrop = function (event) {
+                var e = event;
+                e.preventDefault();
+                if (that.left_url.length < 10000) {
+                    that.ACTIVE = 1;
+                }
+                //获取系统自带的拖拽信息，如果不需要把样式也放进去， 可以把 text/html换成text/plain
+                var url = e.dataTransfer.getData('text/plain');
+                console.log(url);
+                that.left_url = url;
+                that.isLeftUploaded = false;
+                that.isLeftPict = true;
+                e.dataTransfer.clearData();//清除拖拽信息
+
+            };
+            section2.ondragover = function (event) {
+                var e = event;
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+            };
+            section2.ondrop = function (event) {
+                var e = event;
+                e.preventDefault();
+                if (that.right_url.length < 10000) {
+                    that.ACTIVE = 2;
+                }
+                //获取系统自带的拖拽信息，如果不需要把样式也放进去， 可以把 text/html换成text/plain
+                var url = e.dataTransfer.getData('text/plain');
+                console.log(url);
+                console.log('aa', that.right_url);
+                that.right_url = url;
+                console.log('bb', that.right_url);
+                that.isRightUploaded = false;
+                that.isRightPict = true;
+                e.dataTransfer.clearData();//清除拖拽信息
+
+            };
+        },
+    });
+    $(document).ready(function () {
+        $('.el-menu-item').click(function () {
+            var x = $(this).children().attr('href');
+            console.log(x);
+            if (x) {
+                window.location.href = x;
+            }
+        })
+    });
+</script>
+</body>
+</html>

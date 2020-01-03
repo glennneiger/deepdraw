@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>搜图打标界面</title>
+    <style type="text/css">
+        #org_pic {
+            height: 400px;
+            width: 350px;
+            margin: 50px 0;
+            color: #53575e;
+            font-size: 30px;
+            font-weight: bold;
+            border: 1px #1b8ce4 solid;
+            position: fixed;
+        }
+
+        #org_pic .pic {
+            float: left;
+            height: 70%;
+            width: 80%;
+            background-color: rgba(1, 1, 1, 0);
+            margin: 20px 30px;
+            position: relative;
+        }
+
+        #org_pic .pic img {
+            vertical-align: middle;
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #comp_pic {
+            float: right;
+            height: auto;
+            width: 75%;
+        {#background-color: rgba(27,140,228,0.4);#} text-align: center;
+            padding-left: 3%;
+        }
+
+        #comp_pic .pic {
+            float: left;
+            height: 270px;
+            width: 19%;
+            background-color: rgba(1, 1, 1, 0);
+            margin: 100px 30px;
+            position: relative;
+        }
+
+        #org_pic .draw_border {
+            position: absolute;
+            border: 1px solid red;
+        }
+
+        #comp_pic .pic .draw_border {
+            position: absolute;
+            border: 1px solid red;
+        }
+
+        #comp_pic .pic img {
+            vertical-align: middle;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #submit {
+            margin: 50px 50%;
+            width: 80px;
+            height: 45px;
+        {#background-color: #11bb93;#}{#border: 0px;#} font-size: 20px;
+        {#border-radius: 10px;#}{#letter-spacing: 5px;#}{#text-align: center;#}
+        }
+
+        .pic .option {
+            margin: 10px auto 0px;
+            width: 70%;
+            height: 50px;
+            text-align: left;
+            position: absolute;
+            bottom: -48px;
+            left: 25%;
+            letter-spacing: 5px;
+        }
+
+        .pic .option .radio {
+            margin-top: 10px;
+            font-size: 17px;
+        }
+
+        .progress {
+            top: 400px;
+            width: 348px;
+            position: fixed;
+            height: 20px;
+        }
+
+        .progress span {
+            color: #84fdff;
+            width: 40px;
+            overflow: visible;
+            position: fixed;
+        }
+
+        .btn-primary {
+            height: 40px;
+            width: 120px;
+            margin-top: 80px;
+            display: block;
+            margin-left: -110px;
+        }
+
+        .btn-success {
+            height: 40px;
+            width: 120px;
+            display: block;
+            margin-left: -110px;
+            margin-top: 30px;
+        }
+
+        #all_similar {
+            margin-top: 500px;
+            margin-left: 100px;
+            width: 150px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        #all_dissimilar {
+            margin-top: 600px;
+            margin-left: 100px;
+            width: 150px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        #all_unsigned {
+            margin-top: 700px;
+            margin-left: 100px;
+            width: 150px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        .btn-warning {
+            display: block;
+            position: fixed;
+
+        }
+    </style>
+</head>
+<body>
+<div id="org_pic">原图：
+</div>
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="60"
+         aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+        <span>0%</span>
+    </div>
+</div>
+<div id="comp_pic">
+
+    <!--<div class="pic">
+        <img src="tutu.jpg" alt="匹配图" id="img395">
+        <span class="draw_border" id="border395"
+              style="width: 57.97px; height: 21.6623px; top: 0.11257px; left: 1.305px;"></span>
+        <div class="option">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="pic395" id="option1" value="3951">相似
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="pic395" id="option2" value="3952">不相似
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="pic395" id="option3" value="3953" checked="">无法判断
+                </label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary">整 行 相 似</button>
+        <button type="button" class="btn btn-success">整 行 不 相 似</button>
+    </div>-->
+</div>
+<button type="button" class="btn btn-warning" id="all_similar">全部相似</button>
+<button type="button" class="btn btn-warning" id="all_dissimilar">全部不相似</button>
+<button type="button" class="btn btn-warning" id="all_unsigned">全部无法判断</button>
+<button class="btn btn-info" id="submit">提交</button>
+<script type="text/javascript">
+    function GetRequest(value) {   //获取地址栏中的用户信息
+        var url = decodeURI(location.search); //如?id="123456"&Name="bicycle";
+        var object = {};
+        //console.log(location.search)
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            //console.log(str)
+            var strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                object[strs[i].split("=")[0]] = strs[i].split("=")[1]
+            }
+        }
+        return object[value];
+    }
+
+    function draw_region_main(t, r, b, l) {
+        var width;
+        var height;
+        $("img").on("load", function () {
+            width = $('#main_pic').width();
+            height = $('#main_pic').height();
+            //console.log(X, Y);
+            $("#org_pic #border").width(width * (r - l)).height(height * (b - t));
+            $("#org_pic #border").css({'top': height * t + "px", 'left': width * l + "px"});
+        });
+        $(window).resize(function () {
+            width = $('#main_pic').width();
+            height = $('#main_pic').height();
+            //console.log(X, Y);
+            $("#org_pic #border").width(width * (r - l)).height(height * (b - t));
+            $("#org_pic #border").css({'top': height * t + "px", 'left': width * l + "px"});
+        });
+    }
+
+    function draw_region(t, r, b, l, picid) {
+        var width;
+        var height;
+        $("#img" + picid).on("load", function () {
+            width = $('#img' + picid).width();
+            height = $('#img' + picid).height();
+            //console.log(width, height);
+            $("#border" + picid).width(width * (r - l)).height(height * (b - t));
+            $("#border" + picid).css({'top': height * t + "px", 'left': width * l + "px"});
+        });
+        $(window).resize(function () {
+            width = $('#img' + picid).width();
+            height = $('#img' + picid).height();
+            //console.log(X, Y);
+            $("#border" + picid).width(width * (r - l)).height(height * (b - t));
+            $("#border" + picid).css({'top': height * t + "px", 'left': width * l + "px"});
+        });
+    }
+
+    function firm(class_id) {
+        //利用对话框返回的值 （true 或者 false）
+        var similar_pics = [];
+        var not_similar_pics = [];
+        var undefined_pics = [];
+        var class_id = class_id;
+        console.log(class_id);
+        if (confirm("是否提交")) {
+            for (var k = 0; k < $('.option').length; k++) {
+                var str = $(".option input:checked:eq(" + k + ")").val();
+                var status = str.charAt(str.length - 1);
+                var id = str.substring(0, str.length - 1);
+                //console.log('status:' + status + '     id:' + id);
+                if (status == 1) {
+                    similar_pics.push(id);
+                } else if (status == 2) {
+                    not_similar_pics.push(id);
+                } else {
+                    undefined_pics.push(id);
+                }
+            }
+            $("html,body").animate({scrollTop: 0}, 10);
+            //console.log("similar_pics:"+similar_pics);
+            //console.log("not_similar:"+not_similar_pics);
+            //console.log("undefined:"+undefined_pics);
+            axios.post('http://192.168.3.103:8000/marking/submit_task/', {     //部署时需要修改post目标地址
+                //post传参
+                similar_pics: similar_pics,
+                not_similar: not_similar_pics,
+                undefined: undefined_pics,
+                class_id: class_id,
+            }).then(function (response) {
+                if (response.data.code == 1) {
+                    //$("html,body").animate({scrollTop:0},10);
+                    location.reload();
+                } else {
+                    alert(response.data.msg);
+                }
+            }).catch(function (err) {
+                console.log(err);
+            });
+        } else {
+            console.log('false');
+        }
+    }
+
+    function click_btn() {
+        console.log(1);
+    }
+
+
+    $(function () {
+        $('#all_similar').click(function () {
+            $('input').each(function () {
+                console.log($(this).attr('id'));
+                if($(this).attr('id')=='option1'){
+                    $(this).click();
+                }
+            });
+        });
+        $('#all_dissimilar').click(function () {
+            $('input').each(function () {
+                console.log($(this).attr('id'));
+                if($(this).attr('id')=='option2'){
+                    $(this).click();
+                }
+            });
+        });
+        $('#all_unsigned').click(function () {
+            $('input').each(function () {
+                console.log($(this).attr('id'));
+                if($(this).attr('id')=='option3'){
+                    $(this).click();
+                }
+            });
+        });
+        //加
+        $("body").on('click', '.btn1', function () {
+            console.log($(this).attr('id'));
+            click_id = $(this).attr('id');
+            click_id1 = parseInt(click_id) + 10;
+            click_id2 = parseInt(click_id) + 20;
+            click_id3 = parseInt(click_id) + 30;
+            console.log(parseInt($(this).attr('id')) + 10);
+            $('input[value=' + click_id + ']').click();
+            $('input[value=' + click_id1 + ']').click();
+            $('input[value=' + click_id2 + ']').click();
+            $('input[value=' + click_id3 + ']').click();
+
+        });
+        $(window).scroll(function () {
+            var scrollTo = $(window).scrollTop(),
+                docHeight = $(document).height(),
+                windowHeight = $(window).height();
+            scrollPercent = (scrollTo / (docHeight - windowHeight)) * 100;
+            scrollPercent = scrollPercent.toFixed(1);
+            ratio = scrollPercent + "%";
+            $('.progress-bar').css('width', ratio);
+            $('.progress span').html(ratio);
+        });
+        var username = GetRequest('user_name');
+        var http_head = 'http://192.168.2.104:8000/';
+        if (username != '' && username != undefined) {
+            console.log(username);
+            axios.post('http://192.168.3.103:8000/marking/get_task/', {     //部署时需要修改post目标地址
+                //post传参
+                user_name: username,
+            }).then(function (response) {
+                console.log(response);
+                // 成功返回后，展示任务
+                if (response.data.code == 1) {
+                    var main_pic_dict = response.data.main_pic;
+                    var compare_pic_dict = response.data.compare_pic;
+                    var task_id_list = response.data.task_id;
+                    var class_id = response.data.class_id;
+                    //console.log(main_pic_dict+'     '+compare_pic_dict+'      '+task_id_list);
+                    for (main_pic in main_pic_dict[0]) {
+                        //console.log(main_pic_dict[0]);
+                        var main_pic_ = main_pic_dict[0];
+                        for (main_pic_url in main_pic_) {
+                            append_main_pic = '<div class="pic">\n' +
+                                '        <img src="' + http_head + main_pic_url + '"\n' +
+                                '             alt="主图" id="main_pic">\n' +
+                                '        <span class="draw_border" id="border"></span>\n' +
+                                '    </div>';
+                            //console.log(http_head+main_pic_url);
+                            $('#org_pic').append(append_main_pic);
+                            var t = main_pic_[main_pic_url][0];
+                            var r = main_pic_[main_pic_url][1];
+                            var b = main_pic_[main_pic_url][2];
+                            var l = main_pic_[main_pic_url][3];
+                            //console.log(t, r, b, l);
+                            draw_region_main(t, r, b, l)
+                        }
+                    }
+                    for (var i = 0; i < compare_pic_dict.length; i++) {
+                        for (compare_pic in compare_pic_dict[i]) {
+                            //console.log(compare_pic);
+                            //console.log(i);
+                            var compare_pic_ = compare_pic_dict[i];
+                            for (compare_pic_url in compare_pic_) {
+                                order = task_id_list[i];
+                                append_compare_pic = '<div class="pic" id="pic_div' + order + '">\n' +
+                                    '        <img src="' + http_head + compare_pic_url + '"\n' +
+                                    '             alt="匹配图" id="img' + order + '">\n' +
+                                    '        <span class="draw_border" id="border' + order + '"></span>\n' +
+                                    '        <div class="option">\n' +
+                                    '            <div class="radio">\n' +
+                                    '                <label>\n' +
+                                    '                    <input type="radio" name="pic' + order + '" id="option1" value="' + order + '1">相似\n' +
+                                    '                </label>\n' +
+                                    '            </div>\n' +
+                                    '            <div class="radio">\n' +
+                                    '                <label>\n' +
+                                    '                    <input type="radio" name="pic' + order + '" id="option2" value="' + order + '2">不相似\n' +
+                                    '                </label>\n' +
+                                    '            </div>\n' +
+                                    '            <div class="radio">\n' +
+                                    '                <label>\n' +
+                                    '                    <input type="radio" name="pic' + order + '" id="option3" value="' + order + '3" checked>无法判断\n' +
+                                    '                </label>\n' +
+                                    '            </div>\n' +
+                                    '        </div>\n' +
+                                    '    </div>';
+                                $('#comp_pic').append(append_compare_pic);
+                                var comp_t = compare_pic_[compare_pic_url][0];
+                                var comp_r = compare_pic_[compare_pic_url][1];
+                                var comp_b = compare_pic_[compare_pic_url][2];
+                                var comp_l = compare_pic_[compare_pic_url][3];
+                                draw_region(comp_t, comp_r, comp_b, comp_l, order);
+                            }
+                        }
+                    }
+
+                    yui.202
+                    2
+                    2
+                    2'        <button type="button" class="btn btn-success btn1" id="' + task_id_list[k] + '2">整 行 不 相 似</button>'
+                            $('#pic_div' + task_id_list[k]).append(append_btn);
+                        }
+
+                    }
+                } else {
+                    alert(response.data.msg)
+                }
+                $('#submit').click(function () {
+                    firm(class_id)
+                });
+            }).catch(function (err) {
+                console.log(err);
+            });
+        } else {
+            //alert('请登陆');
+        }
+
+    });
+</script>
+</body>
+</html>

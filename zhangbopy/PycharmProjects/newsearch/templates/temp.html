@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">
+    <title>深绘搜图</title>
+    <script type="text/javascript" src="http://dbr.deepdraw.cn/web/duichang/static/spark_md5.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.js"></script>
+    <link rel="stylesheet" href="http://funkydog.oss-cn-chengdu.aliyuncs.com/static/element.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/default.css">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+
+
+
+
+</head>
+<body>
+    <div>
+        <div id="all">
+            <div id="loadings" style="display: none;width:100%;height:100%;background-color: #635683;padding-left: 650px;padding-top: 200px;padding-bottom:295px;">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568284313927&di=5addbcfec962b50752bcebe124b4122a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F6e05684ba6689dff29994bb01b9bd761c3324a15a0084-7rxphA_fw658" width="600px" height="450px"/>
+            </div>
+            <div id="top_nav" v-show="isLoadings">
+                <div id="logo">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAAAVCAYAAABWtYB0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTYyNjM2NDFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTYyNjM2NTFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5NjI2MzYyMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5NjI2MzYzMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+bKpiOAAABa5JREFUeNqsWX1MllUU54WXVwi1ucQSE8HhjGY6l6S2aDUtcxNpZVKYWZJtlZbpxlYtU5e6/gt1ETodtTbTxixj9jH6soKcjDbWl1+gBYWWvimIHy/wdC773e3s7N7n4+U522/vc+/5nXue5577ce59I47jpIQkrxBWEzIC2Fwk3OzBKSJ8aajvIkwmqA/YQniWkDrEbzhNmIo2tbQQCgzcMsKnhJWE1wnDkvB3iXBHJKQgqA54Owm7dsJED04z4XaLLkKYQDgV0kBSnTKCBeFOwg8W7jTCL4S+Ifp8IxrSy29K0m6XD84+Qr2h/mv8rhKzYydhwKf/TMJaQhrzxUdlBXs+xHxeILQSFoj2qglnffh9hjAWz/emqJnggREWZEN/l2OWK4Q+4DLhgoFzkw//XjjD2stLwr6P2c9i9WmEbqa70WBbxfS1AXw+xuyOuhGXEtoIFw1QHfwSeLWiY3cTJiFI44DRhJWC920IAZjD2jtJyIK/AkLEYjOcMB7vt53Znxa8h5juJ0tbXYwz3eJnnMAYwjxm95ft4wocb9Ejo5fVdbh0WJ2wXxpCEPaw9nqBfnSaLQinwL8q3meD4B1kuncM7dzH9O1CF0FQHbwPxzWsDFrO2T5up0cAPgCvRNSvt7SXK3iqAzKGGIA8l/d7zWLznItNPuONErpFhrZ+Zvp1Qve8E0CiloyjzFB/DbrvCEtQ96Lg1Fs2ortF+SPCFY/NazGhhJBAOYrspRqbYjphPdJcLanYWLer1A/pYwqymDcJbUilue8YNvR2VreEPXcT9hv6qAYb+4AhwThu8GOS6OD7GyIsR/cxQjGWH76R3iB4aoO7zjICtwnuXI9RnukycF71OVOamM3qgLOsxWWUhw7TTFghygsJvxt45aKsDi69lohzbpzQ4DFCZqCtcxhpE5iujo2iQuTpPK3sJ+QQZrEZ3ISDXYTx0mB7AjZa8gjTWfkEbDsJPay+EO0NJJGaR+C/g/CfjEqOGHVNLhE8KbjFPtIx0wZoy2D0nrGb2TYyzn4nHKkUvncJfQK/BxinNCTfrYOHZfECGwSpzNJJxYLX5tKhRwR3dMDpyjOJEtSNdcKTUuZrpAtvC+M1h+S7zrQcLWPPl7GBmuRpUa618HKxtGj5hvBvgGm7md1FqZPoJ3iuZJw/CY9gWVDL0mzCVrGcdrINXi9FmahrFkvZPVgK1bK0F0uHWoY2gnMLu0aJo/2rYqnTMgAd34jTWULQMvjEolskovSuZWTGCD2Cm2vhrhO8xwPOAp7LL0fd9WyJUPKksNnMdN8PYcPcytrZa1kG3w9jY+aFGtFhFRajWwXvRxcHbeIaI8jZ4Alm28nqn2L1/wibYfAjAzQJ6+9hLCVqGUh18T1TfKO+zpjscx/UyIY/7bfKLQgRw91OvqXhNYK3wsKbInh7AgQgJt5nDtP9yurLhV252FCzUJ9umL05Lv7/YLwPWX0jqz/k81uOC78xWxAWCmKDpcFphPOM14/LPMkbheg7lo70Qj2z28fqX2D1vxnsvrJ0nsIm8T5TLL6rxclen30eFvYTfX7LKmFXaAvCAUFsxwXbYaDRkOUo+Zg19jJ4Kq2NC15HgABUMjvVThT1Y0SbU4WdzJjmCf1ioS8y+L5NcBagPkNkaRUBvme8aHO26bA20nAvngd4SRV+dxgOeVyafGZDi3C9oOV+9qfJQeG3Vdjyq4bzhM+F/m9RThPl4YTPWPktdg2zkWVp6hrjDOFBH//kqewr3/OrMYKTkbiPizRbBmPCo8Jmh+UA1WWxb2CcbQa9/N9jhrhgPGtZjuc74YpxJjyA6AaRY+yssAwXVQkDrwf/VtV6tFdKeA95usrRv8C/T3p2LEdbCfFvl5YszNxu5OY1Bk5MfGecnWXUO2ZDf4QwF7p8XM4lxGWcPl85Pq4nHHYtoq4pjkrS/wIMAPiAdiPO9/6/AAAAAElFTkSuQmCC" >
+                </div>
+                <div id="nav_select">
+                    <el-menu
+                        :default-active="activeIndex2"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        background-color="rgb(47,52,61)"
+                        text-color="#fff"
+                        active-text-color="#66b1ff">
+                        <el-menu-item index="1">演示主页</el-menu-item>
+                        <el-submenu index="2">
+                            <template slot="title">我的账户</template>
+                            <el-menu-item index="2-1">选项1</el-menu-item>
+                            <el-menu-item index="2-2">选项2</el-menu-item>
+                            <el-menu-item index="2-3">选项3</el-menu-item>
+                            <el-submenu index="2-4">
+                                <template slot="title">选项4</template>
+                                <el-menu-item index="2-4-1">选项1</el-menu-item>
+                                <el-menu-item index="2-4-2">选项2</el-menu-item>
+                                <el-menu-item index="2-4-3">选项3</el-menu-item>
+                            </el-submenu>
+                        </el-submenu>
+                        <el-menu-item index="3">消息中心</el-menu-item>
+                        <el-menu-item index="4"><a href="http://www.deepdraw.cn/#/" target="_blank">订单管理</a></el-menu-item>
+                    </el-menu>
+                </div>
+            </div>
+            <div id="upload_search" v-show="isSearchPage">
+                <div id="title">
+                    <p>
+                        深&nbsp&nbsp&nbsp&nbsp绘&nbsp&nbsp&nbsp&nbsp搜&nbsp&nbsp&nbsp&nbsp图
+                    </p>
+                </div>
+                <div id="search">
+                    <div class="search">
+                        <input type="text" name="searchs" id="get_input" placeholder="请输入图片URL或衣物类目">
+                        <button @click="sendurl()" id="click">搜索一下</button>
+                    </div>
+                    <div class="upload" >
+                        <label class="btn" for="input_img"><p id="fo">上传图片</p></label>
+                        <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" id="input_img" style="display: none;" v-on:input="upload">
+                    </div>
+                </div>
+                <div id="middle_nav">
+                    <el-card  shadow="hover" class="nav_pic" v-for="pic in pics">
+                        <div class="nav_pics">
+                            <img v-bind:src="pic" alt="失败" @click="clickImage(event)">
+                        </div>
+                    </el-card>
+                </div>
+            </div>
+            <div id="result_page" v-show="isResultPage">
+                <div id="left_box">
+                    <div>
+                        <div id="main_pic">
+                            <img v-bind:src="main_url" alt="fail">
+                                <div v-for="box in position_list" class="boxs"  @click="chooseBox">
+                                    <div v-bind:class="box[4]" v-bind:style="{position:'absolute',border:'1px solid red',width:box[0]+'px',height:box[1]+'px',top:box[2]+'px',left:box[3]+'px'}">
+                                    </div>
+                                    <div>
+                                        <button v-bind:id="box[4]" type="disabled" v-bind:style="{opacity: '0.4',position: 'absolute',top:box[2]+'px',left:box[3]+box[0]+'px'}">{{ box[4].replace(/[0-9]/ig,"")}}</button>
+                                    </div>
+                                </div>
+                            <p class="tips">
+                                点击筛选方框
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="right_box">
+                    <el-card>
+                        <template>
+                            <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+                            <el-tab-pane label="瀑布流图片" name="first">
+                                <article class="htmleaf-container" >
+                                    <div class="wall" id="wrapper">
+                                        <div class="pict_single article" v-for="data in result_position_list" >
+                                            <a  v-bind:href="'http://www.deepdraw.biz/product/'+data[5]" target="_blank">
+                                                <img  v-bind:src="data[0]" class="pict" referrerPolicy="no-referrer" width="100%">
+                                                <span class="draw_border" v-bind:style="{position:'absolute',border:'1px solid red',width:data[1]+'px',height:data[2]+'px',top:data[3]+'px',left:data[4]+'px'}"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </el-tab-pane>
+                            <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+                            </el-tabs>
+                        </template>
+                    </el-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/js/jquery-2.1.1.min.js"></script>
+    <script src="../static/js/jaliswall.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-2.1.1.min.js"><\/script>')</script>
+    <script>
+        new Vue({
+            el: '#all',
+            data: {
+                pics: [
+                    "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/4b180eb4-0ecf-4018-88d8-e59d919dd603.jpg",
+                    "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/b5a0e89a-9508-4326-84dd-a095a9543a67.jpg",
+                    "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/5e801db8-769e-4d9b-8643-bb7bac012567.jpg",
+                    "http://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/soutu/cc8ceba5-5583-41dd-afb6-b09b948ba46f.jpeg",
+                ],
+                activeName:'first',
+                main_url:'',
+                main_height:'',
+                main_width:'',
+                main_box:'',
+                main_box_list:[],
+                activeIndex2:'1',
+                result_list:[],
+                result_body:[],
+                position_list:[],
+                result_position_lista:[],
+                result_position_listb:[],
+                result_position_listc:[],
+                result_position_lists:[],
+                result_position_listss:[],
+                isSearchPage:true,
+                isResultPage:false,
+                isLoadings:true,
+            },
+            methods:{
+                uuid: function () {
+                    var s = [];
+                    var hexDigits = "0123456789abcdef";
+                    for (var i = 0; i < 36; i++) {
+                        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+                    }
+                    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+                    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+                    s[8] = s[13] = s[18] = s[23] = "-";
+                    var uuid = s.join("");
+                    return uuid;
+                },
+
+                handleClick:function(tab, event) {
+                    console.log(tab, event);
+                },
+
+                clickImage:function (event) {
+                    this.isLoadings = false;
+                    this.isSearchPage = false;
+                    $('#loadings').css("display", "block");
+                    var temp_url = $(event.target).attr('src');
+                    this.main_url = temp_url;
+                    console.log('click');
+                    this.$options.methods.postUrl(this);
+                },
+
+                sendurl:function () {
+                    this.isLoadings = false;
+                    this.isSearchPage = false;
+                    $('#loadings').css("display", "block");
+                    var url1 = document.getElementById("get_input").value;
+                    //var url2 = document.getElementById("get_inputs").value;
+                    if(url1.length>20){
+                        this.main_url = url1;
+                    }else{
+                        this.main_url = '';
+                        alert('请输入正确的OSS图片');
+                        document.getElementById('get_input').value="";
+                    }
+                    this.$options.methods.postUrl(this);
+                },
+
+                postUrl:function (thi){
+                    document.body.style.backgroundImage="";
+                    document.body.style.backgroundColor="white";
+                    console.log(thi.main_url);
+                    thi.$options.methods.getImageInfo(thi.main_url, thi, (width, height) => {
+                        // 在这里面使用
+                        var real_width = width;
+                        var real_height = height;
+                        console.log(real_height);
+                        console.log(real_width);
+                        thi.main_width = 300;
+                        thi.main_height = real_height / (real_width / 300);
+                        console.log(thi.main_width, thi.main_height);
+                        if (real_width){
+                            thi.$options.methods.getBoxResult(thi);
+                        }
+                    });
+                },
+
+                upload:function () {
+                    this.isLoadings = false;
+                    this.isSearchPage = false;
+                    $('#loadings').css("display", "block");
+                    var file = document.getElementById("input_img").files[0];
+                    let spark= new SparkMD5();
+                    var codes = spark.code();
+                    let client = new OSS({
+                        accessKeyId: codes.hs,
+                        accessKeySecret: codes.ah,
+                        endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                        bucket: 'deepdraw-dbr',
+                    });
+                    var file_types = file['name'].split('.');
+                    var file_type = file_types[file_types.length-1];
+                    console.log(file_type);
+                    var storeAs = 'soutu_data/upload_imgs/' + this.uuid() + '.' + file_type;
+                    client.multipartUpload(storeAs, file)
+                    .then((result) => {
+                        if (result.res.requestUrls[0].split('?')[0].length > 0) {
+                            this.main_url = result.res.requestUrls[0].split('?')[0];
+                        } else {
+                            this.main_url = 'wrong';
+                        }
+                        console.log('upload');
+                        this.$options.methods.postUrl(this);
+                    })
+                    },
+
+                getImageInfo: function (url, thi, callback) {
+                    var img = new Image();
+                    img.src = url;
+                    if (img.complete) {
+                        callback(img.width, img.height);
+                    } else {
+                        img.onload = function () {
+                            callback(img.width, img.height);
+                            img.onload = null;
+                        };
+                    };
+                },
+
+                chooseBox:function (event) {
+                    console.log('点了');
+                    this.result_position_list = [];
+                    this.result_position_lists = [];
+                    this.isResultPage = true;
+                    this.isLoadings = true;
+                    $('#loadings').css("display", "none");
+                    let title = $(event.target).attr('class');
+                    var url = this.main_url;
+                    for (let j = 0; j < this.main_box_list.length; j++) {
+                        if (this.main_box_list[j].contains(title)) {
+                            var box = this.main_box_list[j];
+                        }
+                    }
+                    console.log(box);
+                    axios.post('http://laipan.nps.deepdraw.online/picsearchpic/get_urls/', {
+                        url: url,
+                        box: box,
+                    }).then((response) => {
+                        if (response.data.code == 1) {
+                            this.url_list = response.data.url_list;
+                            this.body_list = response.data.body_list;
+                            var position = [];
+                            for (let j = 0; j < this.url_list.length; j++) {
+                                var sin_url = this.url_list[j];
+                                this.$options.methods.getImageInfo(sin_url, this, (width, height) => {
+                                    position = [];
+                                    console.log(j);
+                                    var single_url = this.url_list[j];
+                                    var boxes = this.body_list[j];
+                                    var box = boxes.split(',');
+                                    var real_height = height;
+                                    var real_width = width;
+                                    console.log(real_height, real_width);
+                                    var t = box[0];
+                                    var r = box[1];
+                                    var b = box[2];
+                                    var l = box[3];
+                                    main_width = 330;
+                                    main_height = real_height / (real_width / 330);
+                                    var now_width = main_width * (r - l);
+                                    var now_height = main_height * (b - t);
+                                    var top = main_height * t;
+                                    var left = main_width * l;
+                                    console.log(single_url, t, r, b, l);
+                                    var fea = single_url.split('/');
+                                    var hrefs = fea[5];
+                                    position.push(single_url, now_width, now_height, top, left, hrefs);
+                                    console.log(position);
+                                    this.result_position_lists.push(position);
+                                });
+                            }
+                            setTimeout(()=>{
+                                console.log(this.result_position_lists,this.url_list);
+                                for (let j = 0; j < this.url_list.length; j++) {
+                                    for (let i = 0; i < this.result_position_lists.length; i++) {
+                                        if(this.url_list[j]==this.result_position_lists[i][0]){
+                                            console.log('real');
+                                            this.result_position_listss.push(this.result_position_lists[i])
+                                        }
+                                    }
+                                }
+                                console.log(this.url_list);
+                                console.log(this.result_position_list);
+                                console.log(this.result_position_lists);
+                            }, 1000 );
+                        }
+                        $('.wall').jaliswall({ item: '.article' });
+                    });
+                },
+
+                preLoads:function (thi) {
+                    thi.isResultPage = true;
+                    thi.isLoadings = true;
+                    $('#loadings').css("display", "none");
+                    console.log(thi.position_list);
+                    //thi.$options.methods.chooseBox(thi);
+                },
+
+                getBoxResult:function (thi) {
+                    console.log(thi.main_url);
+                    console.log(thi.main_width, thi.main_height);
+                    axios.post('http://laipan.nps.deepdraw.online/picsearchpic/get_box/', {
+                        url: thi.main_url,
+                    }).then((response) => {
+                        if (response.data.code == 1) {
+                            thi.main_box = response.data.body_info;
+                            var type_list = [];
+                            for (let j = 0; j < thi.main_box.length; j++) {
+                                console.log(j);
+                                position = [];
+                                boxs = [];
+                                //var pos = '-90';
+                                var type = thi.main_box[j]['type'];
+                                console.log(type_list);
+                                var t = thi.main_box[j]['t'];
+                                var r = thi.main_box[j]['r'];
+                                var b = thi.main_box[j]['b'];
+                                var l = thi.main_box[j]['l'];
+                                var now_width = thi.main_width * (r - l);
+                                var now_height = thi.main_height * (b - t);
+                                var top = thi.main_height * t;
+                                var left = thi.main_width * l;
+                                if (type_list.contains(type)) {
+                                    type = type + j;
+                                    console.log(type);
+                                    //pos = now_width;
+                                }
+                                type_list.push(type);
+                                console.log(t, r, b, l);
+                                position.push(now_width, now_height, top, left, type);
+                                boxs.push(t, r, b, l, type);
+                                console.log(position);
+                                thi.position_list.push(position);
+                                thi.main_box_list.push(boxs);
+                                console.log(thi.position_list);
+                            }
+                        }else{
+                            alert('失败');
+                        }
+                        thi.$options.methods.preLoads(thi);
+                    })
+                },
+            }
+        });
+        Array.prototype.contains = function (obj) {
+            var index = this.length;
+            while (index--) {
+                 if (this[index] === obj) {
+                     return true;
+                 }
+            }
+            return false;
+            };
+    </script>
+</body>
+</html>

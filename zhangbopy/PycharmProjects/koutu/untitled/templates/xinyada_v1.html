@@ -1,0 +1,299 @@
+<!CTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DeepDraw制式卡片分类</title>
+    <!--<link rel="stylesheet" href="http://127.0.0.1:8000/static/index_style.css">-->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+
+    <style type="text/css">
+        .first {
+            display: block;
+        }
+
+        .second {
+            margin: 5% 20%;
+            float: left;
+            font-size: 20px;
+            display: none;
+        }
+
+        .second div {
+            height: 300px;
+            width: 1300px;
+            overflow: auto;
+        }
+
+        .second div img {
+            max-height: 290px;
+            max-width: 500px;
+            display: inline-block;
+        }
+
+        .second p span {
+            margin-left: 50px;
+        }
+
+        .left {
+            float: left;
+            position: fixed;
+            height: 100%;
+            width: 250px;
+            float: left;
+            background-color: #d7d5d4;
+            text-align: center;
+        }
+
+        .left .word {
+            color: black;
+            font-weight: bold;
+            /*float: left;*/
+            font-size: 20px;
+            margin: 50px auto;
+            text-decoration: none;
+            letter-spacing: 5px;
+            display: block;
+        }
+
+        .left .active {
+            background-color: #46aad7;
+        }
+
+        input {
+            height: 30px;
+            width: 200px;
+            margin: 200px 30%;
+            margin-right: 0px;
+            margin-bottom: 40px;
+        }
+
+        #upload {
+            background-color: #00baf1;
+            height: 50px;
+            width: 70px;
+            margin-left: 10px;
+            border-radius: 10px;
+        }
+
+        .description {
+            background-color: white;
+            width: 80%;
+            height: 80px;
+            margin: 10px 30%;
+        }
+
+        .description span {
+            width: 50px;
+            height: 1px;
+            margin-right: 100px;
+        }
+	.loading{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-color: rgba(134,134,134,0.4);
+            display: none;
+        }
+        #circle {
+            margin: 200px 45%;
+            width: 200px;
+            height: 200px;
+            border: 5px #ffffff solid;
+            border-left-color: #ff5500;
+            border-right-color: #0c80fe;
+            border-radius: 100%;
+            animation: loading1 1.5s infinite linear;
+            position: absolute;
+            z-index: 1000;
+        }
+
+        @keyframes loading1 {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="loading">
+    <div id="circle"></div>
+</div>
+<div class="left">
+    <a class="word active" href="#">图片上传</a>
+    <a class="word" href="#">分析结果</a>
+</div>
+<div class="first">
+    <input type="file" multiple="multiple" value="上传图片" id="file">
+    <button id="upload">上传</button>
+    <div class="description"><span class="left_describe">图片名称：</span><span class="mid_describe">图片格式：</span><span
+            class="right_describe">图片大小：</span></div>
+</div>
+<div class="second">
+    <p>类别:驾照 <span id="driver_num">数量:</span></p>
+    <div id="driver"></div>
+    <p>类别:行驶证 <span id="driving_num">数量:</span></p>
+    <div id="driving"></div>
+    <p>类别:身份证 <span id="ID_num">数量:</span></p>
+    <div id="ID"></div>
+    <p>类别:银行卡 <span id="bank_num">数量:</span></p>
+    <div id="bank"></div>
+    <p>类别:未标识 <span id="unsigned_num">数量:</span></p>
+    <div id="unsigned"></div>
+</div>
+<script type="text/javascript">
+    function uuid() {
+        var s = [];
+        var hexDigits = "0123456789abcdef";
+        for (var i = 0; i < 36; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        s[8] = s[13] = s[18] = s[23] = "-";
+
+        var uuid = s.join("");
+        return uuid;
+    }
+
+    $(function () {
+        //console.log($('a'));
+        $('a').click(function () {
+            console.log($(this).index());
+            $(this).attr('class', 'word active');
+            $(this).siblings().attr('class', 'word');
+            if ($(this).index() == 0) {
+                $('.first').css('display', 'block');
+                $('.second').css('display', 'none');
+            } else {
+                $('.first').css('display', 'none');
+                $('.second').css('display', 'block');
+            }
+        });
+        var pic_name_list = [];
+        var pic_path_list = [];
+	var counter = 0;
+        document.getElementById('file').addEventListener('change', function (e) {
+	    //var pic_name_list = [];
+            //var pic_path_list = [];
+            for (i = 0; i < e.target.files.length; i++) {
+                let file = e.target.files[i];
+                console.log(document.getElementById("file").files.length);
+                pic_name_list.push(file.name);
+		var spstr = file.name.split('.');
+                pic_path_list.push('xinyada/' + uuid() + '.'+ spstr[spstr.length - 1]);
+                //console.log(file.name.split('.')[1]);
+                //console.log(file.size);
+                //console.log((file.size / 1000).toFixed(1));
+                //var spstr = file.name.split('.');
+                if (counter == 0) {
+                    $('.left_describe').html('图片名称：  ' + file.name);
+                    $('.mid_describe').html('图片格式：  ' + spstr[spstr.length - 1]);
+                    $('.right_describe').html('图片大小：  ' + (file.size / 1000).toFixed(1) + 'KB');
+		    counter++;
+                } else {
+                    $('.description').append('<p></p><span class="left_describe">图片名称：' + file.name + '</span><span class="mid_describe">图片格式：' + spstr[spstr.length - 1] + '</span><span' +
+                        ' class="right_describe">图片大小：' + (file.size / 1000).toFixed(1) + 'KB' + '</span>')
+                }
+            }
+        });
+        var bank_card_list = [];
+	var driving_license_list = [];
+        var driver_license_list = [];
+        var id_card_list = [];
+        var unsigned_list = [];
+        $("#upload").click(function () {
+            // 上传至oss
+            console.log(document.getElementById("file").files[0]);
+            let files = document.getElementById("file").files;
+            let client = new OSS({
+                accessKeyId: 'LTAI4VIH8rP2cjtg',
+                accessKeySecret: 'uzXZC3TB4egoT5FZe0nYn1BsoqXo5x',
+                //stsToken: result.SecurityToken,
+                endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                bucket: 'deepdraw-test',
+            });
+            for (i = 0; i < files.length; i++) {
+                var time = 0;
+                var storeAs = pic_path_list[i];
+                let file = files[i];
+                //storeAs表示上传的object name , file表示上传的文件
+                client.multipartUpload(storeAs, file).then(function (result) {
+                    time += 1;
+                    console.log(result);
+                    console.log(time + '---------' + files.length);
+                    if (time == files.length) {
+			alert('上传成功');
+			$('.loading').css('display','block');
+                        axios.post('http://47.102.96.81:8000/xinyada/demo/analysis/', {     //部署时需要修改post目标地址
+                            //post传参
+                            pic_name: pic_name_list,
+                            pic_path: pic_path_list,
+                        }).then(function (response) {
+                            bank_card_list = response.data.result.bank_card;
+                            driver_license_list = response.data.result.driver_license;
+			    driving_license_list = response.data.result.driving_license;
+                            id_card_list = response.data.result.id_card;
+                            unsigned_list = response.data.result.unsigned;
+                            for (i = 0; i < driver_license_list.length; i++) {
+                                driver_img = '<img src="' + driver_license_list[i] + '" alt="驾照">';
+                                $('#driver').append(driver_img);
+                                //console.log(driver_license_list.length);
+                                $('#driver_num').html('数量:' + driver_license_list.length);
+                            }
+			    for (p = 0; p < driving_license_list.length; p++) {
+				console.log(driving_license_list[p]);
+                                driving_img = '<img src="' + driving_license_list[p] + '" alt="行驶证">';
+                                $('#driving').append(driving_img);
+                                $('#driving_num').html('数量:' + driving_license_list.length);
+                            }
+
+                            for (j = 0; j < id_card_list.length; j++) {
+                                id_img = '<img src="' + id_card_list[j] + '" alt="身份证">';
+                                $('#ID').append(id_img);
+                                $('#ID_num').html('数量:' + id_card_list.length);
+                            }
+                            for (k = 0; k < bank_card_list.length; k++) {
+                                bank_img = '<img src="' + bank_card_list[k] + '" alt=银行卡">';
+                                $('#bank').append(bank_img);
+                                $('#bank_num').html('数量:' + bank_card_list.length);
+                            }
+                            for (q = 0; q < unsigned_list.length; q++) {
+                                unsigned_img = '<img src="' + unsigned_list[q] + '" alt="未标识">';
+                                $('#unsigned').append(unsigned_img);
+                                $('#unsigned_num').html('数量:' + unsigned_list.length);
+                            }
+			    $('.loading').css('display','none');
+			    alert(response.data.msg)
+			    $('a')[1].click();
+			    pic_name_list = [];
+                            pic_path_list = [];
+			    bank_card_list = [];
+		            driving_license_list = [];
+        		    driver_license_list = [];
+           		    id_card_list = [];
+        		    unsigned_list = [];
+
+                            console.log(response);
+                        }).catch(function (error) {
+                            console.log(error);
+                        })
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            }
+
+        });
+    });
+
+
+</script>
+</body>
+</html>
+

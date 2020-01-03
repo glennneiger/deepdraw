@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <title>纯CSS3实现炫酷动态加载中特效动画代码_在线演示_动画/背景_js特效_js代码</title>
+    <meta name="keywords" content="纯CSS3,炫酷,动态,加载中特效,动画代码"/>
+    <meta name="description"
+          content="纯CSS3实现炫酷动态加载中特效动画代码下载。代码小巧简单，轻量级，纯CSS3，没有引入任何图片，加载速度快，非常实用。可以根据个人喜好，单独引用某一个加载中动画。"/>
+    <meta name="author" content="js代码"/>
+    <meta name="copyright" content="js代码"/>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "微软雅黑";
+        }
+
+        html,
+        iframe,
+        body {
+            height: 100%
+        }
+
+        .none {
+            display: none !important
+        }
+
+        @media screen and (max-width: 640px) {
+            #mobileFrame {
+                display: none !important;
+            }
+        }
+
+        #hidemobile {
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid silver;
+            position: absolute;
+            right: 20px;
+            top: 8px;
+            width: 15px;
+            height: 15px;
+            text-align: center;
+            padding: 0;
+            line-height: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        $('#get_msg').click(function () {
+            if () 
+            var phone = $('#user_phone').val(); //获取文本框用户输入的id信息
+            console.log(phone);
+            // console.log(userid);
+            // console.log(pwd);
+            axios.post('http://47.102.96.81:8000/api/v1/msg/', {     //部署时需要修改post目标地址        //post传参
+                Phone: phone,
+            })
+                .then(function (response) {
+                    var id = response.data.user_id;
+                    var token = response.data.token;
+                    var msg = response.data.msg;
+                    console.log(response);
+                    console.log(response.data.code);    //可能需要修改获取数据路径
+                    window.alert(response.data.msg);
+                    console.log(response.data.code);
+                    if (response.data.code === 1001) {
+                        console.log('success');
+                        // console.log(response.data);
+                    } else {
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+    </script>
+</head>
+
+<body>
+<iframe src="https://www.jsdaima.com/Uploads/js/201805/1526950601/index.html" frameborder="0" width="100%"
+        height="100%"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>深绘大脑</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 50px;
+            padding-left: 50px;
+            background-image: url("http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/element/%E7%B4%A0%E6%9D%90/logo/015b1456cd26db32f875520f3f7a84.jpg%401280w_1l_2o_100sh.jpg");
+            background-repeat: no-repeat;
+            background-size: 110%;
+            background-position: 0 -150px;
+        }
+
+        .actives {
+            background-color: #8f9398;
+        }
+
+        #myCarousel {
+            top: 150px;
+            width: 80%;
+            height: 350px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .is-block {
+            display: block;
+        }
+
+        .is-none {
+            display: none;
+        }
+
+        .borders {
+            border: lightslategrey 4px solid;
+        }
+
+    </style>
+    <!--[if lt IE 9]>
+	<script src="https://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation" style="background-color: #020f22">
+    <div class="container" style="float: left;margin-left: 150px">
+        <div class="navbar-header">
+            <div style="float: left;margin-right: 50px">
+                <a href="home.html" style="position: relative;top:15px">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAAAVCAYAAABWtYB0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTYyNjM2NDFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTYyNjM2NTFDMEIxMUU3OEZFM0I3NThDMEQ2MTRBOSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5NjI2MzYyMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5NjI2MzYzMUMwQjExRTc4RkUzQjc1OEMwRDYxNEE5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+bKpiOAAABa5JREFUeNqsWX1MllUU54WXVwi1ucQSE8HhjGY6l6S2aDUtcxNpZVKYWZJtlZbpxlYtU5e6/gt1ETodtTbTxixj9jH6soKcjDbWl1+gBYWWvimIHy/wdC773e3s7N7n4+U522/vc+/5nXue5577ce59I47jpIQkrxBWEzIC2Fwk3OzBKSJ8aajvIkwmqA/YQniWkDrEbzhNmIo2tbQQCgzcMsKnhJWE1wnDkvB3iXBHJKQgqA54Owm7dsJED04z4XaLLkKYQDgV0kBSnTKCBeFOwg8W7jTCL4S+Ifp8IxrSy29K0m6XD84+Qr2h/mv8rhKzYydhwKf/TMJaQhrzxUdlBXs+xHxeILQSFoj2qglnffh9hjAWz/emqJnggREWZEN/l2OWK4Q+4DLhgoFzkw//XjjD2stLwr6P2c9i9WmEbqa70WBbxfS1AXw+xuyOuhGXEtoIFw1QHfwSeLWiY3cTJiFI44DRhJWC920IAZjD2jtJyIK/AkLEYjOcMB7vt53Znxa8h5juJ0tbXYwz3eJnnMAYwjxm95ft4wocb9Ejo5fVdbh0WJ2wXxpCEPaw9nqBfnSaLQinwL8q3meD4B1kuncM7dzH9O1CF0FQHbwPxzWsDFrO2T5up0cAPgCvRNSvt7SXK3iqAzKGGIA8l/d7zWLznItNPuONErpFhrZ+Zvp1Qve8E0CiloyjzFB/DbrvCEtQ96Lg1Fs2ortF+SPCFY/NazGhhJBAOYrspRqbYjphPdJcLanYWLer1A/pYwqymDcJbUilue8YNvR2VreEPXcT9hv6qAYb+4AhwThu8GOS6OD7GyIsR/cxQjGWH76R3iB4aoO7zjICtwnuXI9RnukycF71OVOamM3qgLOsxWWUhw7TTFghygsJvxt45aKsDi69lohzbpzQ4DFCZqCtcxhpE5iujo2iQuTpPK3sJ+QQZrEZ3ISDXYTx0mB7AjZa8gjTWfkEbDsJPay+EO0NJJGaR+C/g/CfjEqOGHVNLhE8KbjFPtIx0wZoy2D0nrGb2TYyzn4nHKkUvncJfQK/BxinNCTfrYOHZfECGwSpzNJJxYLX5tKhRwR3dMDpyjOJEtSNdcKTUuZrpAtvC+M1h+S7zrQcLWPPl7GBmuRpUa618HKxtGj5hvBvgGm7md1FqZPoJ3iuZJw/CY9gWVDL0mzCVrGcdrINXi9FmahrFkvZPVgK1bK0F0uHWoY2gnMLu0aJo/2rYqnTMgAd34jTWULQMvjEolskovSuZWTGCD2Cm2vhrhO8xwPOAp7LL0fd9WyJUPKksNnMdN8PYcPcytrZa1kG3w9jY+aFGtFhFRajWwXvRxcHbeIaI8jZ4Alm28nqn2L1/wibYfAjAzQJ6+9hLCVqGUh18T1TfKO+zpjscx/UyIY/7bfKLQgRw91OvqXhNYK3wsKbInh7AgQgJt5nDtP9yurLhV252FCzUJ9umL05Lv7/YLwPWX0jqz/k81uOC78xWxAWCmKDpcFphPOM14/LPMkbheg7lo70Qj2z28fqX2D1vxnsvrJ0nsIm8T5TLL6rxclen30eFvYTfX7LKmFXaAvCAUFsxwXbYaDRkOUo+Zg19jJ4Kq2NC15HgABUMjvVThT1Y0SbU4WdzJjmCf1ioS8y+L5NcBagPkNkaRUBvme8aHO26bA20nAvngd4SRV+dxgOeVyafGZDi3C9oOV+9qfJQeG3Vdjyq4bzhM+F/m9RThPl4YTPWPktdg2zkWVp6hrjDOFBH//kqewr3/OrMYKTkbiPizRbBmPCo8Jmh+UA1WWxb2CcbQa9/N9jhrhgPGtZjuc74YpxJjyA6AaRY+yssAwXVQkDrwf/VtV6tFdKeA95usrRv8C/T3p2LEdbCfFvl5YszNxu5OY1Bk5MfGecnWXUO2ZDf4QwF7p8XM4lxGWcPl85Pq4nHHYtoq4pjkrS/wIMAPiAdiPO9/6/AAAAAElFTkSuQmCC">
+                </a>
+            </div>
+            <a class="navbar-brand" href="#" style="color: white">Deepdraw Brain</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#shop"><span class="glyphicon glyphicon-home"></span> Products</a></li>
+                <li><a href="#homes"><span class="glyphicon glyphicon-shopping-cart"></span> Home</a></li>
+                <li><a href="#support"><span class="glyphicon glyphicon-headphones"></span> Support</a></li>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</div>
+<div id="home-page" style="position: relative;width: 70%;height:800px;margin: 0 auto;background-color: white">
+    <div id="homes" class="is-none">
+        <h1 style="padding-top: 80px;margin-top: 0;margin-left: 40%">
+            深&nbsp&nbsp&nbsp&nbsp绘&nbsp&nbsp&nbsp&nbsp智&nbsp&nbsp&nbsp&nbsp能
+        </h1>
+
+        <div id="myCarousel" class="carousel slide">
+            <!-- 轮播（Carousel）指标 -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=381947776,2526894170&fm=26&gp=0.jpg"
+                         alt="First slide" width="100%" height="auto">
+                    <div class="carousel-caption">标题 1</div>
+                </div>
+                <div class="item">
+                    <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1908127731,323972257&fm=26&gp=0.jpg"
+                         alt="Second slide" width="100%" height="auto">
+                    <div class="carousel-caption">标题 2</div>
+                </div>
+                <div class="item">
+                    <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3928753169,2504916705&fm=26&gp=0.jpg"
+                         alt="Third slide" width="100%" height="auto">
+                    <div class="carousel-caption">标题 3</div>
+                </div>
+            </div>
+            <!-- 轮播（Carousel）导航 -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div id="shop" class="container is-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 style="padding-top: 80px;margin-top: 0;margin-left: 40%">
+                    D&nbsp&nbsp&nbsp&nbspB&nbsp&nbsp&nbsp&nbspR&nbsp&nbsp&nbsp&nbsp产&nbsp&nbsp&nbsp&nbsp品&nbsp&nbsp&nbsp&nbsp
+                </h1>
+                <small>
+                    以下demo网站是深绘-dbr部门的功能演示网站
+                </small>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 200px;width: 100%">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail wrap">
+                    <a href="http://dbr.deepdraw.cn/web/soutu_menu/文本分类/contentSearch.html">
+                        <img src="http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/web/menu_website/static/image/2019-10-23%2014-30-27%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png"
+                             alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>文本分类</h3>
+                            <p>拆分商品title关键字</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button" style="display: none">
+                                    按钮
+                                </a>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a href="http://dbr.deepdraw.cn/web/soutu_menu/facemerge/facemerge.html">
+                        <img src="http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/web/menu_website/static/image/2019-10-23%2014-30-48%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png"
+                             alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>人脸融合</h3>
+                            <p>上传正脸图片，按照比例进行融合</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button" style="display: none">
+                                    按钮
+                                </a>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a href="http://dbr.deepdraw.cn/web/soutu_menu/facesearch/soutunew/soutunew.html">
+                        <img src="http://deepdraw-dbr.oss-cn-hangzhou.aliyuncs.com/web/menu_website/static/image/2019-10-23%2014-31-01%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png"
+                             alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>图片搜索</h3>
+                            <p>上传图片，手动框选商品进行相似匹配</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button" style="display: none">
+                                    按钮
+                                </a>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="support" class="is-none">
+        赞助
+    </div>
+</div>
+<!-- jQuery (Bootstrap 插件需要引入) -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<!-- 包含了所有编译插件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.navbar-nav li a').click(function () {
+            console.log($('.navbar-nav li[class="active"]').html());
+            $('.navbar-nav li[class="active"]').removeClass('active');
+            $(this).parent().addClass('active');
+            var now_id = $(this).attr('href');
+            $(now_id).addClass('is-block');
+            $(now_id).removeClass('is-none');
+            $(now_id).siblings().addClass('is-none');
+            $(now_id).siblings().removeClass('is-block');
+            console.log($('.navbar-nav li[class="active"]').html());
+            console.log('click');
+        });
+        $('.navbar-nav li').mouseenter(function () {
+            $(this).addClass('actives');
+            console.log('in');
+        });
+        $('.navbar-nav li').mouseleave(function () {
+            $(this).removeClass('actives');
+            console.log('out');
+        });
+        $('.thumbnail').mouseenter(function () {
+            $(this).addClass('borders')
+        });
+        $('.thumbnail').mouseleave(function () {
+            $(this).removeClass('borders')
+        });
+
+    });
+</script>
+</body>
+</html>

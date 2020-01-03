@@ -1,0 +1,13 @@
+id
+pic_name
+pic_path
+pic_type
+
+
+
+
+
+table_task
+task_id
+c_time
+pic_count

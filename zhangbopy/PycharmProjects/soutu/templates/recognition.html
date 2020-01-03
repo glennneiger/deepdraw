@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-6.0.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="referrer" content="no-referrer"/>
+    <title>人脸识别演示</title>
+    <style type="text/css">
+        body {
+            background-color: #dffffc;
+        }
+
+
+        .menu {
+            height: 880px;
+            width: 97%;
+            margin: 0 auto 100px;
+            background-color: #3e9cf9;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .menu img {
+            float: left;
+            margin: 11px 70px;
+            margin-top: 22px;
+        }
+
+        .menu .word {
+            float: left;
+            color: #ececec;
+            font-weight: bolder;
+            font-size: 35px;
+            margin: 50px 0 0 27%;
+        }
+
+        .menu .show_pic {
+            float: left;
+            margin: 100px 0 0 43%;
+        }
+
+        .btn {
+            background-color: #4aca85;
+            margin: -1011px 0 0 287px;;
+            height: 70px;
+            width: 223px;
+            padding-top: 20px;
+            font-size: 25px;
+            border-radius: 10px;
+            color: white;
+            z-index: 200;
+        }
+
+        .btn:hover {
+            background-color: #42aa6d;
+            font-weight: bolder;
+        }
+
+        .result {
+            text-align: center;
+        }
+
+        .result span {
+            color: #807fff;
+            font-size: 40px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .result .main_pic {
+            display: block;
+            margin: 30px auto 10px;
+        }
+
+        .result .main {
+            margin-top: 60px;
+            font-size: 20px;
+        }
+
+        .result .compare {
+            margin-top: 80px;
+        }
+
+        .loading {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(162, 160, 164, 0.7);
+            text-align: center;
+            display: none;
+        }
+
+        .loading img {
+            margin-top: 21%;
+            width: 15%;
+
+        }
+
+        .progress {
+            margin: 21% 30%;
+            width: 38%;
+            height: 15px;
+        }
+
+        .progress-bar {
+            background-color: #8f9398;
+        }
+
+        .result .pic {
+            overflow: hidden;
+            display: inline-block;
+            height: 400px;
+            /*width: 20%;*/
+            width: 400px;
+            margin: 50px 15px 15px 30px;
+            position: relative;
+        }
+
+        .result .pic .draw_border {
+            position: absolute;
+            border: 1px solid red;
+        }
+
+        .result .pic img {
+            vertical-align: middle;
+            /*max-width: 100%;
+            max-height: 100%;*/
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .result .compare_pic {
+            height: 420px;
+            /*width: 20%;*/
+            width: 420px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="loading">
+    <!--<img src="https://dbr-cd.oss-cn-hangzhou.aliyuncs.com/pic/15%20%282%29.gif?Expires=1565231277&OSSAccessKeyId=TMP.hVf9vZfjaf37YXiyM19Y4RTmELNkJgV7fEjsnUC5Ppa5wjDbAZ9kL9pK5Z9AA2rG1Vxx9YAr7Z86oSkVztMrzpZLQEGjJ6FLUvetWqzFEqacZ47DLFmoePyFi3AEFT.tmp&Signature=zBWQrbyYZg%2B8yiQoPfVwKRezQWU%3D" alt="正在加载">-->
+    <div class="progress progress-striped active">
+        <div class="progress-bar progress-bar-success" role="progressbar"
+             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+             style="width: 0%;">
+        </div>
+    </div>
+</div>
+<div class="menu">
+    <img src="https://deepdraw.oss-cn-hangzhou.aliyuncs.com/static_file/pic/%E7%9F%A2%E9%87%8F%E6%99%BA%E8%83%BD%E5%AF%B9%E8%B1%A1-2%281%29.png"
+         alt="深绘">
+    <span class="word">人脸识别结果演示</span>
+    <img src="https://deepdraw-test.oss-cn-hangzhou.aliyuncs.com/pic/FaceDetection.png"
+         class="show_pic" alt="首页图片">
+    <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" id="input_img" style="display: none">
+</div>
+<label class="btn" for="input_img">开 始 检 索 </label>
+<div class="result">
+</div>
+<script type="text/javascript">
+    function uuid() {
+        var s = [];
+        var hexDigits = "0123456789abcdef";
+        for (var i = 0; i < 36; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        s[8] = s[13] = s[18] = s[23] = "-";
+
+        var uuid = s.join("");
+        return uuid;
+    }
+
+    function randomNum(minNum, maxNum) {
+        switch (arguments.length) {
+            case 1:
+                return parseInt(Math.random() * minNum + 1, 10);
+                break;
+            case 2:
+                return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                break;
+            default:
+                return 0;
+                break;
+        }
+    }
+
+    function sleep(delay) {
+        var start = (new Date()).getTime();
+        while ((new Date()).getTime() - start < delay) {
+            continue;
+        }
+    }
+
+    function fadeOut() {
+        op = 1;
+        timer1 = setInterval(function () {
+            $('.loading').css('opacity', op);
+            if (op <= 0) {
+                clearInterval(timer1)
+            }
+            op -= 0.1;
+        }, 100);
+    }
+
+    function draw_region_main(t, r, b, l) {
+        var width;
+        var height;
+        $("#main_pic").on("load", function () {
+            width = $('#main_pic').width();
+            height = $('#main_pic').height();
+            //console.log(X, Y);
+            $("#org_pic #border").width(width * (r - l)).height(height * (b - t));
+            $("#org_pic #border").css({'top': height * t + "px", 'left': width * l + "px"});
+        });
+        $(window).resize(function () {
+            width = $('#main_pic').width();
+            height = $('#main_pic').height();
+            //console.log(X, Y);
+            $("#org_pic #border").width(width * (r - l)).height(height * (b - t));
+            $("#org_pic #border").css({'top': height * t + "px", 'left': width * l + "px"});
+        });
+    }
+
+    function draw_region(t, r, b, l, picid) {
+        var width;
+        var height;
+        $("#img" + picid).on("load", function () {
+            width = $('#img' + picid).width();
+            height = $('#img' + picid).height();
+            //console.log(width, height);
+            $("#border" + picid).width(width * (r - l)).height(height * (b - t));
+            $("#border" + picid).css({'top': height * t + "px", 'left': width * l + "px"});
+        });
+        $(window).resize(function () {
+            width = $('#img' + picid).width();
+            height = $('#img' + picid).height();
+            //console.log(X, Y);
+            $("#border" + picid).width(width * (r - l)).height(height * (b - t));
+            $("#border" + picid).css({'top': height * t + "px", 'left': width * l + "px"});
+        });
+    }
+
+    function lager_main(t, r, b, l) {
+        var ratio = (b - t) * (r - l);
+        //$('img').css('height', h/ratio+'px');
+        $('#main_pic').on("load", function () {
+            w = $('#main_pic').width();
+            h = $('#main_pic').height();
+            if (ratio < 0.05) {
+                $("#main_pic").css('width', 1300 + 'px');
+                w = $('#main_pic').width();
+                h = $('#main_pic').height();
+                $('#main_pic').css('left', (-(l * w) + w * 0.1) + 'px');
+                $('#main_pic').css('top', (-(t * h) + h * 0.045) + 'px');
+                //$("#img" + picid).css('height', 320 * 2 + 'px');
+            } else {
+                $('#main_pic').css('width', 320 + 'px');
+            }
+        });
+    }
+
+    function lager(t, r, b, l, picid) {
+        var ratio = (b - t) * (r - l);
+        //$('img').css('height', h/ratio+'px');
+        $("#img" + picid).on("load", function () {
+            w = $("#img" + picid).width();
+            h = $("#img" + picid).height();
+            if (ratio < 0.05) {
+                $("#img" + picid).css('width', 1300 + 'px');
+                w = $("#img" + picid).width();
+                h = $("#img" + picid).height();
+                $("#img" + picid).css('left', (-(l * w) + w * 0.1) + 'px');
+                $("#img" + picid).css('top', (-(t * h) + h * 0.045) + 'px');
+                //$("#img" + picid).css('height', 320 * 2 + 'px');
+            } else {
+                $("#img" + picid).css('width', 320 + 'px');
+            }
+        });
+    }
+
+    $(function () {
+        $('#input_img').change(function () {
+            $('.progress-bar').css('width', '0%');
+            $('.loading').css('opacity', '1');
+            $('.result').empty();
+            $('.loading').css('display', 'block');
+            var width = 0;
+            var not_finish = randomNum(5, 9);
+            timer = setInterval(function () {
+                width += randomNum(0, 5);
+                $('.progress-bar').css('width', width + '%');
+                //console.log(width);
+                if (width >= 100 - not_finish) {
+                    clearInterval(timer)
+                }
+            }, randomNum(10, 20));
+            console.log(document.getElementById("input_img").files[0]);
+            let file = document.getElementById("input_img").files[0];
+            let client = new OSS({
+                accessKeyId: 'LTAI4VIH8rP2cjtg',
+                accessKeySecret: 'uzXZC3TB4egoT5FZe0nYn1BsoqXo5x',
+                //stsToken: result.SecurityToken,
+                endpoint: 'oss-cn-hangzhou.aliyuncs.com',
+                bucket: 'deepdraw-test',
+            });
+            var spstr = $('#input_img').val().split('.');
+            var storeAs = 'face/' + uuid() + '.' + spstr[spstr.length - 1];
+            //console.log(storeAs);
+            client.multipartUpload(storeAs, file).then(function (result) {
+                console.log(result);
+                var url = result.res.requestUrls[0].split('?')[0];
+                var main_url = url;
+                //console.log(url);
+                axios.post('http://47.102.96.81:8086/face/get_face/', {     //部署时需要修改post目标地址
+                    //post传参
+                    url: url,
+                }).then(function (response) {
+                    if (response.data.code == 1) {
+                        var url_list = response.data.url_list;
+                        var main_face = response.data.main_face;
+                        var compare_face = response.data.compare_face;
+                        console.log("mainface:   " + main_face);
+                        if (url_list.length > 0) {
+                            append_main = ' <span> 检 索 结 果 </span>\n' +
+                                '    <div id="org_pic" class="pic">\n' +
+                                '        <img src="' + main_url + '" id="main_pic" alt="">\n' +
+                                '    </div>\n' +
+                                '    <span class="compare">匹配图</span>';
+                            $('.result').append(append_main);
+                            var t = main_face["t"];
+                            var r = main_face["r"];
+                            var b = main_face["b"];
+                            var l = main_face["l"];
+                            //draw_region_main(t, r, b, l);
+                            lager_main(t, r, b, l);
+                            for (var i = 0; i < url_list.length; i++) {
+                                var url = url_list[i];
+                                append_content = '<div class="pic compare_pic">\n' +
+                                    '        <img src="' + url_list[i] + '" alt="" id="img' + i + '">\n' +
+                                    '    </div>';
+                                $('.result').append(append_content);
+                                var t_ = compare_face[i][0];
+                                var r_ = compare_face[i][1];
+                                var b_ = compare_face[i][2];
+                                var l_ = compare_face[i][3];
+                                lager(t_, r_, b_, l_, i);
+                                //draw_region(t_, r_, b_, l_, i);
+                            }
+                        } else {
+                            append_content = '<span> 无 匹 配 信 息</span>';
+                            $('.result').append(append_content);
+                        }
+                    } else {
+                        alert(response.data.result)
+                    }
+                    if (width < 120) {
+                        clearInterval(timer);
+                        $('.progress-bar').css('width', '100%');
+                        setTimeout(function () {
+                            $('.progress-bar').css('width', '100%');
+                            //$('.loading').css('display', 'none');
+                        }, 2000);
+                        var op = 1;
+                        timer1 = setInterval(function () {
+                            $('.loading').css('opacity', op);
+                            if (op <= 0) {
+                                clearInterval(timer1);
+                                $('.loading').css('display', 'none');
+                            }
+                            op -= 0.1;
+                        }, 100);
+                    } else {
+                        clearInterval(timer);
+                        $('.progress-bar').css('width', '100%');
+                        timer1 = setInterval(function () {
+                            $('.loading').css('opacity', op);
+                            if (op <= 0) {
+                                clearInterval(timer1);
+                                $('.loading').css('display', 'none');
+                            }
+                            op -= 0.1;
+                        }, 100);
+                    }
+                }).catch(function (error) {
+                    console.log(error)
+                })
+            }).catch(function (error) {
+                console.log(error);
+            })
+        });
+    })
+</script>
+</body>
+</html>
